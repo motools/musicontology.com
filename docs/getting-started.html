@@ -26,13 +26,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Music Ontology</a>
+          <a class="brand" href="../index.html">Music Ontology</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#examples">Examples</a></li>
-              <li><a href="#demo">Demo</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="../index.html">Home</a></li>
+              <li class="active"><a href="docs/getting-started.html">Getting started</a></li>
+              <li><a href="docs/specification.html">Specification</a></li>
+              <li><a href="docs/background.html">Background</a></li>
+              <li><a href="https://github.com/motools">Github</a></li>
+              <li><a href="http://groups.google.com/group/music-ontology-specification-group">Mailing list</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -60,6 +62,7 @@
           <p><a class="btn format-turtle" href="#">RDF/Turtle &raquo;</a></p>
         </div>
       </div>
+
       <h2>Adding prefixes</h2>
       <p>In order to start using the Music Ontology, you will need to add a few prefixes to your document. This is done by adding the following to your document.</p>
       <div class="mo-html-example">
@@ -87,12 +90,56 @@
         </pre>
       </div>
       <div class="mo-turtle-example">
-        <div class="mo-format"><p>In Turtle:</p></div>
+        <div class="mo-format"><p>In RDF/Turtle:</p></div>
         <pre class="prettyprint">
 @prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
 @prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
 @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
 ...
+        </pre>
+      </div>
+
+      <h2>Describing a track</h2>
+      <p>The following example shows how to describe a track, the band who made it, and linking the band 
+         to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier.</p>
+      <div class="mo-html-example">
+        <div class="mo-format"><p>In HTML:</p></div>
+        <pre class="prettyprint">
+&lt;span typeof="mo:Track" about="#track-1"&gt;
+  &lt;span property="dc:title"&gt;Turnover&lt;/span&gt;
+  is a track by 
+  &lt;a rel="foaf:maker" typeof="mo:MusicGroup" 
+     href="http://musicbrainz.org/artist/233fc3f3-6de2-465c-985e-e721dbabbace#_"&gt;
+    &lt;span property="foaf:name"&gt;Fugazi&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/span&gt;
+        </pre>
+      </div>
+      <div class="mo-json-example">
+        <div class="mo-format"><p>In JSON-LD:</p></div>
+        <pre class="prettyprint">
+{
+  "@id": "http://example.org/#track1",
+  "@type": "mo:Track",
+  "dc:title": "Turnover",
+  "foaf:maker": {
+    "@id": "http://musicbrainz.org/artist/233fc3f3-6de2-465c-985e-e721dbabbace#_",
+    "@type": "mo:MusicGroup",
+    "foaf:name": "Fugazi"
+  }
+}
+        </pre>
+      </div>
+      <div class="mo-turtle-example">
+        <div class="mo-format"><p>In RDF/Turtle</p></div>
+        <pre class="prettyprint">
+&lt;#track-1&gt;
+  a mo:Track ;
+  dc:title "Turnover" ;
+  foaf:maker &lt;http://musicbrainz.org/artist/233fc3f3-6de2-465c-985e-e721dbabbace#_&gt; .
+&lt;http://musicbrainz.org/artist/233fc3f3-6de2-465c-985e-e721dbabbace&gt;
+  a mo:MusicGroup ;
+  foaf:name "Fugazi" .
         </pre>
       </div>
     </div>
