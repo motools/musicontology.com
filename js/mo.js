@@ -34,18 +34,27 @@ function hide_turtle_examples() {
   });
 }
 
+function hide_formats() {
+  $.each($(".mo-format"), function (i, format) {
+    $(format).hide();
+  });
+}
+
 $(document).ready(function () {
   $(".format-html").click(function() {
+    hide_formats();
     show_html_examples();
     hide_json_examples();
     hide_turtle_examples();
   });
   $(".format-json").click(function() {
+    hide_formats();
     show_json_examples();
     hide_html_examples();
     hide_turtle_examples();
   });
   $(".format-turtle").click(function() {
+    hide_formats();
     show_turtle_examples();
     hide_json_examples();
     hide_html_examples();
