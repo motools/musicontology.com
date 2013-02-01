@@ -102,6 +102,7 @@
       <h2>Describing a track</h2>
       <p>The following example shows how to describe a track, the band who made it, and linking the band 
          to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier.</p>
+
       <div class="mo-html-example">
         <div class="mo-format"><p>In HTML:</p></div>
         <pre class="prettyprint">
@@ -142,6 +143,140 @@
   foaf:name "Fugazi" .
         </pre>
       </div>
+
+      <h2>Describing a band</h2>
+
+      <p>The following example shows how to describe a band and its members.</p>
+
+      <div class="mo-html-example">
+        <div class="mo-format"><p>In HTML:</p></div>
+        <pre class="prettyprint">        
+&lt;span typeof="mo:MusicGroup" about="#band-1"&gt;
+  &lt;span property="dc:title"&gt;Fugazi&lt;/span&gt;
+  has the following members:
+  &lt;ul rel="foaf:member"&gt;  
+    &lt;li about="#imk" typeof="mo:MusicArtist"&gt;&lt;span property="foaf:name"&gt;Ian MacKaye&lt;/span&gt;&lt;/li&gt;
+    &lt;li about="#jl" typeof="mo:MusicArtist"&gt;&lt;span property="foaf:name"&gt;Joe Lally&lt;/span&gt;&lt;/li&gt;
+    &lt;li about="#gp" typeof="mo:MusicArtist"&gt;&lt;span property="foaf:name"&gt;Guy Picciotto&lt;/span&gt;&lt;/li&gt;
+    &lt;li about="#bc" typeof="mo:MusicArtist"&gt;&lt;span property="foaf:name"&gt;Brendan Canty&lt;/span&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+        </pre>
+      </div>
+
+      <div class="mo-json-example">
+        <div class="mo-format"><p>In JSON-LD:</p></div>
+        <pre class="prettyprint">
+{
+  "@id": "http://example.org/#band-1",
+  "@type": "mo:MusicGroup",
+  "dc:title": "Fugazi",
+  "foaf:member": [{
+    "@id": "http://example.org/#imk",
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Fugazi"
+  },{
+    "@id": "http://example.org/#jl",
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Joe Lally"
+  },{
+    "@id": "http://example.org/#gp",
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Guy Picciotto"
+  },{
+    "@id": "http://example.org/#bc",
+    "@type": "mo:MusicArtist",
+    "foaf:name": "Brendan Canty"
+  }]
+}
+        </pre>
+      </div>
+
+      <div class="mo-turtle-example">
+        <div class="mo-format"><p>In RDF/Turtle:</p></div>
+        <pre class="prettyprint">
+&lt;#band-1&gt;
+   rdf:type mo:MusicGroup;
+   dc:title "Fugazi";
+   foaf:member &lt;#imk&gt;;
+   foaf:member &lt;#jl&gt;;
+   foaf:member &lt;#gp&gt;;
+   foaf:member &lt;#bc&gt; .
+&lt;#imk&gt;
+   rdf:type mo:MusicArtist;
+   dc:title "Ian MacKaye" .
+&lt;#jl&gt;
+   rdf:type mo:MusicArtist;
+   dc:title "Joe Lally" .
+&lt;#gp&gt;
+   rdf:type mo:MusicArtist;
+   dc:title "Guy Picciotto" .
+&lt;#bc&gt;
+   rdf:type mo:MusicArtist;
+   dc:title "Brendan Canty" .
+        </pre>
+      </div>
+
+      <p>The following example shows how to associate the band members with a period of time and an instrument.</p>
+
+      <div class="mo-html-example">
+        <div class="mo-format"><p>In HTML:</p></div>
+        <pre class="prettyprint">
+&lt;span prefix="ical: http://www.w3.org/2002/12/cal/ical#" typeof="mo:MusicGroup" about="#band-1"&gt;
+  &lt;span property="dc:title"&gt;Fugazi&lt;/span&gt;
+  has the following members:
+  &lt;ul rel="mo:membership"&gt;
+    &lt;li typeof="mo:Membership"&gt;
+      &lt;span rel="mo:artist"&gt;&lt;span about="#bc" typeof="mo:MusicArtist" property="foaf:name"&gt;Brendan Canty&lt;/span&gt;&lt;/span&gt; played
+      &lt;a rel="mo:primary_instrument" typeof="mo:Instrument" href="http://dbpedia.org/resource/Drum_kit"&gt;drums&lt;/a&gt;
+      from &lt;span property="ical:dtstart" value="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+        </pre>
+      </div>
+
+      <div class="mo-json-example">
+        <div class="mo-format"><p>In JSON-LD:</p></div>
+        <pre class="prettyprint">
+{
+  "@id": "http://example.org/#band-1",
+  "@type": "mo:MusicGroup",
+  "dc:title": "Fugazi",
+  "mo:membership": [{
+    "@type": "mo:MusicMembership",
+    "mo:artist": {
+      "@type": "mo:MusicArtist",
+      "foaf:name": "Brendan Canty"
+    },
+    "mo:primary_instrument": {
+      "@type": "mo:Instrument",
+      "@id": "http://dbpedia.org/resource/Drum_kit"
+    }
+  }]
+}
+        </pre>
+      </div>
+
+      <div class="mo-turtle-example">
+        <div class="mo-format"><p>In RDF/Turtle:</p></div>
+        <pre class="prettyprint">
+&lt;#band-1&gt;
+   rdf:type mo:MusicGroup;
+   dc:title "Fugazi";
+   mo:membership [
+     rdf:type mo:Membership;
+     mo:artist &lt;#bc&gt;;
+    mo:primary_instrument &lt;http://dbpedia.org/resource/Drum_kit&gt;;
+   &lt;http://www.w3.org/2002/12/cal/ical#dtstart&gt; "1987-01-01T00:00:00Z" .
+&lt;#bc&gt;
+   rdf:type mo:MusicArtist;
+   foaf:name "Brendan Canty" .
+&lt;http://dbpedia.org/resource/Drum_kit&gt;
+   rdf:type mo:Instrument .
+        </pre>
+      </div>
+
     </div>
   </body>
 </html>
