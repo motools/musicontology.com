@@ -63,6 +63,27 @@
         </div>
       </div>
 
+      <h2>URIs</h2>
+      <p>
+        Before publishing Music Ontology data, the first thing to do is to think about the resources 
+        (e.g. <a href="#example-track">tracks</a>, <a href="#example-artist">artists</a>, musical works) you want to describe
+        and what URIs they should have. The main idea behind <a href="http://linkeddata.org">Linked Data</a> revolves
+        around identifying resources with <a href="http://www.w3.org/TR/cooluris/">"cool URIs"</a> 
+        so that other people can link to them and add information about them. Those URIs should be persistent
+        and as unambiguous as possible (i.e. identifying only one thing, so that other people can link to
+        the right one).
+      </p>
+      <p>
+        One of the easiest way of managing URIs is to use <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment identifiers</a>,
+        or "hash URIs" and we will be using such URIs in the examples below.
+      </p>
+      <p>
+        There are also large sets of URIs available for the music domain, 
+        such as those provided <a href="http://musicbrainz.org">Musicbrainz</a>. It is often easier to
+        reuse those URIs rather than creating new ones. Doing so also means that your data is linked with
+        other music-related data, therefore making it richer. 
+      </p>
+
       <h2>Adding prefixes</h2>
       <p>In order to start using the Music Ontology, you will need to add a few prefixes to your document. This is done by adding the following to your document.</p>
       <div class="mo-html-example">
@@ -99,7 +120,7 @@
         </pre>
       </div>
 
-      <h2>Describing a track</h2>
+      <h2 id="example-track">Describing a track</h2>
       <p>The following example shows how to describe a track, the band who made it, and linking the band 
          to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier.</p>
 
@@ -144,7 +165,7 @@
         </pre>
       </div>
 
-      <h2>Describing a band</h2>
+      <h2 id="example-artist">Describing a band</h2>
 
       <p>The following example shows how to describe a band and its members.</p>
 
