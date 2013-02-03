@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Ontology</title>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
+    <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
+    <link href="../css/style.css" rel="stylesheet" media="screen"/>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/mo.js"></script>
+  </head>
+  <body onload="prettyPrint()">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="../index.html">Music Ontology</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="getting-started.html">Getting started</a></li>
+              <li><a href="specification.html">Specification</a></li>
+              <li class="active"><a href="faq.html">FAQ</a></li>
+              <li><a href="https://github.com/motools">Github</a></li>
+              <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h1>Frequently asked questions</h1>
+      <p>
+        This page aims at providing answers to the most frequently asked questions around the Music Ontology
+        and its use.
+      </p>
+
+      <h2>What is the Music Ontology?</h2>
+      <p>
+        The Music Ontology provides a vocabulary for publishing and linking a wide range of music-related data on the Web.
+        Music Ontology data can be published by anyone as part of a web site or an API and linked with existing data, therefore
+        creating a music-related <a href="http://linkeddata.org">web of data</a>. 
+      </p>
+
+      <h2>Why using the Music Ontology?</h2>
+      <p>
+        The Music Ontology provides a useful framework in the following cases:
+        <ul>
+          <li>Building a music website <a href="http://www.w3.org/2001/sw/sweo/public/UseCases/BBC/">that's also an API</a>.</li>
+          <li>Opening up music-related data whilst ensuring it can be used alongside other sources.</li>
+          <li>Integrating music-related data across multiple sources.</li>
+          <li>Enriching search-engine results around tracks, artists, musical works etc.</li>
+          <li>Designing a music-related database schema or domain model.</li>
+        </ul>
+      </p>
+
+      <h2>What technologies is it using?</h2>
+      <p>
+        The Music Ontology is built on <a href="http://www.w3.org/RDF/">RDF</a>, a technology developed by the <a href="http://www.w3.org/">W3C</a>.
+        RDF enables data to be described as "triples": subject, predicate and object, i.e. "this track" "is part of" "this album". RDF
+        can be serialized in a number of ways, as shown in our <a href="getting-started.html">examples</a>.
+        The Music Ontology is specified using <a href="http://www.w3.org/TR/owl2-overview/">OWL</a>, which provides a set of constructs
+        to describe domain models in RDF.
+      </p>
+
+      <h2>Why is the Music Ontology based on RDF?</h2>
+      <p>
+        It would be very difficult to tackle the many competing requirements of the music domain with a stand-alone format.
+        By using RDF, the Music Ontology gains a powerful extensibility mechanism, allowing Music-Ontology-based 
+        data to be mixed with claims made in any other RDF vocabulary. Instead of covering all music-related topics 
+        within the Music Ontology itself, we describe the basic topics and build into a larger 
+        framework - RDF - that allows us to take advantage of work elsewhere on more specific description vocabularies.
+      </p>
+      <p>
+        The various available RDF serializations also enables the Music Ontology to tackle a number of use-cases, e.g.
+        <a href="http://rdfa.info">RDFa</a> to embed music data in web pages, <a href="http://json-ld.org">JSON-LD</a>
+        to provide such data as part of an API, or <a href="http://www.w3.org/2010/01/Turtle/Trig">TriG</a> for easily
+        exchanging large databases of music information.
+      </p>
+
+      <h2>How to contribute or ask questions?</h2>
+      <p>
+        The specification process is community-driven, with discussions
+        happening on <a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">our mailing list</a>
+        and development happening on <a href="https://github.com/motools">our Github account</a>.
+      </p>
+
+    </div>
+  </body>
+</html>
