@@ -1,0 +1,2692 @@
+<html>
+<head>
+  <title>Music Ontology specification</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+      <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+    <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
+    <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
+    <link href="../css/style.css" rel="stylesheet" media="screen"/>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/mo.js"></script>
+</head>
+<body onload="prettyPrint()">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="../index.html">Music Ontology</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="getting-started.html">Getting started</a></li>
+              <li class="active"><a href="specification.html">Specification</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="https://github.com/motools">Github</a></li>
+              <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+
+<h1>The Music Ontology</h1>
+<em>
+        The Music Ontology Specification provides main concepts and 
+        properties fo describing music (i.e. artists, albums and tracks) 
+        on the Semantic Web. This document contains a RDF description 
+        of the Music Ontology.
+    </em>
+<dl>
+<dt>Latest Version</dt><dd><a href="http://purl.org/ontology/mo/">http://purl.org/ontology/mo/</a></dd>
+<dt>Date</dt><dd>$Date: 2010/11/28 17:08:19 $</dd>
+<dt>Revision</dt><dd>Revision: 2.1.5</dd>
+<dt>Authors</dt><dd><a href="http://foaf.me/zazi#me">http://foaf.me/zazi#me</a>, <a href="http://moustaki.org/foaf.rdf#moustaki">http://moustaki.org/foaf.rdf#moustaki</a>, <a href="http://www.talkdigger.com/foaf/fgiasson">http://www.talkdigger.com/foaf/fgiasson</a></dd>
+</dl>
+<h2 id="sec-summary">Summary of Terms</h2>
+<p>This vocabulary defines 53 classes and 150 properties.</p>
+<table class="table table-hover">
+<tr><th>Term Name</th><th>Type</th><th>Definition</th></tr>
+<tr><td><a href="#term-AnalogSignal">AnalogSignal</a></td><td>Class</td><td>
+        An analog signal.
+    </td></tr>
+<tr><td><a href="#term-Arrangement">Arrangement</a></td><td>Class</td><td>
+        An arrangement event.
+        Takes as agent the arranger, and produces a score (informational object, not the actually published score).
+    </td></tr>
+<tr><td><a href="#term-AudioFile">AudioFile</a></td><td>Class</td><td>An audio file, which may be available on a local file system or through http, ftp, etc.</td></tr>
+<tr><td><a href="#term-CD">CD</a></td><td>Class</td><td>Compact Disc used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-Composition">Composition</a></td><td>Class</td><td>
+        A composition event.
+        Takes as agent the composer himself.
+        It produces a MusicalWork, or a MusicalExpression (when the initial "product" is a score, for example), or both...
+    </td></tr>
+<tr><td><a href="#term-CorporateBody">CorporateBody</a></td><td>Class</td><td>Organization or group of individuals and/or other organizations involved in the music market.</td></tr>
+<tr><td><a href="#term-DAT">DAT</a></td><td>Class</td><td>Digital Audio Tape used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-DCC">DCC</a></td><td>Class</td><td>Digital Compact Cassette used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-DVDA">DVDA</a></td><td>Class</td><td>DVD-Audio used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-DigitalSignal">DigitalSignal</a></td><td>Class</td><td>
+        A digital signal
+    </td></tr>
+<tr><td><a href="#term-ED2K">ED2K</a></td><td>Class</td><td>Something available on the E-Donkey peer-2-peer filesharing network</td></tr>
+<tr><td><a href="#term-Festival">Festival</a></td><td>Class</td><td>
+        A festival - musical/artistic event lasting several days, like Glastonbury, Rock Am Ring...
+        We migth decompose this event (which is in fact just a classification of the space/time region related to 
+        a particular festival) using hasSubEvent in several performances at different space/time.
+    </td></tr>
+<tr><td><a href="#term-Genre">Genre</a></td><td>Class</td><td>
+        An expressive style of music.
+        
+        Any taxonomy can be plug-in here. You can either define a genre by yourself, like this:
+
+        :mygenre a mo:Genre; dc:title "electro rock".
+
+        Or you can refer to a DBPedia genre (such as http://dbpedia.org/resource/Baroque_music), allowing semantic web
+        clients to access easily really detailed structured information about the genre you are refering to.
+    </td></tr>
+<tr><td><a href="#term-Instrument">Instrument</a></td><td>Class</td><td>
+        Any of various devices or contrivances that can be used to produce musical tones or sound.
+        
+        Any taxonomy can be used to subsume this concept. The default one is one extracted by Ivan Herman
+        from the Musicbrainz instrument taxonomy, conforming to SKOS. This concept holds a seeAlso link 
+        towards this taxonomy.
+    </td></tr>
+<tr><td><a href="#term-Instrumentation">Instrumentation</a></td><td>Class</td><td>
+        Instrumentation deals with the techniques of writing music for a specific instrument, 
+        including the limitations of the instrument, playing techniques and idiomatic handling of the instrument.
+    </td></tr>
+<tr><td><a href="#term-Label">Label</a></td><td>Class</td><td>Trade name of a company that produces musical works or expression of musical works.</td></tr>
+<tr><td><a href="#term-Libretto">Libretto</a></td><td>Class</td><td>
+                Libretto
+        </td></tr>
+<tr><td><a href="#term-Lyrics">Lyrics</a></td><td>Class</td><td>
+        Lyrics
+    </td></tr>
+<tr><td><a href="#term-MD">MD</a></td><td>Class</td><td>Mini Disc used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-MagneticTape">MagneticTape</a></td><td>Class</td><td>Magnetic analogue tape used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-Medium">Medium</a></td><td>Class</td><td>A means or instrumentality for storing or communicating musical manifestation.</td></tr>
+<tr><td><a href="#term-Membership">Membership</a></td><td>Class</td><td>A membership event, where one or several people belongs to a group during a particular time period.</td></tr>
+<tr><td><a href="#term-Movement">Movement</a></td><td>Class</td><td>A movement is a self-contained part of a musical work. While individual or selected movements from a composition are sometimes performed separately, a performance of the complete work requires all the movements to be performed in succession.
+
+Often a composer attempts to interrelate the movements thematically, or sometimes in more subtle ways, in order that the individual
+movements exert a cumulative effect. In some forms, composers sometimes link the movements, or ask for them to be played without a
+pause between them.
+    </td></tr>
+<tr><td><a href="#term-MusicArtist">MusicArtist</a></td><td>Class</td><td>
+        A person or a group of people (or a computer :-) ), whose musical 
+        creative work shows sensitivity and imagination 
+    </td></tr>
+<tr><td><a href="#term-MusicGroup">MusicGroup</a></td><td>Class</td><td>Group of musicians, or musical ensemble, usually popular or folk, playing parts of or improvising off of a musical arrangement. </td></tr>
+<tr><td><a href="#term-MusicalExpression">MusicalExpression</a></td><td>Class</td><td>
+The intellectual or artistic realization of a work in the form of alpha-numeric, musical, or choreographic notation, sound, etc., or any combination of such forms.    
+
+
+For example:
+
+Work #1 Franz Schubert's Trout quintet
+
+    * Expression #1 the composer's score
+    * Expression #2 sound issued from the performance by the Amadeus Quartet and Hephzibah Menuhin on piano
+    * Expression #3 sound issued from the performance by the Cleveland Quartet and Yo-Yo Ma on the cello
+    * . . . . 
+
+The Music Ontology defines the following sub-concepts of a MusicalExpression, which should be used instead of MusicalExpression itself: Score (the
+result of an arrangement), Sound (produced during a performance), Signal. However, it is possible to stick to FRBR and bypass the worflow
+mechanism this ontology defines by using the core FRBR properties on such objects. But it is often better to use events to interconnect such 
+expressions (allowing to go deeply into the production process - `this performer was playing this particular instrument at that
+particular time').
+    
+    </td></tr>
+<tr><td><a href="#term-MusicalItem">MusicalItem</a></td><td>Class</td><td>A single exemplar of a musical expression.
+    
+For example, it could be a single exemplar of a CD. This is normally an single object (a CD) possessed by somebody.
+
+From the FRBR final report: The entity defined as item is a concrete entity. It is in many instances a single physical object (e.g., a copy of a one-volume monograph, a single audio cassette, etc.). There are instances, however, where the entity defined as item comprises more than one physical object (e.g., a monograph issued as two separately bound volumes, a recording issued on three separate compact discs, etc.).
+
+In terms of intellectual content and physical form, an item exemplifying a manifestation is normally the same as the manifestation itself. However, variations may occur from one item to another, even when the items exemplify the same manifestation, where those variations are the result of actions external to the intent of the producer of the manifestation (e.g., damage occurring after the item was produced, binding performed by a library, etc.). 
+    </td></tr>
+<tr><td><a href="#term-MusicalManifestation">MusicalManifestation</a></td><td>Class</td><td>
+
+This entity is related to the edition/production/publication of a musical expression (musical manifestation are closely related with the music industry (their terms, concepts, definitions, methods (production, publication, etc.), etc.)
+    
+From the FRBR final report: The entity defined as manifestation encompasses a wide range of materials, including manuscripts, books, periodicals, maps, posters, sound recordings, films, video recordings, CD-ROMs, multimedia kits, etc. As an entity, manifestation represents all the physical objects that bear the same characteristics, in respect to both intellectual content and physical form.
+
+
+Work #1 J. S. Bach's Six suites for unaccompanied cello
+
+    * Expression #1 sound issued during the performance by Janos Starker recorded in 1963 and 1965
+          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1965 by Mercury
+          o Manifestation #2 recordings re-released on compact disc in 1991 by Mercury 
+    * Expression #2 sound issued during the performances by Yo-Yo Ma recorded in 1983
+          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1983 by CBS Records
+          o Manifestation #2 recordings re-released on compact disc in 1992 by CBS Records 
+
+          
+Changes that occur deliberately or even inadvertently in the production process that affect the copies result, strictly speaking, in a new manifestation. A manifestation resulting from such a change may be identified as a particular "state" or "issue" of the publication.
+
+Changes that occur to an individual copy after the production process is complete (e.g., the loss of a page, rebinding, etc.) are not considered to result in a new manifestation. That copy is simply considered to be an exemplar (or item) of the manifestation that deviates from the copy as produced.
+
+With the entity defined as manifestation we can describe the physical characteristics of a set of items and the characteristics associated with the production and distribution of that set of items that may be important factors in enabling users to choose a manifestation appropriate to their physical needs and constraints, and to identify and acquire a copy of that manifestation.
+
+Defining manifestation as an entity also enables us to draw relationships between specific manifestations of a work. We can use the relationships between manifestations to identify, for example, the specific publication that was used to create a microreproduction.          
+
+</td></tr>
+<tr><td><a href="#term-MusicalWork">MusicalWork</a></td><td>Class</td><td>
+    Distinct intellectual or artistic musical creation.
+    
+From the FRBR final report: A work is an abstract entity; there is no single material object one can point to as the work. We recognize the work through individual realizations or expressions of the work, but the work itself exists only in the commonality of
+content between and among the various expressions of the work. When we speak of Homer's Iliad as a work, our point of reference is not a particular recitation or text of the work, but the intellectual creation that lies behind all the various expressions of the work.     
+
+For example:
+
+work #1 J. S. Bach's The art of the fugue
+
+    
+    </td></tr>
+<tr><td><a href="#term-Orchestration">Orchestration</a></td><td>Class</td><td>
+            Orchestration includes, in addition to instrumentation, the handling of groups of instruments and their balance and interaction.
+    </td></tr>
+<tr><td><a href="#term-Performance">Performance</a></td><td>Class</td><td>
+        A performance event. 
+        It might include as agents performers, engineers, conductors, or even listeners.
+        It might include as factors a score, a MusicalWork, musical instruments. 
+        It might produce a sound:-)
+    </td></tr>
+<tr><td><a href="#term-PublishedLibretto">PublishedLibretto</a></td><td>Class</td><td>A published libretto</td></tr>
+<tr><td><a href="#term-PublishedLyrics">PublishedLyrics</a></td><td>Class</td><td>Published lyrics, as a book or as a text file, for example</td></tr>
+<tr><td><a href="#term-PublishedScore">PublishedScore</a></td><td>Class</td><td>A published score (subclass of MusicalManifestation)</td></tr>
+<tr><td><a href="#term-Record">Record</a></td><td>Class</td><td>A published record (manifestation which first aim is to render the product of a recording)</td></tr>
+<tr><td><a href="#term-Recording">Recording</a></td><td>Class</td><td>
+        A recording event.
+        Takes a sound as a factor to produce a signal (analog or digital).
+        The location of such events (if any) is the actual location of the corresponding
+        microphone or the "recording device".
+    </td></tr>
+<tr><td><a href="#term-RecordingSession">RecordingSession</a></td><td>Class</td><td>A set of performances/recordings/mastering events. This event can be decomposed in its constituent events using event:sub_event</td></tr>
+<tr><td><a href="#term-Release">Release</a></td><td>Class</td><td>A specific release, with barcode, box, liner notes, cover art, and a number of records</td></tr>
+<tr><td><a href="#term-ReleaseEvent">ReleaseEvent</a></td><td>Class</td><td>A release event, in a particular place (e.g. a country) at a particular time. Other factors of this event might include cover art, liner notes, box, etc. or a release grouping all these.</td></tr>
+<tr><td><a href="#term-ReleaseStatus">ReleaseStatus</a></td><td>Class</td><td>Musical manifestation release status.</td></tr>
+<tr><td><a href="#term-ReleaseType">ReleaseType</a></td><td>Class</td><td>
+        Release type of a particular manifestation, such as "album" or "interview"...
+    </td></tr>
+<tr><td><a href="#term-SACD">SACD</a></td><td>Class</td><td>Super Audio Compact Disc used as medium to record a musical manifestation.</td></tr>
+<tr><td><a href="#term-Score">Score</a></td><td>Class</td><td>
+        Here, we are dealing with the informational object (the MusicalExpression), not the actually "published" score.
+        This may be, for example, the product of an arrangement process.
+    </td></tr>
+<tr><td><a href="#term-Show">Show</a></td><td>Class</td><td>
+        A show - a musical event lasting several days, in a particular venue. Examples can be
+        "The Magic Flute" at the Opera Bastille, August 2005, or a musical in the west end...
+    </td></tr>
+<tr><td><a href="#term-Signal">Signal</a></td><td>Class</td><td>
+        A subclass of MusicalExpression, representing a signal, for example a master signal produced by a performance and a recording.
+    </td></tr>
+<tr><td><a href="#term-SignalGroup">SignalGroup</a></td><td>Class</td><td>
+        A musical expression representing a group of signals, for example a set of masters resulting from a whole recording/mastering session.
+    </td></tr>
+<tr><td><a href="#term-SoloMusicArtist">SoloMusicArtist</a></td><td>Class</td><td>Single person whose musical creative work shows sensitivity and imagination.</td></tr>
+<tr><td><a href="#term-Sound">Sound</a></td><td>Class</td><td>
+        A subclass of MusicalExpression, representing a sound. Realisation of a MusicalWork during a musical Performance.
+    </td></tr>
+<tr><td><a href="#term-Stream">Stream</a></td><td>Class</td><td>Transmission over a network  used as medium to broadcast a musical manifestation</td></tr>
+<tr><td><a href="#term-Torrent">Torrent</a></td><td>Class</td><td>Something available on the Bittorrent peer-2-peer filesharing network</td></tr>
+<tr><td><a href="#term-Track">Track</a></td><td>Class</td><td>A track on a particular record</td></tr>
+<tr><td><a href="#term-Transcription">Transcription</a></td><td>Class</td><td>Transcription event</td></tr>
+<tr><td><a href="#term-Vinyl">Vinyl</a></td><td>Class</td><td>Vinyl used as medium to record a musical manifestation</td></tr>
+<tr><td><a href="#term-activity_end">activity_end</a></td><td>Property</td><td>Relates an artist to a date at which its activity ended</td></tr>
+<tr><td><a href="#term-activity_start">activity_start</a></td><td>Property</td><td>Relates an artist to a date at which its activity started</td></tr>
+<tr><td><a href="#term-amazon_asin">amazon_asin</a></td><td>Property</td><td>Used to link a work or the expression of a work to its corresponding Amazon ASINs page.</td></tr>
+<tr><td><a href="#term-arranged_in">arranged_in</a></td><td>Property</td><td>
+        Associates a work to an arrangement event where it was arranged
+    </td></tr>
+<tr><td><a href="#term-arrangement_of">arrangement_of</a></td><td>Property</td><td>
+                Associates an arrangement event to a work
+        </td></tr>
+<tr><td><a href="#term-available_as">available_as</a></td><td>Property</td><td>
+        Relates a musical manifestation to a musical item (this album, and my particular cd). By using
+        this property, there is no assumption on wether the full content is available on the linked item.
+        To be explicit about this, you can use a sub-property, such as mo:item (the full manifestation
+        is available on that item) or mo:preview (only a part of the manifestation is available on
+        that item).
+
+        This is a subproperty of frbr:examplar.
+    </td></tr>
+<tr><td><a href="#term-biography">biography</a></td><td>Property</td><td>Used to link an artist to their online biography.</td></tr>
+<tr><td><a href="#term-bitsPerSample">bitsPerSample</a></td><td>Property</td><td>
+        Associates a digital signal to the number a bits used to encode one sample. Range is xsd:int.
+    </td></tr>
+<tr><td><a href="#term-bpm">bpm</a></td><td>Property</td><td>
+        Indicates the BPM of a MusicalWork or a particular Performance 
+        Beats per minute: the pace of music measured by the number of beats occurring in 60 seconds.
+    </td></tr>
+<tr><td><a href="#term-catalogue_number">catalogue_number</a></td><td>Property</td><td>Links a release with the corresponding catalogue number</td></tr>
+<tr><td><a href="#term-channels">channels</a></td><td>Property</td><td>
+        Associates a signal to the number of channels it holds (mono --> 1, stereo --> 2). Range is xsd:int.
+    </td></tr>
+<tr><td><a href="#term-collaborated_with">collaborated_with</a></td><td>Property</td><td>Used to relate two collaborating people on a work.</td></tr>
+<tr><td><a href="#term-compilation_of">compilation_of</a></td><td>Property</td><td>Indicates that a musical manifestation is a compilation of several Signals.</td></tr>
+<tr><td><a href="#term-compiled">compiled</a></td><td>Property</td><td>Used to relate an person or a group of person who compiled the manifestation of a musical work.</td></tr>
+<tr><td><a href="#term-compiler">compiler</a></td><td>Property</td><td>Used to relate the manifestation of a musical work to a person or a group of person who compiled it.</td></tr>
+<tr><td><a href="#term-composed_in">composed_in</a></td><td>Property</td><td>
+        Associates a MusicalWork to the Composition event pertaining
+        to its creation. For example, I might use this property to associate
+        the Magic Flute to its composition event, occuring during 1782 and having as
+        a mo:composer Mozart.
+    </td></tr>
+<tr><td><a href="#term-composer">composer</a></td><td>Property</td><td>
+        Associates a composition event to the actual composer. For example,
+        this property could link the event corresponding to the composition of the
+        Magic Flute in 1782 to Mozart himself (who obviously has a FOAF profile:-) ).
+    </td></tr>
+<tr><td><a href="#term-conducted">conducted</a></td><td>Property</td><td>Relates agents to the performances they were conducting</td></tr>
+<tr><td><a href="#term-conductor">conductor</a></td><td>Property</td><td>Relates a performance to the conductor involved</td></tr>
+<tr><td><a href="#term-contains_sample_from">contains_sample_from</a></td><td>Property</td><td>
+        Relates a signal to another signal, which has been sampled.
+        </td></tr>
+<tr><td><a href="#term-derived_from">derived_from</a></td><td>Property</td><td>A related signal from which the described signal is derived.</td></tr>
+<tr><td><a href="#term-discography">discography</a></td><td>Property</td><td>Used to links an artist to an online discography of their musical works. The discography should provide a summary of each released musical work of the artist.</td></tr>
+<tr><td><a href="#term-discogs">discogs</a></td><td>Property</td><td>Used to link a musical work or the expression of a musical work, an artist or a corporate body to to its corresponding Discogs page.</td></tr>
+<tr><td><a href="#term-djmix_of">djmix_of</a></td><td>Property</td><td>Indicates that all (or most of) the tracks of a musical work or the expression of a musical work were mixed together from all (or most of) the tracks from another musical work or the expression of a musical work to form a so called DJ-Mix. 
+    
+The tracks might have been altered by pitching (so that the tempo of one track matches the tempo of the following track) and fading (so that one track blends in smoothly with the other). If the tracks have been more substantially altered, the "mo:remix" relationship type is more appropriate. </td></tr>
+<tr><td><a href="#term-djmixed">djmixed</a></td><td>Property</td><td>Used to relate an artist who djmixed a musical work or the expression of a musical work. 
+    
+The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </td></tr>
+<tr><td><a href="#term-djmixed_by">djmixed_by</a></td><td>Property</td><td>Used to relate a work or the expression of a work to an artist who djmixed it. 
+    
+The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </td></tr>
+<tr><td><a href="#term-download">download</a></td><td>Property</td><td>
+                This property can be used to link from a person to the website where they make their works available, or from
+                a manifestation (a track or an album, for example) to a web page where it is available for
+                download.
+        
+        It is better to use one of the three sub-properties instead of this one in order to specify wether the
+        content can be accessed for free (mo:freedownload), if it is just free preview material (mo:previewdownload), or
+        if it can be accessed for some money (mo:paiddownload) (this includes links to the Amazon store, for example).
+
+                This property MUST be used only if the content is just available through a web page (holding, for example
+                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
+                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+                less to rip streams from Flash applications can still access the audio content.
+        </td></tr>
+<tr><td><a href="#term-ean">ean</a></td><td>Property</td><td>The European Article Number (EAN) is a universal identifier for products, commonly printed in form of barcodes on them. The numbers represented by those codes can either be 8 or 13 digits long, with the 13-digit-version being most common. EANs form a superset of the North American Universal Product Code (UPC) as every UPC can be made an EAN by adding a leading zero to it. Additionally every EAN is also a Japanese Article Number (JAN). The identifiers were formerly assigned by EAN International which merged with Uniform Code Council (UCC, the guys behind the UPCs) and Electronic Commerce Council of Canada (ECCC) to become GS1. </td></tr>
+<tr><td><a href="#term-encodes">encodes</a></td><td>Property</td><td>
+        Relates a MusicalItem (a track on a particular CD, an audio file, a stream somewhere) to the signal it encodes.
+
+        This is usually a lower-resolution version of the master signal (issued from a Recording event).
+    </td></tr>
+<tr><td><a href="#term-encoding">encoding</a></td><td>Property</td><td>Method used to convert analog electronic signals into digital format such as "MP3 CBR @ 128kbps", "OGG @ 160kbps", "FLAC", etc.</td></tr>
+<tr><td><a href="#term-engineer">engineer</a></td><td>Property</td><td>Relates a performance or a recording to the engineer involved</td></tr>
+<tr><td><a href="#term-engineered">engineered</a></td><td>Property</td><td>Relates agents to the performances/recordings they were engineering in</td></tr>
+<tr><td><a href="#term-event_homepage">event_homepage</a></td><td>Property</td><td>Links a particular event to a web page</td></tr>
+<tr><td><a href="#term-exchange_item">exchange_item</a></td><td>Property</td><td>A person, a group of person or an organization exchanging an exemplar of a single manifestation.</td></tr>
+<tr><td><a href="#term-fanpage">fanpage</a></td><td>Property</td><td>Used to link an artist to a fan-created webpage devoted to that artist.</td></tr>
+<tr><td><a href="#term-free_download">free_download</a></td><td>Property</td><td>
+        This property can be used to link from a person to the website where they make their works available, or from
+        a manifestation (a track or an album, for example) to a web page where it is available for free 
+        download.
+
+        This property MUST be used only if the content is just available through a web page (holding, for example
+        a Flash application) - it is better to link to actual content directly through the use of mo:available_as and 
+        mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+        less to rip streams from Flash applications can still access the audio content.
+    </td></tr>
+<tr><td><a href="#term-freedownload">freedownload</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-genre">genre</a></td><td>Property</td><td>
+        Associates an event (like a performance or a recording) to a particular musical genre.
+        Further version of this property may also include works and scores in the domain.
+    </td></tr>
+<tr><td><a href="#term-grid">grid</a></td><td>Property</td><td>The Global Release Identifier (GRid) is a system for uniquely identifying Releases of music over electronic networks (that is, online stores where you can buy music as digital files). As that it can be seen as the equivalent of the BarCode (or more correctly the GTIN) as found on physical releases of music. Like the ISRC (a code for identifying single recordings as found on releases) it was developed by the IFPI but it does not appear to be a standard of the ISO.</td></tr>
+<tr><td><a href="#term-group">group</a></td><td>Property</td><td>Relates a membership event with the corresponding group</td></tr>
+<tr><td><a href="#term-gtin">gtin</a></td><td>Property</td><td>GTIN is a grouping term for EANs and UPCs. In common speech those are called barcodes although the barcodes are just a representation of those identifying numbers.</td></tr>
+<tr><td><a href="#term-has_track">has_track</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-headliner">headliner</a></td><td>Property</td><td>Relates a performance to the headliner(s) involved</td></tr>
+<tr><td><a href="#term-homepage">homepage</a></td><td>Property</td><td>Links an artist, a record, etc. to a corresponding web page</td></tr>
+<tr><td><a href="#term-image">image</a></td><td>Property</td><td>Indicates a pictorial image (JPEG, GIF, PNG, Etc.) of a musical work, the expression of a musical work, the manifestation of a work or the examplar of a manifestation.</td></tr>
+<tr><td><a href="#term-imdb">imdb</a></td><td>Property</td><td>Used to link an artist, a musical work or the expression of a musical work to their equivalent page on IMDb, the InternetMovieDatabase.</td></tr>
+<tr><td><a href="#term-instrument">instrument</a></td><td>Property</td><td>Relates a performance to a musical instrument involved</td></tr>
+<tr><td><a href="#term-interpreter">interpreter</a></td><td>Property</td><td>Adds an involved music artist, who interpreted, remixed, or otherwise modified an existing signal, which resulted in the signal that is here the subject of this relation.</td></tr>
+<tr><td><a href="#term-ipi">ipi</a></td><td>Property</td><td>The Interested Parties Information Code (IPI) is an ISO standard similar to ISBNs for identifying the people or groups with some involvement with a particular musical work / compositions.</td></tr>
+<tr><td><a href="#term-ismn">ismn</a></td><td>Property</td><td>The International Standard Music Number (ISMN) is an ISO standard similar to ISBNs for identifying printed music publications</td></tr>
+<tr><td><a href="#term-isrc">isrc</a></td><td>Property</td><td>
+    The ISRC (International Standard Recording Code) is the international identification system for sound recordings and music videorecordings. 
+    Each ISRC is a unique and permanent identifier for a specific recording which can be permanently encoded into a product as its digital fingerprint. 
+    Encoded ISRC provide the means to automatically identify recordings for royalty payments.
+    </td></tr>
+<tr><td><a href="#term-iswc">iswc</a></td><td>Property</td><td>Links a musical work to the corresponding ISWC number</td></tr>
+<tr><td><a href="#term-item">item</a></td><td>Property</td><td>
+                Relates a musical manifestation to a musical item (this album, and my particular cd) holding the
+                entire manifestation, and not just a part of it.
+        </td></tr>
+<tr><td><a href="#term-key">key</a></td><td>Property</td><td>
+        Indicated the key used by the musicians during a performance, or the key of a MusicalWork.
+        Any of 24 major or minor diatonic scales that provide the tonal framework for a piece of music.</td></tr>
+<tr><td><a href="#term-label">label</a></td><td>Property</td><td>Associates a release event with the label releasing the record</td></tr>
+<tr><td><a href="#term-lc">lc</a></td><td>Property</td><td>The Label Code (LC) was introduced in 1977 by the IFPI (International Federation of Phonogram and Videogram Industries) in order to unmistakably identify the different record labels (see Introduction, Record labels) for rights purposes. The Label Code consists historically of 4 figures, presently being extended to 5 figures, preceded by LC and a dash (e.g. LC-0193 = Electrola; LC-0233 = His Master's Voice). Note that the number of countries using the LC is limited, and that the code given on the item is not always accurate.</td></tr>
+<tr><td><a href="#term-licence">licence</a></td><td>Property</td><td>Used to link a work or the expression of a work to the license under which they can be manipulated (downloaded, modified, etc). 
+    
+This is usually used to link to a Creative Commons licence.</td></tr>
+<tr><td><a href="#term-listened">listened</a></td><td>Property</td><td>Relates agents to the performances they were listening in</td></tr>
+<tr><td><a href="#term-listener">listener</a></td><td>Property</td><td>Relates a performance to the listener involved</td></tr>
+<tr><td><a href="#term-lyrics">lyrics</a></td><td>Property</td><td>Associates lyrics with a musical work</td></tr>
+<tr><td><a href="#term-mailorder">mailorder</a></td><td>Property</td><td>Used to link a musical work or the expression of a musical work to a website where people can buy a copy of the musical manifestation.</td></tr>
+<tr><td><a href="#term-mashup_of">mashup_of</a></td><td>Property</td><td>Indicates that musical works or the expressions of a musical work were mashed up on this album or track. 
+    
+This means that two musical works or the expressions of a musical work by different artists are mixed together, over each other, or otherwise combined into a single musical work (usually by a third artist, the remixer).</td></tr>
+<tr><td><a href="#term-media_type">media_type</a></td><td>Property</td><td>The mediatype (file format or MIME type, or physical medium) of a musical manifestation, e.g. a MP3, CD or vinyl.</td></tr>
+<tr><td><a href="#term-medley_of">medley_of</a></td><td>Property</td><td>Indicates that a musical expression is a medley of several other musical expressions. 
+    
+This means that the orignial musical expression were rearranged to create a new musical expression in the form of a medley. </td></tr>
+<tr><td><a href="#term-member">member</a></td><td>Property</td><td>
+        Indicates a member of a musical group
+    </td></tr>
+<tr><td><a href="#term-member_of">member_of</a></td><td>Property</td><td>Inverse of the foaf:member property</td></tr>
+<tr><td><a href="#term-membership">membership</a></td><td>Property</td><td>Relates an agent with related membership events</td></tr>
+<tr><td><a href="#term-meter">meter</a></td><td>Property</td><td>Associates a musical work or a score with its meter</td></tr>
+<tr><td><a href="#term-movement">movement</a></td><td>Property</td><td>Indicates that a musical work has movements</td></tr>
+<tr><td><a href="#term-movement_number">movement_number</a></td><td>Property</td><td>Indicates the position of a movement in a musical work.</td></tr>
+<tr><td><a href="#term-musicbrainz">musicbrainz</a></td><td>Property</td><td>
+        Linking an agent, a track or a record to its corresponding Musicbrainz page.
+        </td></tr>
+<tr><td><a href="#term-musicbrainz_guid">musicbrainz_guid</a></td><td>Property</td><td>Links an object to the corresponding Musicbrainz identifier</td></tr>
+<tr><td><a href="#term-musicmoz">musicmoz</a></td><td>Property</td><td>Used to link an artist, a musical work or the expression of a musical work to its corresponding MusicMoz page.</td></tr>
+<tr><td><a href="#term-myspace">myspace</a></td><td>Property</td><td>Used to link a person to its corresponding MySpace page.</td></tr>
+<tr><td><a href="#term-olga">olga</a></td><td>Property</td><td>Used to link a track to a tabulature file for track in the On-Line Guitar Archive.</td></tr>
+<tr><td><a href="#term-onlinecommunity">onlinecommunity</a></td><td>Property</td><td>Used to link a person with an online community web page like a blog, a wiki, a forum, a livejournal page, Etc.</td></tr>
+<tr><td><a href="#term-opus">opus</a></td><td>Property</td><td>
+        Used to define a creative work, especially a musical composition numbered to designate the order of a composer's works.
+    </td></tr>
+<tr><td><a href="#term-origin">origin</a></td><td>Property</td><td>Relates an artist to its geographic origin</td></tr>
+<tr><td><a href="#term-other_release_of">other_release_of</a></td><td>Property</td><td>Indicates that two musical manifestations are essentially the same.</td></tr>
+<tr><td><a href="#term-paid_download">paid_download</a></td><td>Property</td><td>
+                Provide a link from an artist to a web page where all of that artist's musical work is available for some money,
+                or a link from a manifestation (record/track, for example) to a web page providing a paid access to this manifestation.
+        </td></tr>
+<tr><td><a href="#term-paiddownload">paiddownload</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-performance_of">performance_of</a></td><td>Property</td><td>
+        Associates a Performance to a musical work or an arrangement that is being used as a factor in it.
+        For example, I might use this property to attach the Magic Flute musical work to 
+        a particular Performance.
+    </td></tr>
+<tr><td><a href="#term-performed">performed</a></td><td>Property</td><td>Relates agents to the performances they were performing in</td></tr>
+<tr><td><a href="#term-performed_in">performed_in</a></td><td>Property</td><td>
+        Associates a Musical Work or an Score to Performances in which they were
+        a factor. For example, I might use this property in order to 
+        associate the Magic Flute to a particular performance at the Opera
+        Bastille last year.</td></tr>
+<tr><td><a href="#term-performer">performer</a></td><td>Property</td><td>Relates a performance to the performers involved</td></tr>
+<tr><td><a href="#term-possess_item">possess_item</a></td><td>Property</td><td>A person, a group of person or an organization possessing an exemplar of a single manifestation.</td></tr>
+<tr><td><a href="#term-preview">preview</a></td><td>Property</td><td>
+                Relates a musical manifestation to a musical item (this album, and my particular cd), which holds
+                a preview of the manifestation (eg. one track for an album, or a snippet for a track)
+        </td></tr>
+<tr><td><a href="#term-preview_download">preview_download</a></td><td>Property</td><td>
+                This property can be used to link from a person to the website where they make previews of their works available, or from
+                a manifestation (a track or an album, for example) to a web page where a preview download is available.
+
+                This property MUST be used only if the content is just available through a web page (holding, for example
+                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
+                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+                less to rip streams from Flash applications can still access the audio content.
+        </td></tr>
+<tr><td><a href="#term-primary_instrument">primary_instrument</a></td><td>Property</td><td>Indicates that an artist primarily plays an instrument, or that a member was primarily playing a particular instrument during his membership</td></tr>
+<tr><td><a href="#term-produced">produced</a></td><td>Property</td><td>Used to relate an person or a group of person who produced the manifestation of a work.</td></tr>
+<tr><td><a href="#term-produced_score">produced_score</a></td><td>Property</td><td>
+        Associates an arrangement event to a score product (score here does not refer to a published score, but more
+        an abstract arrangement of a particular work).
+    </td></tr>
+<tr><td><a href="#term-produced_signal">produced_signal</a></td><td>Property</td><td>
+                Associates a Recording to the outputted signal.
+        </td></tr>
+<tr><td><a href="#term-produced_signal_group">produced_signal_group</a></td><td>Property</td><td>Associates a recording session with a group of master signals produced by it.</td></tr>
+<tr><td><a href="#term-produced_sound">produced_sound</a></td><td>Property</td><td>
+                Associates a Performance to a physical Sound that is being produced by it.
+        </td></tr>
+<tr><td><a href="#term-produced_work">produced_work</a></td><td>Property</td><td>
+                Associates a composition event to the produced MusicalWork. For example,
+                this property could link the event corresponding to the composition of the
+                Magic Flute in 1782 to the Magic Flute musical work itself. This musical work
+                can then be used in particular performances.
+        </td></tr>
+<tr><td><a href="#term-producer">producer</a></td><td>Property</td><td>Used to relate the manifestation of a work to a person or a group of person who produced it.</td></tr>
+<tr><td><a href="#term-producesSignal">producesSignal</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-producesSound">producesSound</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-productOfComposition">productOfComposition</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-publication_of">publication_of</a></td><td>Property</td><td>Link a particular manifestation to the related signal, score, libretto, or lyrics</td></tr>
+<tr><td><a href="#term-published">published</a></td><td>Property</td><td>Used to relate an person or a group of person who published the manifestation of a work.</td></tr>
+<tr><td><a href="#term-published_as">published_as</a></td><td>Property</td><td>
+        Links a musical expression (e.g. a signal or a score) to one of its manifestations (e.g. a track on a particular record or a published score).
+    </td></tr>
+<tr><td><a href="#term-publisher">publisher</a></td><td>Property</td><td>Used to relate a musical manifestation to a person or a group of person who published it.</td></tr>
+<tr><td><a href="#term-publishing_location">publishing_location</a></td><td>Property</td><td>
+        Relates a musical manifestation to its publication location.
+        </td></tr>
+<tr><td><a href="#term-puid">puid</a></td><td>Property</td><td>
+        Link a signal to the PUIDs associated with it, that is, PUID computed from MusicalItems (mo:AudioFile) 
+        derived from this signal.
+        PUIDs (Portable Unique IDentifier) are the IDs used in the 
+        proprietary MusicDNS AudioFingerprinting system which is operated by MusicIP.
+
+        Using PUIDs, one (with some luck) can identify the Signal object associated with a particular audio file, therefore allowing
+        to access further information (on which release this track is featured? etc.). Using some more metadata one can identify
+        the particular Track corresponding to the audio file (a track on a particular release).</td></tr>
+<tr><td><a href="#term-record">record</a></td><td>Property</td><td>Associates a release with the records it contains. A single release can be associated with multiple records, for example for a multi-disc release.</td></tr>
+<tr><td><a href="#term-record_count">record_count</a></td><td>Property</td><td>Associates a release with the number of records it contains, e.g. the number of discs it contains in the case of a multi-disc release.</td></tr>
+<tr><td><a href="#term-record_number">record_number</a></td><td>Property</td><td>Indicates the position of a record in a release (e.g. a 2xLP, etc.).</td></tr>
+<tr><td><a href="#term-record_side">record_side</a></td><td>Property</td><td>Associates the side on a vinyl record, where a track is located, e.g. A, B, C, etc. This property can then also be used 
+in conjunction with mo:track_number, so that one can infer e.g. "A1", that means, track number 1 on side A.</td></tr>
+<tr><td><a href="#term-recorded_as">recorded_as</a></td><td>Property</td><td>
+        This is a shortcut property, allowing to bypass all the Sound/Recording steps. This property
+        allows to directly link a Performance to the recorded Signal. This is recommended for "normal"
+        users. However, advanced users wanting to express things such as the location of the microphone will
+        have to create this shortcut as well as the whole workflow, in order to let the "normal" users access
+        simply the, well, simple information:-) .
+    </td></tr>
+<tr><td><a href="#term-recorded_in">recorded_in</a></td><td>Property</td><td>
+            Associates a physical Sound to a Recording event where it is being used 
+        in order to produce a signal. For example, I might use this property to 
+        associate the sound produced by a particular performance of the magic flute
+        to a given recording, done using my cell-phone.
+    </td></tr>
+<tr><td><a href="#term-recording_of">recording_of</a></td><td>Property</td><td>
+            Associates a Recording event to a physical Sound being recorded.
+                For example, I might use this property to
+                associate a given recording, done using my cell phone, to the 
+        sound produced by a particular performance of the magic flute.
+    </td></tr>
+<tr><td><a href="#term-records">records</a></td><td>Property</td><td>
+        This is the inverse of the shortcut property recordedAs, allowing to relate directly a performance
+        to a signal.
+    </td></tr>
+<tr><td><a href="#term-release">release</a></td><td>Property</td><td>Associates a release with the corresponding release event</td></tr>
+<tr><td><a href="#term-release_status">release_status</a></td><td>Property</td><td>
+                Relates a musical manifestation to its release status (bootleg, ...)
+        </td></tr>
+<tr><td><a href="#term-release_type">release_type</a></td><td>Property</td><td>
+        Relates a musical manifestation to its release type (interview, spoken word, album, ...)
+    </td></tr>
+<tr><td><a href="#term-remaster_of">remaster_of</a></td><td>Property</td><td>This relates two musical work or the expression of a musical work, where one is a remaster of the other. 
+    
+A remaster is a new version made for release from source recordings that were earlier released separately. This is usually done to improve the audio quality or adjust for more modern playback equipment. The process generally doesn't involve changing the music in any artistically important way. It may, however, result in tracks that are a few seconds longer or shorter.</td></tr>
+<tr><td><a href="#term-remix_of">remix_of</a></td><td>Property</td><td>Used to relate the remix of a musical work in a substantially altered version produced by mixing together individual tracks or segments of an original musical source work.</td></tr>
+<tr><td><a href="#term-remixed">remixed</a></td><td>Property</td><td>Used to relate an artist who remixed a musical work or the expression of a musical work. 
+    
+This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</td></tr>
+<tr><td><a href="#term-remixer">remixer</a></td><td>Property</td><td>Used to relate a musical work or the expression of a musical work to an artist who remixed it. 
+    
+This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</td></tr>
+<tr><td><a href="#term-review">review</a></td><td>Property</td><td>Used to link a work or the expression of a work to a review. 
+    
+The review does not have to be open content, as long as it is accessible to the general internet population.</td></tr>
+<tr><td><a href="#term-sample_rate">sample_rate</a></td><td>Property</td><td>
+        Associates a digital signal to its sample rate. It might be easier to express it this way instead of
+        defining a timeline map:-) Range is xsd:float.
+    </td></tr>
+<tr><td><a href="#term-sampled">sampled</a></td><td>Property</td><td>Used to relate an artist who sampled a Signal.</td></tr>
+<tr><td><a href="#term-sampledVersionOf">sampledVersionOf</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-sampled_version">sampled_version</a></td><td>Property</td><td>
+        Associates an analog signal with a sampled version of it
+    </td></tr>
+<tr><td><a href="#term-sampled_version_of">sampled_version_of</a></td><td>Property</td><td>
+        Associates a digital signal with the analog version of it
+    </td></tr>
+<tr><td><a href="#term-sampler">sampler</a></td><td>Property</td><td>Used to relate the signal of a musical work to an artist who sampled it.</td></tr>
+<tr><td><a href="#term-sell_item">sell_item</a></td><td>Property</td><td>A person, a group of person or an organization selling an exemplar of a single manifestation.</td></tr>
+<tr><td><a href="#term-signal">signal</a></td><td>Property</td><td>Associates a group of signals with one of the signals it contains</td></tr>
+<tr><td><a href="#term-signalTime">signalTime</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-similar_to">similar_to</a></td><td>Property</td><td>
+            A similarity relationships between two objects (so far, either an agent, a signal or a genre, but
+        this could grow).
+        This relationship is pretty general and doesn't make any assumptions on how the similarity claim
+        was derived.
+        Such similarity statements can come from a range of different sources (Musicbrainz similarities between
+        artists, or coming from some automatic content analysis).
+        However, the origin of such statements should be kept using a named graph approach - and ultimately, the 
+        documents providing such statements should attach some metadata to themselves (confidence of the claim, etc.).
+        </td></tr>
+<tr><td><a href="#term-singer">singer</a></td><td>Property</td><td>Relates a performance to an involved singer</td></tr>
+<tr><td><a href="#term-supporting_musician">supporting_musician</a></td><td>Property</td><td>Used to relate an artist doing long-time instrumental or vocal support for another artist.</td></tr>
+<tr><td><a href="#term-tempo">tempo</a></td><td>Property</td><td>
+        Rate of speed or pace of music. Tempo markings are traditionally given in Italian; 
+        common markings include: grave (solemn; very, very slow); largo (broad; very slow); 
+        adagio (quite slow); andante (a walking pace); moderato (moderate); allegro (fast; cheerful); 
+        vivace (lively); presto (very fast); accelerando (getting faster); ritardando (getting slower); 
+        and a tempo (in time; returning to the original pace).
+    </td></tr>
+<tr><td><a href="#term-text">text</a></td><td>Property</td><td>Associates lyrics with their text.</td></tr>
+<tr><td><a href="#term-time">time</a></td><td>Property</td><td>
+        Associates a Signal to a time object - its actual domain
+    </td></tr>
+<tr><td><a href="#term-track">track</a></td><td>Property</td><td>Indicates a part of a musical manifestation - in this particular case, a track.</td></tr>
+<tr><td><a href="#term-trackNum">trackNum</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-track_count">track_count</a></td><td>Property</td><td>The track count of a record</td></tr>
+<tr><td><a href="#term-track_number">track_number</a></td><td>Property</td><td>Indicates the position of a track on a record medium (a CD, etc.).</td></tr>
+<tr><td><a href="#term-translation_of">translation_of</a></td><td>Property</td><td>Indicates that a work or the expression of a work has translated or transliterated into another expression of a work.</td></tr>
+<tr><td><a href="#term-tribute_to">tribute_to</a></td><td>Property</td><td>Indicates a musical work or the expression of a musical work that is a tribute to an artist - normally consisting of music being composed by the artist but performed by other artists. </td></tr>
+<tr><td><a href="#term-trmid">trmid</a></td><td>Property</td><td>
+        Indicates the TRMID of a track.
+        TRM IDs are MusicBrainz' old AudioFingerprinting system. 
+        TRM (TRM Recognizes Music) IDs are (somewhat) unique ids that represent 
+        the audio signature of a musical piece (see AudioFingerprint).
+    </td></tr>
+<tr><td><a href="#term-upc">upc</a></td><td>Property</td><td>UPC stands for "Universal Product Code", which was the original barcode used in the United States and Canada. The UPC (now officially EAN.UCC-12 is a numerical method of identifying products without redundancy worldwide for all types of products in the retail sector. The EAN is a superset of the original UPC increasing the digits to 13 with the prefix 0 reserved for UPC. As of 2005, manufacturers are only allowed to use the new 13-digit codes on their items, rather than having two separate numbers.</td></tr>
+<tr><td><a href="#term-usedInPerformance">usedInPerformance</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-usedInRecording">usedInRecording</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-usesSound">usesSound</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-usesWork">usesWork</a></td><td>Property</td><td></td></tr>
+<tr><td><a href="#term-want_item">want_item</a></td><td>Property</td><td>A person, a group of person or an organization wanting an exemplar of a single manifestation.</td></tr>
+<tr><td><a href="#term-wikipedia">wikipedia</a></td><td>Property</td><td>
+        Used to link an work, an expression of a work, a manifestation of a work, 
+        a person, an instrument or a musical genre to its corresponding WikiPedia page. 
+        The full URL should be used, not just the WikiName.
+    </td></tr>
+</table>
+<h2 id="sec-classes">Classes</h2>
+<h3 id="term-AnalogSignal">AnalogSignal</h3
+<p>
+        An analog signal.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/AnalogSignal">http://purl.org/ontology/mo/AnalogSignal</a></td></tr>
+<tr><th>Label:</th> <td>analogue signal</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-sampled_version">sampled_version</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-channels">channels</a>, <a href="#term-derived_from">derived_from</a>, <a href="#term-djmixed_by">djmixed_by</a>, <a href="#term-interpreter">interpreter</a>, <a href="#term-isrc">isrc</a>, <a href="#term-puid">puid</a>, <a href="#term-records">records</a>, <a href="#term-time">time</a>, <a href="#term-trmid">trmid</a>, <a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-Arrangement">Arrangement</h3
+<p>
+        An arrangement event.
+        Takes as agent the arranger, and produces a score (informational object, not the actually published score).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Arrangement">http://purl.org/ontology/mo/Arrangement</a></td></tr>
+<tr><th>Label:</th> <td>arrangement</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-Instrumentation">Instrumentation</a>, <a href="#term-Orchestration">Orchestration</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+</table>
+<h3 id="term-AudioFile">AudioFile</h3
+<p>An audio file, which may be available on a local file system or through http, ftp, etc.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/AudioFile">http://purl.org/ontology/mo/AudioFile</a></td></tr>
+<tr><th>Label:</th> <td>audio file</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a>, <a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-encoding">encoding</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-CD">CD</h3
+<p>Compact Disc used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/CD">http://purl.org/ontology/mo/CD</a></td></tr>
+<tr><th>Label:</th> <td>CD</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Composition">Composition</h3
+<p>
+        A composition event.
+        Takes as agent the composer himself.
+        It produces a MusicalWork, or a MusicalExpression (when the initial &quot;product&quot; is a score, for example), or both...
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Composition">http://purl.org/ontology/mo/Composition</a></td></tr>
+<tr><th>Label:</th> <td>composition</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-composer">composer</a>, <a href="#term-produced_work">produced_work</a></td></tr>
+</table>
+<h3 id="term-CorporateBody">CorporateBody</h3
+<p>Organization or group of individuals and/or other organizations involved in the music market.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/CorporateBody">http://purl.org/ontology/mo/CorporateBody</a></td></tr>
+<tr><th>Label:</th> <td>corporate body</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-Label">Label</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://xmlns.com/foaf/0.1/Organization">foaf:Organization</a></td></tr>
+</table>
+<h3 id="term-DAT">DAT</h3
+<p>Digital Audio Tape used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/DAT">http://purl.org/ontology/mo/DAT</a></td></tr>
+<tr><th>Label:</th> <td>DAT</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-DCC">DCC</h3
+<p>Digital Compact Cassette used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/DCC">http://purl.org/ontology/mo/DCC</a></td></tr>
+<tr><th>Label:</th> <td>DCC</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-DVDA">DVDA</h3
+<p>DVD-Audio used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/DVDA">http://purl.org/ontology/mo/DVDA</a></td></tr>
+<tr><th>Label:</th> <td>DVDA</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-DigitalSignal">DigitalSignal</h3
+<p>
+        A digital signal
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/DigitalSignal">http://purl.org/ontology/mo/DigitalSignal</a></td></tr>
+<tr><th>Label:</th> <td>digital signal</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-bitsPerSample">bitsPerSample</a>, <a href="#term-sample_rate">sample_rate</a>, <a href="#term-sampled_version_of">sampled_version_of</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-channels">channels</a>, <a href="#term-derived_from">derived_from</a>, <a href="#term-djmixed_by">djmixed_by</a>, <a href="#term-interpreter">interpreter</a>, <a href="#term-isrc">isrc</a>, <a href="#term-puid">puid</a>, <a href="#term-records">records</a>, <a href="#term-time">time</a>, <a href="#term-trmid">trmid</a>, <a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-ED2K">ED2K</h3
+<p>Something available on the E-Donkey peer-2-peer filesharing network</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ED2K">http://purl.org/ontology/mo/ED2K</a></td></tr>
+<tr><th>Label:</th> <td>ED2K</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Festival">Festival</h3
+<p>
+        A festival - musical/artistic event lasting several days, like Glastonbury, Rock Am Ring...
+        We migth decompose this event (which is in fact just a classification of the space/time region related to 
+        a particular festival) using hasSubEvent in several performances at different space/time.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Festival">http://purl.org/ontology/mo/Festival</a></td></tr>
+<tr><th>Label:</th> <td>Festival</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+</table>
+<h3 id="term-Genre">Genre</h3
+<p>
+        An expressive style of music.
+        
+        Any taxonomy can be plug-in here. You can either define a genre by yourself, like this:
+
+        :mygenre a mo:Genre; dc:title &quot;electro rock&quot;.
+
+        Or you can refer to a DBPedia genre (such as http://dbpedia.org/resource/Baroque_music), allowing semantic web
+        clients to access easily really detailed structured information about the genre you are refering to.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Genre">http://purl.org/ontology/mo/Genre</a></td></tr>
+<tr><th>Label:</th> <td>Genre</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+</table>
+<h3 id="term-Instrument">Instrument</h3
+<p>
+        Any of various devices or contrivances that can be used to produce musical tones or sound.
+        
+        Any taxonomy can be used to subsume this concept. The default one is one extracted by Ivan Herman
+        from the Musicbrainz instrument taxonomy, conforming to SKOS. This concept holds a seeAlso link 
+        towards this taxonomy.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Instrument">http://purl.org/ontology/mo/Instrument</a></td></tr>
+<tr><th>Label:</th> <td>Instrument</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>See Also:</th> <td><a href="http://purl.org/ontology/mo/mit#">http://purl.org/ontology/mo/mit#</a></td></tr>
+</table>
+<h3 id="term-Instrumentation">Instrumentation</h3
+<p>
+        Instrumentation deals with the techniques of writing music for a specific instrument, 
+        including the limitations of the instrument, playing techniques and idiomatic handling of the instrument.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Instrumentation">http://purl.org/ontology/mo/Instrumentation</a></td></tr>
+<tr><th>Label:</th> <td>instrumentation</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+</table>
+<h3 id="term-Label">Label</h3
+<p>Trade name of a company that produces musical works or expression of musical works.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Label">http://purl.org/ontology/mo/Label</a></td></tr>
+<tr><th>Label:</th> <td>label</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-CorporateBody">CorporateBody</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-lc">lc</a></td></tr>
+</table>
+<h3 id="term-Libretto">Libretto</h3
+<p>
+                Libretto
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Libretto">http://purl.org/ontology/mo/Libretto</a></td></tr>
+<tr><th>Label:</th> <td>libretto</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-Lyrics">Lyrics</h3
+<p>
+        Lyrics
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Lyrics">http://purl.org/ontology/mo/Lyrics</a></td></tr>
+<tr><th>Label:</th> <td>lyrics</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-text">text</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-MD">MD</h3
+<p>Mini Disc used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MD">http://purl.org/ontology/mo/MD</a></td></tr>
+<tr><th>Label:</th> <td>MD</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-MagneticTape">MagneticTape</h3
+<p>Magnetic analogue tape used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MagneticTape">http://purl.org/ontology/mo/MagneticTape</a></td></tr>
+<tr><th>Label:</th> <td>MagneticTape</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Medium">Medium</h3
+<p>A means or instrumentality for storing or communicating musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Medium">http://purl.org/ontology/mo/Medium</a></td></tr>
+<tr><th>Label:</th> <td>Medium</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-AudioFile">AudioFile</a>, <a href="#term-CD">CD</a>, <a href="#term-DAT">DAT</a>, <a href="#term-DCC">DCC</a>, <a href="#term-DVDA">DVDA</a>, <a href="#term-ED2K">ED2K</a>, <a href="#term-MD">MD</a>, <a href="#term-MagneticTape">MagneticTape</a>, <a href="#term-SACD">SACD</a>, <a href="#term-Stream">Stream</a>, <a href="#term-Torrent">Torrent</a>, <a href="#term-Vinyl">Vinyl</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalItem">MusicalItem</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Membership">Membership</h3
+<p>A membership event, where one or several people belongs to a group during a particular time period.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Membership">http://purl.org/ontology/mo/Membership</a></td></tr>
+<tr><th>Label:</th> <td>membership</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-group">group</a></td></tr>
+</table>
+<h3 id="term-Movement">Movement</h3
+<p>A movement is a self-contained part of a musical work. While individual or selected movements from a composition are sometimes performed separately, a performance of the complete work requires all the movements to be performed in succession.
+
+Often a composer attempts to interrelate the movements thematically, or sometimes in more subtle ways, in order that the individual
+movements exert a cumulative effect. In some forms, composers sometimes link the movements, or ask for them to be played without a
+pause between them.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Movement">http://purl.org/ontology/mo/Movement</a></td></tr>
+<tr><th>Label:</th> <td>movement</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-movement_number">movement_number</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-lyrics">lyrics</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a></td></tr>
+</table>
+<h3 id="term-MusicArtist">MusicArtist</h3
+<p>
+        A person or a group of people (or a computer :-) ), whose musical 
+        creative work shows sensitivity and imagination 
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicArtist">http://purl.org/ontology/mo/MusicArtist</a></td></tr>
+<tr><th>Label:</th> <td>music artist</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-MusicGroup">MusicGroup</a>, <a href="#term-SoloMusicArtist">SoloMusicArtist</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+</table>
+<h3 id="term-MusicGroup">MusicGroup</h3
+<p>Group of musicians, or musical ensemble, usually popular or folk, playing parts of or improvising off of a musical arrangement. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicGroup">http://purl.org/ontology/mo/MusicGroup</a></td></tr>
+<tr><th>Label:</th> <td>music group</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicArtist">MusicArtist</a>, <a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-member">member</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+</table>
+<h3 id="term-MusicalExpression">MusicalExpression</h3
+<p>
+The intellectual or artistic realization of a work in the form of alpha-numeric, musical, or choreographic notation, sound, etc., or any combination of such forms.    
+
+
+For example:
+
+Work #1 Franz Schubert's Trout quintet
+
+    * Expression #1 the composer's score
+    * Expression #2 sound issued from the performance by the Amadeus Quartet and Hephzibah Menuhin on piano
+    * Expression #3 sound issued from the performance by the Cleveland Quartet and Yo-Yo Ma on the cello
+    * . . . . 
+
+The Music Ontology defines the following sub-concepts of a MusicalExpression, which should be used instead of MusicalExpression itself: Score (the
+result of an arrangement), Sound (produced during a performance), Signal. However, it is possible to stick to FRBR and bypass the worflow
+mechanism this ontology defines by using the core FRBR properties on such objects. But it is often better to use events to interconnect such 
+expressions (allowing to go deeply into the production process - `this performer was playing this particular instrument at that
+particular time').
+    
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicalExpression">http://purl.org/ontology/mo/MusicalExpression</a></td></tr>
+<tr><th>Label:</th> <td>musical expression</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-Libretto">Libretto</a>, <a href="#term-Lyrics">Lyrics</a>, <a href="#term-Score">Score</a>, <a href="#term-Signal">Signal</a>, <a href="#term-SignalGroup">SignalGroup</a>, <a href="#term-Sound">Sound</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/vocab/frbr/core#Expression">http://purl.org/vocab/frbr/core#Expression</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-MusicalItem">MusicalItem</h3
+<p>A single exemplar of a musical expression.
+    
+For example, it could be a single exemplar of a CD. This is normally an single object (a CD) possessed by somebody.
+
+From the FRBR final report: The entity defined as item is a concrete entity. It is in many instances a single physical object (e.g., a copy of a one-volume monograph, a single audio cassette, etc.). There are instances, however, where the entity defined as item comprises more than one physical object (e.g., a monograph issued as two separately bound volumes, a recording issued on three separate compact discs, etc.).
+
+In terms of intellectual content and physical form, an item exemplifying a manifestation is normally the same as the manifestation itself. However, variations may occur from one item to another, even when the items exemplify the same manifestation, where those variations are the result of actions external to the intent of the producer of the manifestation (e.g., damage occurring after the item was produced, binding performed by a library, etc.). 
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicalItem">http://purl.org/ontology/mo/MusicalItem</a></td></tr>
+<tr><th>Label:</th> <td>MusicalItem</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-MusicalManifestation">MusicalManifestation</h3
+<p>
+
+This entity is related to the edition/production/publication of a musical expression (musical manifestation are closely related with the music industry (their terms, concepts, definitions, methods (production, publication, etc.), etc.)
+    
+From the FRBR final report: The entity defined as manifestation encompasses a wide range of materials, including manuscripts, books, periodicals, maps, posters, sound recordings, films, video recordings, CD-ROMs, multimedia kits, etc. As an entity, manifestation represents all the physical objects that bear the same characteristics, in respect to both intellectual content and physical form.
+
+
+Work #1 J. S. Bach's Six suites for unaccompanied cello
+
+    * Expression #1 sound issued during the performance by Janos Starker recorded in 1963 and 1965
+          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1965 by Mercury
+          o Manifestation #2 recordings re-released on compact disc in 1991 by Mercury 
+    * Expression #2 sound issued during the performances by Yo-Yo Ma recorded in 1983
+          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1983 by CBS Records
+          o Manifestation #2 recordings re-released on compact disc in 1992 by CBS Records 
+
+          
+Changes that occur deliberately or even inadvertently in the production process that affect the copies result, strictly speaking, in a new manifestation. A manifestation resulting from such a change may be identified as a particular &quot;state&quot; or &quot;issue&quot; of the publication.
+
+Changes that occur to an individual copy after the production process is complete (e.g., the loss of a page, rebinding, etc.) are not considered to result in a new manifestation. That copy is simply considered to be an exemplar (or item) of the manifestation that deviates from the copy as produced.
+
+With the entity defined as manifestation we can describe the physical characteristics of a set of items and the characteristics associated with the production and distribution of that set of items that may be important factors in enabling users to choose a manifestation appropriate to their physical needs and constraints, and to identify and acquire a copy of that manifestation.
+
+Defining manifestation as an entity also enables us to draw relationships between specific manifestations of a work. We can use the relationships between manifestations to identify, for example, the specific publication that was used to create a microreproduction.          
+
+</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicalManifestation">http://purl.org/ontology/mo/MusicalManifestation</a></td></tr>
+<tr><th>Label:</th> <td>musical manifestation</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-PublishedLibretto">PublishedLibretto</a>, <a href="#term-PublishedLyrics">PublishedLyrics</a>, <a href="#term-PublishedScore">PublishedScore</a>, <a href="#term-Record">Record</a>, <a href="#term-Release">Release</a>, <a href="#term-Track">Track</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/vocab/frbr/core#Manifestation">http://purl.org/vocab/frbr/core#Manifestation</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-MusicalWork">MusicalWork</h3
+<p>
+    Distinct intellectual or artistic musical creation.
+    
+From the FRBR final report: A work is an abstract entity; there is no single material object one can point to as the work. We recognize the work through individual realizations or expressions of the work, but the work itself exists only in the commonality of
+content between and among the various expressions of the work. When we speak of Homer's Iliad as a work, our point of reference is not a particular recitation or text of the work, but the intellectual creation that lies behind all the various expressions of the work.     
+
+For example:
+
+work #1 J. S. Bach's The art of the fugue
+
+    
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicalWork">http://purl.org/ontology/mo/MusicalWork</a></td></tr>
+<tr><th>Label:</th> <td>musical work</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-Movement">Movement</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/vocab/frbr/core#Work">http://purl.org/vocab/frbr/core#Work</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-lyrics">lyrics</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a></td></tr>
+</table>
+<h3 id="term-Orchestration">Orchestration</h3
+<p>
+            Orchestration includes, in addition to instrumentation, the handling of groups of instruments and their balance and interaction.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Orchestration">http://purl.org/ontology/mo/Orchestration</a></td></tr>
+<tr><th>Label:</th> <td>orchestration</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+</table>
+<h3 id="term-Performance">Performance</h3
+<p>
+        A performance event. 
+        It might include as agents performers, engineers, conductors, or even listeners.
+        It might include as factors a score, a MusicalWork, musical instruments. 
+        It might produce a sound:-)
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Performance">http://purl.org/ontology/mo/Performance</a></td></tr>
+<tr><th>Label:</th> <td>performance</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-conductor">conductor</a>, <a href="#term-instrument">instrument</a>, <a href="#term-listener">listener</a>, <a href="#term-performance_of">performance_of</a>, <a href="#term-performer">performer</a>, <a href="#term-produced_sound">produced_sound</a>, <a href="#term-recorded_as">recorded_as</a>, <a href="#term-singer">singer</a></td></tr>
+</table>
+<h3 id="term-PublishedLibretto">PublishedLibretto</h3
+<p>A published libretto</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/PublishedLibretto">http://purl.org/ontology/mo/PublishedLibretto</a></td></tr>
+<tr><th>Label:</th> <td>published libretto</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-PublishedLyrics">PublishedLyrics</h3
+<p>Published lyrics, as a book or as a text file, for example</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/PublishedLyrics">http://purl.org/ontology/mo/PublishedLyrics</a></td></tr>
+<tr><th>Label:</th> <td>published lyrics</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-PublishedScore">PublishedScore</h3
+<p>A published score (subclass of MusicalManifestation)</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/PublishedScore">http://purl.org/ontology/mo/PublishedScore</a></td></tr>
+<tr><th>Label:</th> <td>published score</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-Record">Record</h3
+<p>A published record (manifestation which first aim is to render the product of a recording)</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Record">http://purl.org/ontology/mo/Record</a></td></tr>
+<tr><th>Label:</th> <td>record</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-record_number">record_number</a>, <a href="#term-track">track</a>, <a href="#term-track_count">track_count</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-Recording">Recording</h3
+<p>
+        A recording event.
+        Takes a sound as a factor to produce a signal (analog or digital).
+        The location of such events (if any) is the actual location of the corresponding
+        microphone or the &quot;recording device&quot;.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Recording">http://purl.org/ontology/mo/Recording</a></td></tr>
+<tr><th>Label:</th> <td>recording</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-produced_signal">produced_signal</a>, <a href="#term-recording_of">recording_of</a></td></tr>
+</table>
+<h3 id="term-RecordingSession">RecordingSession</h3
+<p>A set of performances/recordings/mastering events. This event can be decomposed in its constituent events using event:sub_event</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/RecordingSession">http://purl.org/ontology/mo/RecordingSession</a></td></tr>
+<tr><th>Label:</th> <td>recording session</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-produced_signal_group">produced_signal_group</a></td></tr>
+</table>
+<h3 id="term-Release">Release</h3
+<p>A specific release, with barcode, box, liner notes, cover art, and a number of records</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Release">http://purl.org/ontology/mo/Release</a></td></tr>
+<tr><th>Label:</th> <td>release</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-catalogue_number">catalogue_number</a>, <a href="#term-ean">ean</a>, <a href="#term-grid">grid</a>, <a href="#term-gtin">gtin</a>, <a href="#term-record">record</a>, <a href="#term-record_count">record_count</a>, <a href="#term-upc">upc</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-ReleaseEvent">ReleaseEvent</h3
+<p>A release event, in a particular place (e.g. a country) at a particular time. Other factors of this event might include cover art, liner notes, box, etc. or a release grouping all these.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ReleaseEvent">http://purl.org/ontology/mo/ReleaseEvent</a></td></tr>
+<tr><th>Label:</th> <td>release event</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-release">release</a></td></tr>
+</table>
+<h3 id="term-ReleaseStatus">ReleaseStatus</h3
+<p>Musical manifestation release status.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ReleaseStatus">http://purl.org/ontology/mo/ReleaseStatus</a></td></tr>
+<tr><th>Label:</th> <td>release status</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+</table>
+<h3 id="term-ReleaseType">ReleaseType</h3
+<p>
+        Release type of a particular manifestation, such as &quot;album&quot; or &quot;interview&quot;...
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ReleaseType">http://purl.org/ontology/mo/ReleaseType</a></td></tr>
+<tr><th>Label:</th> <td>Release type</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+</table>
+<h3 id="term-SACD">SACD</h3
+<p>Super Audio Compact Disc used as medium to record a musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/SACD">http://purl.org/ontology/mo/SACD</a></td></tr>
+<tr><th>Label:</th> <td>SACD</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Score">Score</h3
+<p>
+        Here, we are dealing with the informational object (the MusicalExpression), not the actually &quot;published&quot; score.
+        This may be, for example, the product of an arrangement process.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Score">http://purl.org/ontology/mo/Score</a></td></tr>
+<tr><th>Label:</th> <td>score</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-Show">Show</h3
+<p>
+        A show - a musical event lasting several days, in a particular venue. Examples can be
+        &quot;The Magic Flute&quot; at the Opera Bastille, August 2005, or a musical in the west end...
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Show">http://purl.org/ontology/mo/Show</a></td></tr>
+<tr><th>Label:</th> <td>Show</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+</table>
+<h3 id="term-Signal">Signal</h3
+<p>
+        A subclass of MusicalExpression, representing a signal, for example a master signal produced by a performance and a recording.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Signal">http://purl.org/ontology/mo/Signal</a></td></tr>
+<tr><th>Label:</th> <td>signal</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Subclasses:</th> <td><a href="#term-AnalogSignal">AnalogSignal</a>, <a href="#term-DigitalSignal">DigitalSignal</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-channels">channels</a>, <a href="#term-derived_from">derived_from</a>, <a href="#term-djmixed_by">djmixed_by</a>, <a href="#term-interpreter">interpreter</a>, <a href="#term-isrc">isrc</a>, <a href="#term-puid">puid</a>, <a href="#term-records">records</a>, <a href="#term-time">time</a>, <a href="#term-trmid">trmid</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-SignalGroup">SignalGroup</h3
+<p>
+        A musical expression representing a group of signals, for example a set of masters resulting from a whole recording/mastering session.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/SignalGroup">http://purl.org/ontology/mo/SignalGroup</a></td></tr>
+<tr><th>Label:</th> <td>signal group</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-signal">signal</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-SoloMusicArtist">SoloMusicArtist</h3
+<p>Single person whose musical creative work shows sensitivity and imagination.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/SoloMusicArtist">http://purl.org/ontology/mo/SoloMusicArtist</a></td></tr>
+<tr><th>Label:</th> <td>solo music artist</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicArtist">MusicArtist</a>, <a href="http://xmlns.com/foaf/0.1/Person">foaf:Person</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+</table>
+<h3 id="term-Sound">Sound</h3
+<p>
+        A subclass of MusicalExpression, representing a sound. Realisation of a MusicalWork during a musical Performance.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Sound">http://purl.org/ontology/mo/Sound</a></td></tr>
+<tr><th>Label:</th> <td>sound</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a>, <a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-recorded_in">recorded_in</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-published_as">published_as</a></td></tr>
+</table>
+<h3 id="term-Stream">Stream</h3
+<p>Transmission over a network  used as medium to broadcast a musical manifestation</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Stream">http://purl.org/ontology/mo/Stream</a></td></tr>
+<tr><th>Label:</th> <td>Stream</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Torrent">Torrent</h3
+<p>Something available on the Bittorrent peer-2-peer filesharing network</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Torrent">http://purl.org/ontology/mo/Torrent</a></td></tr>
+<tr><th>Label:</th> <td>Torrent</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h3 id="term-Track">Track</h3
+<p>A track on a particular record</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Track">http://purl.org/ontology/mo/Track</a></td></tr>
+<tr><th>Label:</th> <td>rack</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-olga">olga</a>, <a href="#term-record_side">record_side</a>, <a href="#term-track_number">track_number</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-available_as">available_as</a>, <a href="#term-compilation_of">compilation_of</a>, <a href="#term-compiler">compiler</a>, <a href="#term-item">item</a>, <a href="#term-media_type">media_type</a>, <a href="#term-other_release_of">other_release_of</a>, <a href="#term-preview">preview</a>, <a href="#term-producer">producer</a>, <a href="#term-publication_of">publication_of</a>, <a href="#term-publisher">publisher</a>, <a href="#term-publishing_location">publishing_location</a>, <a href="#term-release_status">release_status</a>, <a href="#term-release_type">release_type</a>, <a href="#term-tribute_to">tribute_to</a></td></tr>
+</table>
+<h3 id="term-Transcription">Transcription</h3
+<p>Transcription event</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Transcription">http://purl.org/ontology/mo/Transcription</a></td></tr>
+<tr><th>Label:</th> <td>transcription</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+</table>
+<h3 id="term-Vinyl">Vinyl</h3
+<p>Vinyl used as medium to record a musical manifestation</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Vinyl">http://purl.org/ontology/mo/Vinyl</a></td></tr>
+<tr><th>Label:</th> <td>Vinyl</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Parent Class:</th> <td><a href="#term-Medium">Medium</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
+</table>
+<h2 id="sec-properties">Properties</h2>
+<h3 id="term-activity_end">activity_end</h3
+<p>Relates an artist to a date at which its activity ended</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/activity_end">http://purl.org/ontology/mo/activity_end</a></td></tr>
+<tr><th>Label:</th> <td>activity end</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-activity_start">activity_start</h3
+<p>Relates an artist to a date at which its activity started</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/activity_start">http://purl.org/ontology/mo/activity_start</a></td></tr>
+<tr><th>Label:</th> <td>activity start</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#date">xsd:date</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-amazon_asin">amazon_asin</h3
+<p>Used to link a work or the expression of a work to its corresponding Amazon ASINs page.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/amazon_asin">http://purl.org/ontology/mo/amazon_asin</a></td></tr>
+<tr><th>Label:</th> <td>amazon_asin</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid7">genid7</a></td></tr>
+</table>
+<h3 id="term-arranged_in">arranged_in</h3
+<p>
+        Associates a work to an arrangement event where it was arranged
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/arranged_in">http://purl.org/ontology/mo/arranged_in</a></td></tr>
+<tr><th>Label:</th> <td>arranged in</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-arrangement_of">arrangement_of</h3
+<p>
+                Associates an arrangement event to a work
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/arrangement_of">http://purl.org/ontology/mo/arrangement_of</a></td></tr>
+<tr><th>Label:</th> <td>arrangement of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+</table>
+<h3 id="term-available_as">available_as</h3
+<p>
+        Relates a musical manifestation to a musical item (this album, and my particular cd). By using
+        this property, there is no assumption on wether the full content is available on the linked item.
+        To be explicit about this, you can use a sub-property, such as mo:item (the full manifestation
+        is available on that item) or mo:preview (only a part of the manifestation is available on
+        that item).
+
+        This is a subproperty of frbr:examplar.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/available_as">http://purl.org/ontology/mo/available_as</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalItem">MusicalItem</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-biography">biography</h3
+<p>Used to link an artist to their online biography.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/biography">http://purl.org/ontology/mo/biography</a></td></tr>
+<tr><th>Label:</th> <td>biography</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-bitsPerSample">bitsPerSample</h3
+<p>
+        Associates a digital signal to the number a bits used to encode one sample. Range is xsd:int.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/bitsPerSample">http://purl.org/ontology/mo/bitsPerSample</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#int">xsd:int</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-DigitalSignal">DigitalSignal</a></td></tr>
+</table>
+<h3 id="term-bpm">bpm</h3
+<p>
+        Indicates the BPM of a MusicalWork or a particular Performance 
+        Beats per minute: the pace of music measured by the number of beats occurring in 60 seconds.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/bpm">http://purl.org/ontology/mo/bpm</a></td></tr>
+<tr><th>Label:</th> <td>bpm</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#float">xsd:float</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid12">genid12</a></td></tr>
+</table>
+<h3 id="term-catalogue_number">catalogue_number</h3
+<p>Links a release with the corresponding catalogue number</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/catalogue_number">http://purl.org/ontology/mo/catalogue_number</a></td></tr>
+<tr><th>Label:</th> <td>catalogue number</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-channels">channels</h3
+<p>
+        Associates a signal to the number of channels it holds (mono --&gt; 1, stereo --&gt; 2). Range is xsd:int.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/channels">http://purl.org/ontology/mo/channels</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#int">xsd:int</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-collaborated_with">collaborated_with</h3
+<p>Used to relate two collaborating people on a work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/collaborated_with">http://purl.org/ontology/mo/collaborated_with</a></td></tr>
+<tr><th>Label:</th> <td>collaborated_with</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-compilation_of">compilation_of</h3
+<p>Indicates that a musical manifestation is a compilation of several Signals.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/compilation_of">http://purl.org/ontology/mo/compilation_of</a></td></tr>
+<tr><th>Label:</th> <td>compilation_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-compiled">compiled</h3
+<p>Used to relate an person or a group of person who compiled the manifestation of a musical work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/compiled">http://purl.org/ontology/mo/compiled</a></td></tr>
+<tr><th>Label:</th> <td>compiled</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-compiler">compiler</h3
+<p>Used to relate the manifestation of a musical work to a person or a group of person who compiled it.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/compiler">http://purl.org/ontology/mo/compiler</a></td></tr>
+<tr><th>Label:</th> <td>compiler</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-composed_in">composed_in</h3
+<p>
+        Associates a MusicalWork to the Composition event pertaining
+        to its creation. For example, I might use this property to associate
+        the Magic Flute to its composition event, occuring during 1782 and having as
+        a mo:composer Mozart.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/composed_in">http://purl.org/ontology/mo/composed_in</a></td></tr>
+<tr><th>Label:</th> <td>composed in</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Composition">Composition</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-composer">composer</h3
+<p>
+        Associates a composition event to the actual composer. For example,
+        this property could link the event corresponding to the composition of the
+        Magic Flute in 1782 to Mozart himself (who obviously has a FOAF profile:-) ).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/composer">http://purl.org/ontology/mo/composer</a></td></tr>
+<tr><th>Label:</th> <td>composer</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Composition">Composition</a></td></tr>
+</table>
+<h3 id="term-conducted">conducted</h3
+<p>Relates agents to the performances they were conducting</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/conducted">http://purl.org/ontology/mo/conducted</a></td></tr>
+<tr><th>Label:</th> <td>conducted</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-conductor">conductor</h3
+<p>Relates a performance to the conductor involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/conductor">http://purl.org/ontology/mo/conductor</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-contains_sample_from">contains_sample_from</h3
+<p>
+        Relates a signal to another signal, which has been sampled.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/contains_sample_from">http://purl.org/ontology/mo/contains_sample_from</a></td></tr>
+<tr><th>Label:</th> <td>contains_sample_from</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-derived_from">derived_from</h3
+<p>A related signal from which the described signal is derived.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/derived_from">http://purl.org/ontology/mo/derived_from</a></td></tr>
+<tr><th>Label:</th> <td>derived from</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-discography">discography</h3
+<p>Used to links an artist to an online discography of their musical works. The discography should provide a summary of each released musical work of the artist.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/discography">http://purl.org/ontology/mo/discography</a></td></tr>
+<tr><th>Label:</th> <td>discography</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-discogs">discogs</h3
+<p>Used to link a musical work or the expression of a musical work, an artist or a corporate body to to its corresponding Discogs page.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/discogs">http://purl.org/ontology/mo/discogs</a></td></tr>
+<tr><th>Label:</th> <td>discogs</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid16">genid16</a></td></tr>
+</table>
+<h3 id="term-djmix_of">djmix_of</h3
+<p>Indicates that all (or most of) the tracks of a musical work or the expression of a musical work were mixed together from all (or most of) the tracks from another musical work or the expression of a musical work to form a so called DJ-Mix. 
+    
+The tracks might have been altered by pitching (so that the tempo of one track matches the tempo of the following track) and fading (so that one track blends in smoothly with the other). If the tracks have been more substantially altered, the &quot;mo:remix&quot; relationship type is more appropriate. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/djmix_of">http://purl.org/ontology/mo/djmix_of</a></td></tr>
+<tr><th>Label:</th> <td>djmix_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-djmixed">djmixed</h3
+<p>Used to relate an artist who djmixed a musical work or the expression of a musical work. 
+    
+The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/djmixed">http://purl.org/ontology/mo/djmixed</a></td></tr>
+<tr><th>Label:</th> <td>djmixed</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-djmixed_by">djmixed_by</h3
+<p>Used to relate a work or the expression of a work to an artist who djmixed it. 
+    
+The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/djmixed_by">http://purl.org/ontology/mo/djmixed_by</a></td></tr>
+<tr><th>Label:</th> <td>djmixed_by</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-download">download</h3
+<p>
+                This property can be used to link from a person to the website where they make their works available, or from
+                a manifestation (a track or an album, for example) to a web page where it is available for
+                download.
+        
+        It is better to use one of the three sub-properties instead of this one in order to specify wether the
+        content can be accessed for free (mo:freedownload), if it is just free preview material (mo:previewdownload), or
+        if it can be accessed for some money (mo:paiddownload) (this includes links to the Amazon store, for example).
+
+                This property MUST be used only if the content is just available through a web page (holding, for example
+                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
+                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+                less to rip streams from Flash applications can still access the audio content.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/download">http://purl.org/ontology/mo/download</a></td></tr>
+<tr><th>Label:</th> <td>download</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid22">genid22</a></td></tr>
+</table>
+<h3 id="term-ean">ean</h3
+<p>The European Article Number (EAN) is a universal identifier for products, commonly printed in form of barcodes on them. The numbers represented by those codes can either be 8 or 13 digits long, with the 13-digit-version being most common. EANs form a superset of the North American Universal Product Code (UPC) as every UPC can be made an EAN by adding a leading zero to it. Additionally every EAN is also a Japanese Article Number (JAN). The identifiers were formerly assigned by EAN International which merged with Uniform Code Council (UCC, the guys behind the UPCs) and Electronic Commerce Council of Canada (ECCC) to become GS1. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ean">http://purl.org/ontology/mo/ean</a></td></tr>
+<tr><th>Label:</th> <td>ean</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-encodes">encodes</h3
+<p>
+        Relates a MusicalItem (a track on a particular CD, an audio file, a stream somewhere) to the signal it encodes.
+
+        This is usually a lower-resolution version of the master signal (issued from a Recording event).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/encodes">http://purl.org/ontology/mo/encodes</a></td></tr>
+<tr><th>Label:</th> <td>encodes</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalItem">MusicalItem</a></td></tr>
+</table>
+<h3 id="term-encoding">encoding</h3
+<p>Method used to convert analog electronic signals into digital format such as &quot;MP3 CBR @ 128kbps&quot;, &quot;OGG @ 160kbps&quot;, &quot;FLAC&quot;, etc.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/encoding">http://purl.org/ontology/mo/encoding</a></td></tr>
+<tr><th>Label:</th> <td>encoding</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-AudioFile">AudioFile</a></td></tr>
+</table>
+<h3 id="term-engineer">engineer</h3
+<p>Relates a performance or a recording to the engineer involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/engineer">http://purl.org/ontology/mo/engineer</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid29">genid29</a></td></tr>
+</table>
+<h3 id="term-engineered">engineered</h3
+<p>Relates agents to the performances/recordings they were engineering in</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/engineered">http://purl.org/ontology/mo/engineered</a></td></tr>
+<tr><th>Label:</th> <td>engineered</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid33">genid33</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-event_homepage">event_homepage</h3
+<p>Links a particular event to a web page</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/event_homepage">http://purl.org/ontology/mo/event_homepage</a></td></tr>
+<tr><th>Label:</th> <td>event homepage</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+</table>
+<h3 id="term-exchange_item">exchange_item</h3
+<p>A person, a group of person or an organization exchanging an exemplar of a single manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/exchange_item">http://purl.org/ontology/mo/exchange_item</a></td></tr>
+<tr><th>Label:</th> <td>exchange_item</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/vocab/frbr/core#Item">http://purl.org/vocab/frbr/core#Item</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-fanpage">fanpage</h3
+<p>Used to link an artist to a fan-created webpage devoted to that artist.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/fanpage">http://purl.org/ontology/mo/fanpage</a></td></tr>
+<tr><th>Label:</th> <td>fanpage</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-free_download">free_download</h3
+<p>
+        This property can be used to link from a person to the website where they make their works available, or from
+        a manifestation (a track or an album, for example) to a web page where it is available for free 
+        download.
+
+        This property MUST be used only if the content is just available through a web page (holding, for example
+        a Flash application) - it is better to link to actual content directly through the use of mo:available_as and 
+        mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+        less to rip streams from Flash applications can still access the audio content.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/free_download">http://purl.org/ontology/mo/free_download</a></td></tr>
+<tr><th>Label:</th> <td>free download</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid37">genid37</a></td></tr>
+</table>
+<h3 id="term-freedownload">freedownload</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/freedownload">http://purl.org/ontology/mo/freedownload</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-genre">genre</h3
+<p>
+        Associates an event (like a performance or a recording) to a particular musical genre.
+        Further version of this property may also include works and scores in the domain.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/genre">http://purl.org/ontology/mo/genre</a></td></tr>
+<tr><th>Label:</th> <td>genre</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Genre">Genre</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid41">genid41</a></td></tr>
+</table>
+<h3 id="term-grid">grid</h3
+<p>The Global Release Identifier (GRid) is a system for uniquely identifying Releases of music over electronic networks (that is, online stores where you can buy music as digital files). As that it can be seen as the equivalent of the BarCode (or more correctly the GTIN) as found on physical releases of music. Like the ISRC (a code for identifying single recordings as found on releases) it was developed by the IFPI but it does not appear to be a standard of the ISO.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/grid">http://purl.org/ontology/mo/grid</a></td></tr>
+<tr><th>Label:</th> <td>GRid</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-group">group</h3
+<p>Relates a membership event with the corresponding group</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/group">http://purl.org/ontology/mo/group</a></td></tr>
+<tr><th>Label:</th> <td>group</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Membership">Membership</a></td></tr>
+</table>
+<h3 id="term-gtin">gtin</h3
+<p>GTIN is a grouping term for EANs and UPCs. In common speech those are called barcodes although the barcodes are just a representation of those identifying numbers.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/gtin">http://purl.org/ontology/mo/gtin</a></td></tr>
+<tr><th>Label:</th> <td>gtin</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-has_track">has_track</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/has_track">http://purl.org/ontology/mo/has_track</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-headliner">headliner</h3
+<p>Relates a performance to the headliner(s) involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/headliner">http://purl.org/ontology/mo/headliner</a></td></tr>
+<tr><th>Label:</th> <td>headliner</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+</table>
+<h3 id="term-homepage">homepage</h3
+<p>Links an artist, a record, etc. to a corresponding web page</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/homepage">http://purl.org/ontology/mo/homepage</a></td></tr>
+<tr><th>Label:</th> <td>homepage</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid52">genid52</a></td></tr>
+</table>
+<h3 id="term-image">image</h3
+<p>Indicates a pictorial image (JPEG, GIF, PNG, Etc.) of a musical work, the expression of a musical work, the manifestation of a work or the examplar of a manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/image">http://purl.org/ontology/mo/image</a></td></tr>
+<tr><th>Label:</th> <td>image</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Image">foaf:Image</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid58">genid58</a></td></tr>
+</table>
+<h3 id="term-imdb">imdb</h3
+<p>Used to link an artist, a musical work or the expression of a musical work to their equivalent page on IMDb, the InternetMovieDatabase.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/imdb">http://purl.org/ontology/mo/imdb</a></td></tr>
+<tr><th>Label:</th> <td>imdb</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid64">genid64</a></td></tr>
+</table>
+<h3 id="term-instrument">instrument</h3
+<p>Relates a performance to a musical instrument involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/instrument">http://purl.org/ontology/mo/instrument</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Instrument">Instrument</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-interpreter">interpreter</h3
+<p>Adds an involved music artist, who interpreted, remixed, or otherwise modified an existing signal, which resulted in the signal that is here the subject of this relation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/interpreter">http://purl.org/ontology/mo/interpreter</a></td></tr>
+<tr><th>Label:</th> <td>has interpeter</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-ipi">ipi</h3
+<p>The Interested Parties Information Code (IPI) is an ISO standard similar to ISBNs for identifying the people or groups with some involvement with a particular musical work / compositions.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ipi">http://purl.org/ontology/mo/ipi</a></td></tr>
+<tr><th>Label:</th> <td>ipi</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-ismn">ismn</h3
+<p>The International Standard Music Number (ISMN) is an ISO standard similar to ISBNs for identifying printed music publications</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/ismn">http://purl.org/ontology/mo/ismn</a></td></tr>
+<tr><th>Label:</th> <td>ismn</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid70">genid70</a></td></tr>
+</table>
+<h3 id="term-isrc">isrc</h3
+<p>
+    The ISRC (International Standard Recording Code) is the international identification system for sound recordings and music videorecordings. 
+    Each ISRC is a unique and permanent identifier for a specific recording which can be permanently encoded into a product as its digital fingerprint. 
+    Encoded ISRC provide the means to automatically identify recordings for royalty payments.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/isrc">http://purl.org/ontology/mo/isrc</a></td></tr>
+<tr><th>Label:</th> <td>isrc</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-iswc">iswc</h3
+<p>Links a musical work to the corresponding ISWC number</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/iswc">http://purl.org/ontology/mo/iswc</a></td></tr>
+<tr><th>Label:</th> <td>iswc</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-item">item</h3
+<p>
+                Relates a musical manifestation to a musical item (this album, and my particular cd) holding the
+                entire manifestation, and not just a part of it.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/item">http://purl.org/ontology/mo/item</a></td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalItem">MusicalItem</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-key">key</h3
+<p>
+        Indicated the key used by the musicians during a performance, or the key of a MusicalWork.
+        Any of 24 major or minor diatonic scales that provide the tonal framework for a piece of music.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/key">http://purl.org/ontology/mo/key</a></td></tr>
+<tr><th>Label:</th> <td>key</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/NET/c4dm/keys.owl#Key">http://purl.org/NET/c4dm/keys.owl#Key</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid74">genid74</a></td></tr>
+</table>
+<h3 id="term-label">label</h3
+<p>Associates a release event with the label releasing the record</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/label">http://purl.org/ontology/mo/label</a></td></tr>
+<tr><th>Label:</th> <td>label</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Label">Label</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid78">genid78</a></td></tr>
+</table>
+<h3 id="term-lc">lc</h3
+<p>The Label Code (LC) was introduced in 1977 by the IFPI (International Federation of Phonogram and Videogram Industries) in order to unmistakably identify the different record labels (see Introduction, Record labels) for rights purposes. The Label Code consists historically of 4 figures, presently being extended to 5 figures, preceded by LC and a dash (e.g. LC-0193 = Electrola; LC-0233 = His Master's Voice). Note that the number of countries using the LC is limited, and that the code given on the item is not always accurate.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/lc">http://purl.org/ontology/mo/lc</a></td></tr>
+<tr><th>Label:</th> <td>lc</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Label">Label</a></td></tr>
+</table>
+<h3 id="term-licence">licence</h3
+<p>Used to link a work or the expression of a work to the license under which they can be manipulated (downloaded, modified, etc). 
+    
+This is usually used to link to a Creative Commons licence.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/licence">http://purl.org/ontology/mo/licence</a></td></tr>
+<tr><th>Label:</th> <td>licence</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://web.resource.org/cc/License">http://web.resource.org/cc/License</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid81">genid81</a></td></tr>
+</table>
+<h3 id="term-listened">listened</h3
+<p>Relates agents to the performances they were listening in</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/listened">http://purl.org/ontology/mo/listened</a></td></tr>
+<tr><th>Label:</th> <td>listened</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-listener">listener</h3
+<p>Relates a performance to the listener involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/listener">http://purl.org/ontology/mo/listener</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-lyrics">lyrics</h3
+<p>Associates lyrics with a musical work</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/lyrics">http://purl.org/ontology/mo/lyrics</a></td></tr>
+<tr><th>Label:</th> <td>lyrics</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Lyrics">Lyrics</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-mailorder">mailorder</h3
+<p>Used to link a musical work or the expression of a musical work to a website where people can buy a copy of the musical manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/mailorder">http://purl.org/ontology/mo/mailorder</a></td></tr>
+<tr><th>Label:</th> <td>mailorder</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid85">genid85</a></td></tr>
+</table>
+<h3 id="term-mashup_of">mashup_of</h3
+<p>Indicates that musical works or the expressions of a musical work were mashed up on this album or track. 
+    
+This means that two musical works or the expressions of a musical work by different artists are mixed together, over each other, or otherwise combined into a single musical work (usually by a third artist, the remixer).</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/mashup_of">http://purl.org/ontology/mo/mashup_of</a></td></tr>
+<tr><th>Label:</th> <td>mashup_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-media_type">media_type</h3
+<p>The mediatype (file format or MIME type, or physical medium) of a musical manifestation, e.g. a MP3, CD or vinyl.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/media_type">http://purl.org/ontology/mo/media_type</a></td></tr>
+<tr><th>Label:</th> <td>has media type</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/dc/terms/MediaType">dc:MediaType</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-medley_of">medley_of</h3
+<p>Indicates that a musical expression is a medley of several other musical expressions. 
+    
+This means that the orignial musical expression were rearranged to create a new musical expression in the form of a medley. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/medley_of">http://purl.org/ontology/mo/medley_of</a></td></tr>
+<tr><th>Label:</th> <td>medley_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-member">member</h3
+<p>
+        Indicates a member of a musical group
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/member">http://purl.org/ontology/mo/member</a></td></tr>
+<tr><th>Label:</th> <td>member</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicGroup">MusicGroup</a></td></tr>
+</table>
+<h3 id="term-member_of">member_of</h3
+<p>Inverse of the foaf:member property</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/member_of">http://purl.org/ontology/mo/member_of</a></td></tr>
+<tr><th>Label:</th> <td>member_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-membership">membership</h3
+<p>Relates an agent with related membership events</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/membership">http://purl.org/ontology/mo/membership</a></td></tr>
+<tr><th>Label:</th> <td>membership</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Membership">Membership</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-meter">meter</h3
+<p>Associates a musical work or a score with its meter</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/meter">http://purl.org/ontology/mo/meter</a></td></tr>
+<tr><th>Label:</th> <td>meter</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid89">genid89</a></td></tr>
+</table>
+<h3 id="term-movement">movement</h3
+<p>Indicates that a musical work has movements</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/movement">http://purl.org/ontology/mo/movement</a></td></tr>
+<tr><th>Label:</th> <td>has_movement</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Movement">Movement</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-movement_number">movement_number</h3
+<p>Indicates the position of a movement in a musical work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/movement_number">http://purl.org/ontology/mo/movement_number</a></td></tr>
+<tr><th>Label:</th> <td>movement number</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#int">xsd:int</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Movement">Movement</a></td></tr>
+</table>
+<h3 id="term-musicbrainz">musicbrainz</h3
+<p>
+        Linking an agent, a track or a record to its corresponding Musicbrainz page.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/musicbrainz">http://purl.org/ontology/mo/musicbrainz</a></td></tr>
+<tr><th>Label:</th> <td>musicbrainz</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid92">genid92</a></td></tr>
+</table>
+<h3 id="term-musicbrainz_guid">musicbrainz_guid</h3
+<p>Links an object to the corresponding Musicbrainz identifier</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/musicbrainz_guid">http://purl.org/ontology/mo/musicbrainz_guid</a></td></tr>
+<tr><th>Label:</th> <td>Musicbrainz GUID</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid97">genid97</a></td></tr>
+</table>
+<h3 id="term-musicmoz">musicmoz</h3
+<p>Used to link an artist, a musical work or the expression of a musical work to its corresponding MusicMoz page.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/musicmoz">http://purl.org/ontology/mo/musicmoz</a></td></tr>
+<tr><th>Label:</th> <td>musicmoz</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid105">genid105</a></td></tr>
+</table>
+<h3 id="term-myspace">myspace</h3
+<p>Used to link a person to its corresponding MySpace page.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/myspace">http://purl.org/ontology/mo/myspace</a></td></tr>
+<tr><th>Label:</th> <td>myspace</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-olga">olga</h3
+<p>Used to link a track to a tabulature file for track in the On-Line Guitar Archive.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/olga">http://purl.org/ontology/mo/olga</a></td></tr>
+<tr><th>Label:</th> <td>olga</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Track">Track</a></td></tr>
+</table>
+<h3 id="term-onlinecommunity">onlinecommunity</h3
+<p>Used to link a person with an online community web page like a blog, a wiki, a forum, a livejournal page, Etc.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/onlinecommunity">http://purl.org/ontology/mo/onlinecommunity</a></td></tr>
+<tr><th>Label:</th> <td>onlinecommunity</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-opus">opus</h3
+<p>
+        Used to define a creative work, especially a musical composition numbered to designate the order of a composer's works.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/opus">http://purl.org/ontology/mo/opus</a></td></tr>
+<tr><th>Label:</th> <td>opus</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+</table>
+<h3 id="term-origin">origin</h3
+<p>Relates an artist to its geographic origin</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/origin">http://purl.org/ontology/mo/origin</a></td></tr>
+<tr><th>Label:</th> <td>origin</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing">geo:SpatialThing</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-other_release_of">other_release_of</h3
+<p>Indicates that two musical manifestations are essentially the same.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/other_release_of">http://purl.org/ontology/mo/other_release_of</a></td></tr>
+<tr><th>Label:</th> <td>other_release_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-paid_download">paid_download</h3
+<p>
+                Provide a link from an artist to a web page where all of that artist's musical work is available for some money,
+                or a link from a manifestation (record/track, for example) to a web page providing a paid access to this manifestation.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/paid_download">http://purl.org/ontology/mo/paid_download</a></td></tr>
+<tr><th>Label:</th> <td>paid download</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid110">genid110</a></td></tr>
+</table>
+<h3 id="term-paiddownload">paiddownload</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/paiddownload">http://purl.org/ontology/mo/paiddownload</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-performance_of">performance_of</h3
+<p>
+        Associates a Performance to a musical work or an arrangement that is being used as a factor in it.
+        For example, I might use this property to attach the Magic Flute musical work to 
+        a particular Performance.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/performance_of">http://purl.org/ontology/mo/performance_of</a></td></tr>
+<tr><th>Label:</th> <td>performance of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid114">genid114</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-performed">performed</h3
+<p>Relates agents to the performances they were performing in</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/performed">http://purl.org/ontology/mo/performed</a></td></tr>
+<tr><th>Label:</th> <td>performed</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-performed_in">performed_in</h3
+<p>
+        Associates a Musical Work or an Score to Performances in which they were
+        a factor. For example, I might use this property in order to 
+        associate the Magic Flute to a particular performance at the Opera
+        Bastille last year.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/performed_in">http://purl.org/ontology/mo/performed_in</a></td></tr>
+<tr><th>Label:</th> <td>performed in</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid117">genid117</a></td></tr>
+</table>
+<h3 id="term-performer">performer</h3
+<p>Relates a performance to the performers involved</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/performer">http://purl.org/ontology/mo/performer</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-possess_item">possess_item</h3
+<p>A person, a group of person or an organization possessing an exemplar of a single manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/possess_item">http://purl.org/ontology/mo/possess_item</a></td></tr>
+<tr><th>Label:</th> <td>possess_item</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/vocab/frbr/core#Item">http://purl.org/vocab/frbr/core#Item</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-preview">preview</h3
+<p>
+                Relates a musical manifestation to a musical item (this album, and my particular cd), which holds
+                a preview of the manifestation (eg. one track for an album, or a snippet for a track)
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/preview">http://purl.org/ontology/mo/preview</a></td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalItem">MusicalItem</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-preview_download">preview_download</h3
+<p>
+                This property can be used to link from a person to the website where they make previews of their works available, or from
+                a manifestation (a track or an album, for example) to a web page where a preview download is available.
+
+                This property MUST be used only if the content is just available through a web page (holding, for example
+                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
+                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
+                less to rip streams from Flash applications can still access the audio content.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/preview_download">http://purl.org/ontology/mo/preview_download</a></td></tr>
+<tr><th>Label:</th> <td>preview download</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid120">genid120</a></td></tr>
+</table>
+<h3 id="term-primary_instrument">primary_instrument</h3
+<p>Indicates that an artist primarily plays an instrument, or that a member was primarily playing a particular instrument during his membership</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/primary_instrument">http://purl.org/ontology/mo/primary_instrument</a></td></tr>
+<tr><th>Label:</th> <td>primary instrument</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Instrument">Instrument</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid124">genid124</a></td></tr>
+</table>
+<h3 id="term-produced">produced</h3
+<p>Used to relate an person or a group of person who produced the manifestation of a work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced">http://purl.org/ontology/mo/produced</a></td></tr>
+<tr><th>Label:</th> <td>produced</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-produced_score">produced_score</h3
+<p>
+        Associates an arrangement event to a score product (score here does not refer to a published score, but more
+        an abstract arrangement of a particular work).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced_score">http://purl.org/ontology/mo/produced_score</a></td></tr>
+<tr><th>Label:</th> <td>produced score</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Score">Score</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+</table>
+<h3 id="term-produced_signal">produced_signal</h3
+<p>
+                Associates a Recording to the outputted signal.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced_signal">http://purl.org/ontology/mo/produced_signal</a></td></tr>
+<tr><th>Label:</th> <td>produced signal</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Recording">Recording</a></td></tr>
+</table>
+<h3 id="term-produced_signal_group">produced_signal_group</h3
+<p>Associates a recording session with a group of master signals produced by it.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced_signal_group">http://purl.org/ontology/mo/produced_signal_group</a></td></tr>
+<tr><th>Label:</th> <td>produced signal group</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-SignalGroup">SignalGroup</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-RecordingSession">RecordingSession</a></td></tr>
+</table>
+<h3 id="term-produced_sound">produced_sound</h3
+<p>
+                Associates a Performance to a physical Sound that is being produced by it.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced_sound">http://purl.org/ontology/mo/produced_sound</a></td></tr>
+<tr><th>Label:</th> <td>produced sound</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Sound">Sound</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-produced_work">produced_work</h3
+<p>
+                Associates a composition event to the produced MusicalWork. For example,
+                this property could link the event corresponding to the composition of the
+                Magic Flute in 1782 to the Magic Flute musical work itself. This musical work
+                can then be used in particular performances.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/produced_work">http://purl.org/ontology/mo/produced_work</a></td></tr>
+<tr><th>Label:</th> <td>produced work</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Composition">Composition</a></td></tr>
+</table>
+<h3 id="term-producer">producer</h3
+<p>Used to relate the manifestation of a work to a person or a group of person who produced it.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/producer">http://purl.org/ontology/mo/producer</a></td></tr>
+<tr><th>Label:</th> <td>producer</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-producesSignal">producesSignal</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/producesSignal">http://purl.org/ontology/mo/producesSignal</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-producesSound">producesSound</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/producesSound">http://purl.org/ontology/mo/producesSound</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-productOfComposition">productOfComposition</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/productOfComposition">http://purl.org/ontology/mo/productOfComposition</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-publication_of">publication_of</h3
+<p>Link a particular manifestation to the related signal, score, libretto, or lyrics</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/publication_of">http://purl.org/ontology/mo/publication_of</a></td></tr>
+<tr><th>Label:</th> <td>publication of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-published">published</h3
+<p>Used to relate an person or a group of person who published the manifestation of a work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/published">http://purl.org/ontology/mo/published</a></td></tr>
+<tr><th>Label:</th> <td>published</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-published_as">published_as</h3
+<p>
+        Links a musical expression (e.g. a signal or a score) to one of its manifestations (e.g. a track on a particular record or a published score).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/published_as">http://purl.org/ontology/mo/published_as</a></td></tr>
+<tr><th>Label:</th> <td>published as</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalExpression">MusicalExpression</a></td></tr>
+</table>
+<h3 id="term-publisher">publisher</h3
+<p>Used to relate a musical manifestation to a person or a group of person who published it.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/publisher">http://purl.org/ontology/mo/publisher</a></td></tr>
+<tr><th>Label:</th> <td>publisher</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-publishing_location">publishing_location</h3
+<p>
+        Relates a musical manifestation to its publication location.
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/publishing_location">http://purl.org/ontology/mo/publishing_location</a></td></tr>
+<tr><th>Label:</th> <td>publishingLocation</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing">geo:SpatialThing</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-puid">puid</h3
+<p>
+        Link a signal to the PUIDs associated with it, that is, PUID computed from MusicalItems (mo:AudioFile) 
+        derived from this signal.
+        PUIDs (Portable Unique IDentifier) are the IDs used in the 
+        proprietary MusicDNS AudioFingerprinting system which is operated by MusicIP.
+
+        Using PUIDs, one (with some luck) can identify the Signal object associated with a particular audio file, therefore allowing
+        to access further information (on which release this track is featured? etc.). Using some more metadata one can identify
+        the particular Track corresponding to the audio file (a track on a particular release).</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/puid">http://purl.org/ontology/mo/puid</a></td></tr>
+<tr><th>Label:</th> <td>puid</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-record">record</h3
+<p>Associates a release with the records it contains. A single release can be associated with multiple records, for example for a multi-disc release.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/record">http://purl.org/ontology/mo/record</a></td></tr>
+<tr><th>Label:</th> <td>released record</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Record">Record</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-record_count">record_count</h3
+<p>Associates a release with the number of records it contains, e.g. the number of discs it contains in the case of a multi-disc release.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/record_count">http://purl.org/ontology/mo/record_count</a></td></tr>
+<tr><th>Label:</th> <td>record count</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#int">xsd:int</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-record_number">record_number</h3
+<p>Indicates the position of a record in a release (e.g. a 2xLP, etc.).</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/record_number">http://purl.org/ontology/mo/record_number</a></td></tr>
+<tr><th>Label:</th> <td>has record number</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">xsd:nonNegativeInteger</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Record">Record</a></td></tr>
+</table>
+<h3 id="term-record_side">record_side</h3
+<p>Associates the side on a vinyl record, where a track is located, e.g. A, B, C, etc. This property can then also be used 
+in conjunction with mo:track_number, so that one can infer e.g. &quot;A1&quot;, that means, track number 1 on side A.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/record_side">http://purl.org/ontology/mo/record_side</a></td></tr>
+<tr><th>Label:</th> <td>has record side</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Track">Track</a></td></tr>
+</table>
+<h3 id="term-recorded_as">recorded_as</h3
+<p>
+        This is a shortcut property, allowing to bypass all the Sound/Recording steps. This property
+        allows to directly link a Performance to the recorded Signal. This is recommended for &quot;normal&quot;
+        users. However, advanced users wanting to express things such as the location of the microphone will
+        have to create this shortcut as well as the whole workflow, in order to let the &quot;normal&quot; users access
+        simply the, well, simple information:-) .
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/recorded_as">http://purl.org/ontology/mo/recorded_as</a></td></tr>
+<tr><th>Label:</th> <td>recorded as</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-recorded_in">recorded_in</h3
+<p>
+            Associates a physical Sound to a Recording event where it is being used 
+        in order to produce a signal. For example, I might use this property to 
+        associate the sound produced by a particular performance of the magic flute
+        to a given recording, done using my cell-phone.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/recorded_in">http://purl.org/ontology/mo/recorded_in</a></td></tr>
+<tr><th>Label:</th> <td>recorded in</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Recording">Recording</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Sound">Sound</a></td></tr>
+</table>
+<h3 id="term-recording_of">recording_of</h3
+<p>
+            Associates a Recording event to a physical Sound being recorded.
+                For example, I might use this property to
+                associate a given recording, done using my cell phone, to the 
+        sound produced by a particular performance of the magic flute.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/recording_of">http://purl.org/ontology/mo/recording_of</a></td></tr>
+<tr><th>Label:</th> <td>recorded sound</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Sound">Sound</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Recording">Recording</a></td></tr>
+</table>
+<h3 id="term-records">records</h3
+<p>
+        This is the inverse of the shortcut property recordedAs, allowing to relate directly a performance
+        to a signal.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/records">http://purl.org/ontology/mo/records</a></td></tr>
+<tr><th>Label:</th> <td>records</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-release">release</h3
+<p>Associates a release with the corresponding release event</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/release">http://purl.org/ontology/mo/release</a></td></tr>
+<tr><th>Label:</th> <td>release</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Release">Release</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-ReleaseEvent">ReleaseEvent</a></td></tr>
+</table>
+<h3 id="term-release_status">release_status</h3
+<p>
+                Relates a musical manifestation to its release status (bootleg, ...)
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/release_status">http://purl.org/ontology/mo/release_status</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-ReleaseStatus">ReleaseStatus</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-release_type">release_type</h3
+<p>
+        Relates a musical manifestation to its release type (interview, spoken word, album, ...)
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/release_type">http://purl.org/ontology/mo/release_type</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-ReleaseType">ReleaseType</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-remaster_of">remaster_of</h3
+<p>This relates two musical work or the expression of a musical work, where one is a remaster of the other. 
+    
+A remaster is a new version made for release from source recordings that were earlier released separately. This is usually done to improve the audio quality or adjust for more modern playback equipment. The process generally doesn't involve changing the music in any artistically important way. It may, however, result in tracks that are a few seconds longer or shorter.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/remaster_of">http://purl.org/ontology/mo/remaster_of</a></td></tr>
+<tr><th>Label:</th> <td>remaster_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-remix_of">remix_of</h3
+<p>Used to relate the remix of a musical work in a substantially altered version produced by mixing together individual tracks or segments of an original musical source work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/remix_of">http://purl.org/ontology/mo/remix_of</a></td></tr>
+<tr><th>Label:</th> <td>remix_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-remixed">remixed</h3
+<p>Used to relate an artist who remixed a musical work or the expression of a musical work. 
+    
+This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/remixed">http://purl.org/ontology/mo/remixed</a></td></tr>
+<tr><th>Label:</th> <td>remixed</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-remixer">remixer</h3
+<p>Used to relate a musical work or the expression of a musical work to an artist who remixed it. 
+    
+This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/remixer">http://purl.org/ontology/mo/remixer</a></td></tr>
+<tr><th>Label:</th> <td>remixer</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-review">review</h3
+<p>Used to link a work or the expression of a work to a review. 
+    
+The review does not have to be open content, as long as it is accessible to the general internet population.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/review">http://purl.org/ontology/mo/review</a></td></tr>
+<tr><th>Label:</th> <td>review</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid127">genid127</a></td></tr>
+</table>
+<h3 id="term-sample_rate">sample_rate</h3
+<p>
+        Associates a digital signal to its sample rate. It might be easier to express it this way instead of
+        defining a timeline map:-) Range is xsd:float.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sample_rate">http://purl.org/ontology/mo/sample_rate</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#float">xsd:float</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-DigitalSignal">DigitalSignal</a></td></tr>
+</table>
+<h3 id="term-sampled">sampled</h3
+<p>Used to relate an artist who sampled a Signal.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sampled">http://purl.org/ontology/mo/sampled</a></td></tr>
+<tr><th>Label:</th> <td>sampled</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-sampledVersionOf">sampledVersionOf</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sampledVersionOf">http://purl.org/ontology/mo/sampledVersionOf</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-sampled_version">sampled_version</h3
+<p>
+        Associates an analog signal with a sampled version of it
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sampled_version">http://purl.org/ontology/mo/sampled_version</a></td></tr>
+<tr><th>Label:</th> <td>sampled version</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-DigitalSignal">DigitalSignal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-AnalogSignal">AnalogSignal</a></td></tr>
+</table>
+<h3 id="term-sampled_version_of">sampled_version_of</h3
+<p>
+        Associates a digital signal with the analog version of it
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sampled_version_of">http://purl.org/ontology/mo/sampled_version_of</a></td></tr>
+<tr><th>Label:</th> <td>sampled version of</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-AnalogSignal">AnalogSignal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-DigitalSignal">DigitalSignal</a></td></tr>
+</table>
+<h3 id="term-sampler">sampler</h3
+<p>Used to relate the signal of a musical work to an artist who sampled it.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sampler">http://purl.org/ontology/mo/sampler</a></td></tr>
+<tr><th>Label:</th> <td>sampler</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+</table>
+<h3 id="term-sell_item">sell_item</h3
+<p>A person, a group of person or an organization selling an exemplar of a single manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/sell_item">http://purl.org/ontology/mo/sell_item</a></td></tr>
+<tr><th>Label:</th> <td>sell_item</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/vocab/frbr/core#Item">http://purl.org/vocab/frbr/core#Item</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-signal">signal</h3
+<p>Associates a group of signals with one of the signals it contains</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/signal">http://purl.org/ontology/mo/signal</a></td></tr>
+<tr><th>Label:</th> <td>signal</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-SignalGroup">SignalGroup</a></td></tr>
+</table>
+<h3 id="term-signalTime">signalTime</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/signalTime">http://purl.org/ontology/mo/signalTime</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-similar_to">similar_to</h3
+<p>
+            A similarity relationships between two objects (so far, either an agent, a signal or a genre, but
+        this could grow).
+        This relationship is pretty general and doesn't make any assumptions on how the similarity claim
+        was derived.
+        Such similarity statements can come from a range of different sources (Musicbrainz similarities between
+        artists, or coming from some automatic content analysis).
+        However, the origin of such statements should be kept using a named graph approach - and ultimately, the 
+        documents providing such statements should attach some metadata to themselves (confidence of the claim, etc.).
+        </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/similar_to">http://purl.org/ontology/mo/similar_to</a></td></tr>
+<tr><th>Label:</th> <td>similar_to</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid138">genid138</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid131">genid131</a></td></tr>
+</table>
+<h3 id="term-singer">singer</h3
+<p>Relates a performance to an involved singer</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/singer">http://purl.org/ontology/mo/singer</a></td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
+</table>
+<h3 id="term-supporting_musician">supporting_musician</h3
+<p>Used to relate an artist doing long-time instrumental or vocal support for another artist.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/supporting_musician">http://purl.org/ontology/mo/supporting_musician</a></td></tr>
+<tr><th>Label:</th> <td>supporting_musician</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
+<h3 id="term-tempo">tempo</h3
+<p>
+        Rate of speed or pace of music. Tempo markings are traditionally given in Italian; 
+        common markings include: grave (solemn; very, very slow); largo (broad; very slow); 
+        adagio (quite slow); andante (a walking pace); moderato (moderate); allegro (fast; cheerful); 
+        vivace (lively); presto (very fast); accelerando (getting faster); ritardando (getting slower); 
+        and a tempo (in time; returning to the original pace).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/tempo">http://purl.org/ontology/mo/tempo</a></td></tr>
+<tr><th>Label:</th> <td>tempo</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid145">genid145</a></td></tr>
+</table>
+<h3 id="term-text">text</h3
+<p>Associates lyrics with their text.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/text">http://purl.org/ontology/mo/text</a></td></tr>
+<tr><th>Label:</th> <td>text</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Lyrics">Lyrics</a></td></tr>
+</table>
+<h3 id="term-time">time</h3
+<p>
+        Associates a Signal to a time object - its actual domain
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/time">http://purl.org/ontology/mo/time</a></td></tr>
+<tr><th>Label:</th> <td>time</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2006/time#TemporalEntity">http://www.w3.org/2006/time#TemporalEntity</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-track">track</h3
+<p>Indicates a part of a musical manifestation - in this particular case, a track.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/track">http://purl.org/ontology/mo/track</a></td></tr>
+<tr><th>Label:</th> <td>track</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Track">Track</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Record">Record</a></td></tr>
+</table>
+<h3 id="term-trackNum">trackNum</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/trackNum">http://purl.org/ontology/mo/trackNum</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-track_count">track_count</h3
+<p>The track count of a record</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/track_count">http://purl.org/ontology/mo/track_count</a></td></tr>
+<tr><th>Label:</th> <td>track count</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#int">xsd:int</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Record">Record</a></td></tr>
+</table>
+<h3 id="term-track_number">track_number</h3
+<p>Indicates the position of a track on a record medium (a CD, etc.).</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/track_number">http://purl.org/ontology/mo/track_number</a></td></tr>
+<tr><th>Label:</th> <td>track number</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">xsd:nonNegativeInteger</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Track">Track</a></td></tr>
+</table>
+<h3 id="term-translation_of">translation_of</h3
+<p>Indicates that a work or the expression of a work has translated or transliterated into another expression of a work.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/translation_of">http://purl.org/ontology/mo/translation_of</a></td></tr>
+<tr><th>Label:</th> <td>translation_of</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/vocab/frbr/core#Expression">http://purl.org/vocab/frbr/core#Expression</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://purl.org/vocab/frbr/core#Expression">http://purl.org/vocab/frbr/core#Expression</a></td></tr>
+</table>
+<h3 id="term-tribute_to">tribute_to</h3
+<p>Indicates a musical work or the expression of a musical work that is a tribute to an artist - normally consisting of music being composed by the artist but performed by other artists. </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/tribute_to">http://purl.org/ontology/mo/tribute_to</a></td></tr>
+<tr><th>Label:</th> <td>tribute_to</td></tr>
+<tr><th>Status:</th> <td>unstable</td></tr>
+<tr><th>Range:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
+</table>
+<h3 id="term-trmid">trmid</h3
+<p>
+        Indicates the TRMID of a track.
+        TRM IDs are MusicBrainz' old AudioFingerprinting system. 
+        TRM (TRM Recognizes Music) IDs are (somewhat) unique ids that represent 
+        the audio signature of a musical piece (see AudioFingerprint).
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/trmid">http://purl.org/ontology/mo/trmid</a></td></tr>
+<tr><th>Label:</th> <td>trmid</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Signal">Signal</a></td></tr>
+</table>
+<h3 id="term-upc">upc</h3
+<p>UPC stands for &quot;Universal Product Code&quot;, which was the original barcode used in the United States and Canada. The UPC (now officially EAN.UCC-12 is a numerical method of identifying products without redundancy worldwide for all types of products in the retail sector. The EAN is a superset of the original UPC increasing the digits to 13 with the prefix 0 reserved for UPC. As of 2005, manufacturers are only allowed to use the new 13-digit codes on their items, rather than having two separate numbers.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/upc">http://purl.org/ontology/mo/upc</a></td></tr>
+<tr><th>Label:</th> <td>upc</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Release">Release</a></td></tr>
+</table>
+<h3 id="term-usedInPerformance">usedInPerformance</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/usedInPerformance">http://purl.org/ontology/mo/usedInPerformance</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-usedInRecording">usedInRecording</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/usedInRecording">http://purl.org/ontology/mo/usedInRecording</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-usesSound">usesSound</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/usesSound">http://purl.org/ontology/mo/usesSound</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-usesWork">usesWork</h3
+<p></p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/usesWork">http://purl.org/ontology/mo/usesWork</a></td></tr>
+<tr><th>Status:</th> <td>deprecated</td></tr>
+</table>
+<h3 id="term-want_item">want_item</h3
+<p>A person, a group of person or an organization wanting an exemplar of a single manifestation.</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/want_item">http://purl.org/ontology/mo/want_item</a></td></tr>
+<tr><th>Label:</th> <td>want_item</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://purl.org/vocab/frbr/core#Item">http://purl.org/vocab/frbr/core#Item</a></td></tr>
+<tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+</table>
+<h3 id="term-wikipedia">wikipedia</h3
+<p>
+        Used to link an work, an expression of a work, a manifestation of a work, 
+        a person, an instrument or a musical genre to its corresponding WikiPedia page. 
+        The full URL should be used, not just the WikiName.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/wikipedia">http://purl.org/ontology/mo/wikipedia</a></td></tr>
+<tr><th>Label:</th> <td>wikipedia</td></tr>
+<tr><th>Status:</th> <td>stable</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid149">genid149</a></td></tr>
+</table>
+    </div>
+</body>
+</html>
