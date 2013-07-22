@@ -1,8 +1,8 @@
 <html>
 <head>
-  <title>Music Ontology specification</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-      <!-- Bootstrap -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Music Ontology specification</title>
+    <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
     <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
@@ -53,7 +53,7 @@
 <dt>Latest Version</dt><dd><a href="http://purl.org/ontology/mo/">http://purl.org/ontology/mo/</a></dd>
 <dt>Date</dt><dd>$Date: 2010/11/28 17:08:19 $</dd>
 <dt>Revision</dt><dd>Revision: 2.1.5</dd>
-<dt>Authors</dt><dd><a href="http://www.talkdigger.com/foaf/fgiasson">http://www.talkdigger.com/foaf/fgiasson</a>, <a href="http://foaf.me/zazi#me">http://foaf.me/zazi#me</a>, <a href="http://moustaki.org/foaf.rdf#moustaki">http://moustaki.org/foaf.rdf#moustaki</a></dd>
+<dt>Authors</dt><dd><a href="http://raimond.me.uk/">Yves Raimond</a>, <a href="http://smiy.wordpress.com/">Thomas Gängler</a>, <a href="http://fgiasson.com/">Frédérick Giasson</a>, <a href="http://kurtisrandom.com/">Kurt Jacobson</a>, George Fazekas, <a href="http://simon-reinhardt.de/">Simon Reinhardt</a>, <a href="http://apassant.net/">Alexandre Passant</a></dd>
 </dl>
 <h2 id="sec-summary">Summary of Terms</h2>
 <p>This vocabulary defines 54 classes and 153 properties.</p>
@@ -779,7 +779,7 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Label:</th> <td>amazon_asin</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid7">genid7</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid10">genid10</a></td></tr>
 </table>
 <h3 id="term-arranged_in">arranged_in</h3
 <p>
@@ -857,7 +857,7 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Label:</th> <td>bpm</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#float">xsd:float</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid12">genid12</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid15">genid15</a></td></tr>
 </table>
 <h3 id="term-catalogue_number">catalogue_number</h3
 <p>Links a release with the corresponding catalogue number</p>
@@ -992,7 +992,7 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Label:</th> <td>discogs</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid16">genid16</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid19">genid19</a></td></tr>
 </table>
 <h3 id="term-djmix_of">djmix_of</h3
 <p>Indicates that all (or most of) the tracks of a musical work or the expression of a musical work were mixed together from all (or most of) the tracks from another musical work or the expression of a musical work to form a so called DJ-Mix. 
@@ -1045,7 +1045,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>download</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid22">genid22</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid25">genid25</a></td></tr>
 </table>
 <h3 id="term-ean">ean</h3
 <p>The European Article Number (EAN) is a universal identifier for products, commonly printed in form of barcodes on them. The numbers represented by those codes can either be 8 or 13 digits long, with the 13-digit-version being most common. EANs form a superset of the North American Universal Product Code (UPC) as every UPC can be made an EAN by adding a leading zero to it. Additionally every EAN is also a Japanese Article Number (JAN). The identifiers were formerly assigned by EAN International which merged with Uniform Code Council (UCC, the guys behind the UPCs) and Electronic Commerce Council of Canada (ECCC) to become GS1. </p>
@@ -1084,7 +1084,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/duration">http://purl.org/ontology/mo/duration</a></td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#float">xsd:float</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid26">genid26</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid29">genid29</a></td></tr>
 </table>
 <h3 id="term-engineer">engineer</h3
 <p>Relates a performance or a recording to the engineer involved</p>
@@ -1092,7 +1092,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/engineer">http://purl.org/ontology/mo/engineer</a></td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid29">genid29</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid32">genid32</a></td></tr>
 </table>
 <h3 id="term-engineered">engineered</h3
 <p>Relates agents to the performances/recordings they were engineering in</p>
@@ -1100,7 +1100,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/engineered">http://purl.org/ontology/mo/engineered</a></td></tr>
 <tr><th>Label:</th> <td>engineered</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
-<tr><th>Range:</th> <td><a href="#term-genid33">genid33</a></td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid36">genid36</a></td></tr>
 <tr><th>Domain:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
 </table>
 <h3 id="term-event_homepage">event_homepage</h3
@@ -1146,7 +1146,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>free download</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid37">genid37</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid40">genid40</a></td></tr>
 </table>
 <h3 id="term-freedownload">freedownload</h3
 <p></p>
@@ -1164,7 +1164,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>genre</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="#term-Genre">Genre</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid41">genid41</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid44">genid44</a></td></tr>
 </table>
 <h3 id="term-grid">grid</h3
 <p>The Global Release Identifier (GRid) is a system for uniquely identifying Releases of music over electronic networks (that is, online stores where you can buy music as digital files). As that it can be seen as the equivalent of the BarCode (or more correctly the GTIN) as found on physical releases of music. Like the ISRC (a code for identifying single recordings as found on releases) it was developed by the IFPI but it does not appear to be a standard of the ISO.</p>
@@ -1222,7 +1222,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>homepage</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid52">genid52</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid55">genid55</a></td></tr>
 </table>
 <h3 id="term-image">image</h3
 <p>Indicates a pictorial image (JPEG, GIF, PNG, Etc.) of a musical work, the expression of a musical work, the manifestation of a work or the examplar of a manifestation.</p>
@@ -1231,7 +1231,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>image</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Image">foaf:Image</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid58">genid58</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid61">genid61</a></td></tr>
 </table>
 <h3 id="term-imdb">imdb</h3
 <p>Used to link an artist, a musical work or the expression of a musical work to their equivalent page on IMDb, the InternetMovieDatabase.</p>
@@ -1240,7 +1240,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>imdb</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid64">genid64</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid67">genid67</a></td></tr>
 </table>
 <h3 id="term-instrument">instrument</h3
 <p>Relates a performance to a musical instrument involved</p>
@@ -1275,7 +1275,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>ismn</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid70">genid70</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid73">genid73</a></td></tr>
 </table>
 <h3 id="term-isrc">isrc</h3
 <p>
@@ -1319,7 +1319,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>key</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://purl.org/NET/c4dm/keys.owl#Key">http://purl.org/NET/c4dm/keys.owl#Key</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid74">genid74</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid77">genid77</a></td></tr>
 </table>
 <h3 id="term-label">label</h3
 <p>Associates a release event with the label releasing the record</p>
@@ -1328,7 +1328,7 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Label:</th> <td>label</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Range:</th> <td><a href="#term-Label">Label</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid78">genid78</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid81">genid81</a></td></tr>
 </table>
 <h3 id="term-lc">lc</h3
 <p>The Label Code (LC) was introduced in 1977 by the IFPI (International Federation of Phonogram and Videogram Industries) in order to unmistakably identify the different record labels (see Introduction, Record labels) for rights purposes. The Label Code consists historically of 4 figures, presently being extended to 5 figures, preceded by LC and a dash (e.g. LC-0193 = Electrola; LC-0233 = His Master's Voice). Note that the number of countries using the LC is limited, and that the code given on the item is not always accurate.</p>
@@ -1348,7 +1348,7 @@ This is usually used to link to a Creative Commons licence.</p>
 <tr><th>Label:</th> <td>licence</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://web.resource.org/cc/License">http://web.resource.org/cc/License</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid81">genid81</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid84">genid84</a></td></tr>
 </table>
 <h3 id="term-listened">listened</h3
 <p>Relates agents to the performances they were listening in</p>
@@ -1374,7 +1374,7 @@ This is usually used to link to a Creative Commons licence.</p>
 <tr><th>Label:</th> <td>mailorder</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid85">genid85</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid88">genid88</a></td></tr>
 </table>
 <h3 id="term-mashup_of">mashup_of</h3
 <p>Indicates that musical works or the expressions of a musical work were mashed up on this album or track. 
@@ -1438,7 +1438,7 @@ This means that the orignial musical expression were rearranged to create a new 
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/meter">http://purl.org/ontology/mo/meter</a></td></tr>
 <tr><th>Label:</th> <td>meter</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid89">genid89</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid92">genid92</a></td></tr>
 </table>
 <h3 id="term-movement">movement</h3
 <p>Indicates that a musical work has movements</p>
@@ -1467,7 +1467,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>musicbrainz</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid92">genid92</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid95">genid95</a></td></tr>
 </table>
 <h3 id="term-musicbrainz_guid">musicbrainz_guid</h3
 <p>Links an object to the corresponding Musicbrainz identifier</p>
@@ -1475,7 +1475,7 @@ This means that the orignial musical expression were rearranged to create a new 
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/musicbrainz_guid">http://purl.org/ontology/mo/musicbrainz_guid</a></td></tr>
 <tr><th>Label:</th> <td>Musicbrainz GUID</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid97">genid97</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid100">genid100</a></td></tr>
 </table>
 <h3 id="term-musicmoz">musicmoz</h3
 <p>Used to link an artist, a musical work or the expression of a musical work to its corresponding MusicMoz page.</p>
@@ -1484,7 +1484,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>musicmoz</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid105">genid105</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid108">genid108</a></td></tr>
 </table>
 <h3 id="term-myspace">myspace</h3
 <p>Used to link a person to its corresponding MySpace page.</p>
@@ -1543,7 +1543,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>paid download</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid110">genid110</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid113">genid113</a></td></tr>
 </table>
 <h3 id="term-paiddownload">paiddownload</h3
 <p></p>
@@ -1561,7 +1561,7 @@ This means that the orignial musical expression were rearranged to create a new 
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/performance_of">http://purl.org/ontology/mo/performance_of</a></td></tr>
 <tr><th>Label:</th> <td>performance of</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
-<tr><th>Range:</th> <td><a href="#term-genid114">genid114</a></td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid117">genid117</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
 </table>
 <h3 id="term-performed">performed</h3
@@ -1584,7 +1584,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>performed in</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
 <tr><th>Range:</th> <td><a href="#term-Performance">Performance</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid117">genid117</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid120">genid120</a></td></tr>
 </table>
 <h3 id="term-performer">performer</h3
 <p>Relates a performance to the performers involved</p>
@@ -1629,7 +1629,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>preview download</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid120">genid120</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid123">genid123</a></td></tr>
 </table>
 <h3 id="term-primary_instrument">primary_instrument</h3
 <p>Indicates that an artist primarily plays an instrument, or that a member was primarily playing a particular instrument during his membership</p>
@@ -1638,7 +1638,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>primary instrument</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Range:</th> <td><a href="#term-Instrument">Instrument</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid124">genid124</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid127">genid127</a></td></tr>
 </table>
 <h3 id="term-produced">produced</h3
 <p>Used to relate an person or a group of person who produced the manifestation of a work.</p>
@@ -1965,7 +1965,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>review</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid127">genid127</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid130">genid130</a></td></tr>
 </table>
 <h3 id="term-sample_rate">sample_rate</h3
 <p>
@@ -2061,8 +2061,8 @@ The review does not have to be open content, as long as it is accessible to the 
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/similar_to">http://purl.org/ontology/mo/similar_to</a></td></tr>
 <tr><th>Label:</th> <td>similar_to</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
-<tr><th>Range:</th> <td><a href="#term-genid138">genid138</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid131">genid131</a></td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid141">genid141</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid134">genid134</a></td></tr>
 </table>
 <h3 id="term-singer">singer</h3
 <p>Relates a performance to an involved singer</p>
@@ -2094,7 +2094,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>tempo</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid145">genid145</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid148">genid148</a></td></tr>
 </table>
 <h3 id="term-lyrics">lyrics</h3
 <p>Associates lyrics with a musical work</p>
@@ -2242,7 +2242,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>wikipedia</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid149">genid149</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid152">genid152</a></td></tr>
 </table>
     </div>
 </body>

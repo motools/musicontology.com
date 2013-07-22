@@ -204,9 +204,9 @@
 ?>
 <html>
 <head>
-  <title>Music Ontology specification</title>
-  <link rel="stylesheet" type="text/css" href="style.css" />
-      <!-- Bootstrap -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Music Ontology specification</title>
+    <!-- Bootstrap -->
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
     <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
