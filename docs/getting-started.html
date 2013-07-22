@@ -124,9 +124,18 @@
         </pre>
       </div>
 
+      <p>
+        The main reason for these multiple prefixes is that the Music Ontology doesn't redefine terms that
+        are defined in other vocabularies. For example the Music Ontology is very commonly used alongside
+        <a href="http://xmlns.com/foaf/spec/">FOAF</a>, a vocabulary for describing people and including terms such
+        as 'name', 'homepage', 'member', etc. RDF is designed to mix and match terms from multiple vocabularies,
+        and the Music Ontology makes a heavy use of that.
+      </p>
+
       <h2 id="example-track">Describing a track</h2>
       <p>The following example shows how to describe a track, the band who made it, and linking the band 
-         to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier.</p>
+         to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier. It uses the Music Ontology
+         alongside <a href="http://xmlns.com/foaf/spec/">FOAF</a> and <a href="http://dublincore.org/">Dublin Core</a>.</p>
 
       <div class="mo-html-example">
         <div class="mo-format"><p>In HTML:</p></div>
