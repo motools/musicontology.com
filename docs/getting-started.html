@@ -93,6 +93,8 @@
 &lt;html prefix="mo: http://purl.org/ontology/mo/
               dc: http://purl.org/dc/elements/1.1/
               xsd: http://www.w3.org/2001/XMLSchema#
+              tl: http://purl.org/NET/c4dm/timeline.owl#
+              event: http://purl.org/NET/c4dm/event.owl#
               foaf: http://xmlns.com/foaf/0.1/"&gt;
   ...
 
@@ -107,6 +109,8 @@
     "mo": "http://purl.org/ontology/mo/",
     "dc": "http://purl.org/dc/elements/1.1/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "tl": "http://purl.org/NET/c4dm/timeline.owl#",
+    "event": "http://purl.org/NET/c4dm/event.owl#",
     "foaf": "http://xmlns.com/foaf/0.1/"
   }
   ...
@@ -119,6 +123,8 @@
 @prefix mo: &lt;http://purl.org/ontology/mo/&gt; .
 @prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
 @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix tl: &lt;http://purl.org/NET/c4dm/timeline.owl#&gt; .
+@prefix event: &lt;http://purl.org/NET/c4dm/event.owl#&gt; .
 @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
 ...
         </pre>
@@ -311,6 +317,41 @@
    foaf:name "Brendan Canty" .
 &lt;http://dbpedia.org/resource/Drum_kit&gt;
    rdf:type mo:Instrument .
+        </pre>
+      </div>
+
+      <h2 id="example-workflow">The music production workflow</h2>
+
+      <p>The Music Ontology model for music production is based on a chain of events, from the composition
+         of a given musical work to a recording of one of its performances. This enables the ontology
+         to be very descriptive and easily extensible. Below is an illustration of such a workflow.</p>
+
+      <p><img title="An example of a Music Ontology production workflow" src="../img/mo-workflow.jpg"/>
+
+      <p>We describe below Bach's "The Art of Fugue" and one of its performances.</p>
+
+      <div class="mo-turtle-example">
+        <div class="mo-format"><p>In RDF/Turtle:</p></div>
+        <pre class="prettyprint">
+&lt;http://dbpedia.org/resource/Johann_Sebastian_Bach&gt;
+    rdf:type mo:MusicArtist ;
+    foaf:name "Johann Sebastian Bach" .
+&lt;#composition&gt;
+    a mo:Composition ;
+    dc:title "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima" ;
+    mo:composer &lt;http://dbpedia.org/resource/Johann_Sebastian_Bach&gt; ;
+    event:time [ tl:start "1742"^^xsd:gYear ; tl:end "1749"^^xsd:gYear ] ;
+    mo:produced_work &lt;#kunst-der-fuge&gt; .
+&lt;#kunst-der-fuge&gt;
+    a mo:MusicalWork ;
+    dc:title "The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima" .
+&lt;#performance&gt;
+    a mo:Performance ;
+    mo:performance_of &lt;#kunst-der-fuge&gt; ;
+    event:time [ tl:at "2003"^^xsd:gYear ] ;
+    mo:performer &lt;http://musicbrainz.org/artist/fd20e8ed-0736-44db-8d97-530fbf00e813#_&gt; ;
+    mo:instrument [ rdfs:label "Violin" ], [ rdfs:label "Violin" ], [ rdfs:label "Viola" ]; [ rdfs:label "Cello" ] ;
+    mo:recorded_as &lt;http://musicbrainz.org/recording/93da082b-99c1-4469-9eb6-91e9fbeaeb2a#_&gt; .
         </pre>
       </div>
 
