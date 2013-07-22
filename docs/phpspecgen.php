@@ -237,6 +237,7 @@
               <li><a href="getting-started.html">Getting started</a></li>
               <li class="active"><a href="specification.html">Specification</a></li>
               <li><a href="faq.html">FAQ</a></li>
+              <li><a href="http://wiki.musicontology.com/">Wiki</a></li>
               <li><a href="https://github.com/motools">Github</a></li>
               <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
             </ul>
