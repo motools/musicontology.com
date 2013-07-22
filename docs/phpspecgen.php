@@ -248,28 +248,22 @@
 
 <?php
 
+    // Parse the document
     $uri = 'http://purl.org/ontology/mo/';
+    $graph = new EasyRdf_Graph($uri);
+    $graph->parseFile('../mo/rdf/musicontology.n3', 'turtle', $uri);
 
-    if (!empty($uri)) {
-
-      // Parse the document
-      $graph = new EasyRdf_Graph($uri);
-      $graph->load($uri);
-
-      // Get the first ontology in the document
-      $vocab = $graph->get('owl:Ontology', '^rdf:type');
-      if (!isset($vocab)) {
-          print "<p>Error: No OWL ontologies defined at that URL.</p>\n";
-      } else {
-          // FIXME: register the preferredNamespacePrefix
-
-          print $vocab->htmlHeader();
-          print $vocab->htmlSummaryOfTerms();
-          print $vocab->htmlTerms('Phpspecgen_Class', 'Classes');
-          print $vocab->htmlTerms('Phpspecgen_Property', 'Properties');
-      }
-
-    } 
+    // Get the first ontology in the document
+    $vocab = $graph->get('owl:Ontology', '^rdf:type');
+    if (!isset($vocab)) {
+        print "<p>Error: No OWL ontologies defined at that URL.</p>\n";
+    } else {
+        // FIXME: register the preferredNamespacePrefix
+        print $vocab->htmlHeader();
+        print $vocab->htmlSummaryOfTerms();
+        print $vocab->htmlTerms('Phpspecgen_Class', 'Classes');
+        print $vocab->htmlTerms('Phpspecgen_Property', 'Properties');
+    }
 ?>
     </div>
 </body>

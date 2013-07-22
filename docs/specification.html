@@ -53,12 +53,13 @@
 <dt>Latest Version</dt><dd><a href="http://purl.org/ontology/mo/">http://purl.org/ontology/mo/</a></dd>
 <dt>Date</dt><dd>$Date: 2010/11/28 17:08:19 $</dd>
 <dt>Revision</dt><dd>Revision: 2.1.5</dd>
-<dt>Authors</dt><dd><a href="http://foaf.me/zazi#me">http://foaf.me/zazi#me</a>, <a href="http://moustaki.org/foaf.rdf#moustaki">http://moustaki.org/foaf.rdf#moustaki</a>, <a href="http://www.talkdigger.com/foaf/fgiasson">http://www.talkdigger.com/foaf/fgiasson</a></dd>
+<dt>Authors</dt><dd><a href="http://www.talkdigger.com/foaf/fgiasson">http://www.talkdigger.com/foaf/fgiasson</a>, <a href="http://foaf.me/zazi#me">http://foaf.me/zazi#me</a>, <a href="http://moustaki.org/foaf.rdf#moustaki">http://moustaki.org/foaf.rdf#moustaki</a></dd>
 </dl>
 <h2 id="sec-summary">Summary of Terms</h2>
-<p>This vocabulary defines 53 classes and 150 properties.</p>
+<p>This vocabulary defines 54 classes and 153 properties.</p>
 <table class="table table-hover">
 <tr><th>Term Name</th><th>Type</th><th>Definition</th></tr>
+<tr><td><a href="#term-Activity">Activity</a></td><td>Class</td><td>activity</td></tr>
 <tr><td><a href="#term-AnalogSignal">AnalogSignal</a></td><td>Class</td><td>analogue signal</td></tr>
 <tr><td><a href="#term-Arrangement">Arrangement</a></td><td>Class</td><td>arrangement</td></tr>
 <tr><td><a href="#term-AudioFile">AudioFile</a></td><td>Class</td><td>audio file</td></tr>
@@ -109,11 +110,21 @@
 <tr><td><a href="#term-Sound">Sound</a></td><td>Class</td><td>sound</td></tr>
 <tr><td><a href="#term-Stream">Stream</a></td><td>Class</td><td>Stream</td></tr>
 <tr><td><a href="#term-Torrent">Torrent</a></td><td>Class</td><td>Torrent</td></tr>
-<tr><td><a href="#term-Track">Track</a></td><td>Class</td><td>rack</td></tr>
+<tr><td><a href="#term-Track">Track</a></td><td>Class</td><td>track</td></tr>
 <tr><td><a href="#term-Transcription">Transcription</a></td><td>Class</td><td>transcription</td></tr>
 <tr><td><a href="#term-Vinyl">Vinyl</a></td><td>Class</td><td>Vinyl</td></tr>
 </table>
 <h2 id="sec-classes">Classes</h2>
+<h3 id="term-Activity">Activity</h3
+<p>
+        An activity period, defining when an artist was musically active.
+    </p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Activity">http://purl.org/ontology/mo/Activity</a></td></tr>
+<tr><th>Label:</th> <td>activity</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
+</table>
 <h3 id="term-AnalogSignal">AnalogSignal</h3
 <p>
         An analog signal.
@@ -349,7 +360,7 @@
 <tr><th>Label:</th> <td>membership</td></tr>
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
-<tr><th>Properties:</th> <td><a href="#term-group">group</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-artist">artist</a>, <a href="#term-group">group</a></td></tr>
 </table>
 <h3 id="term-Movement">Movement</h3
 <p>A movement is a self-contained part of a musical work. While individual or selected movements from a composition are sometimes performed separately, a performance of the complete work requires all the movements to be performed in succession.
@@ -364,7 +375,7 @@ pause between them.
 <tr><th>Status:</th> <td>unstable</td></tr>
 <tr><th>Parent Class:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
 <tr><th>Properties:</th> <td><a href="#term-movement_number">movement_number</a></td></tr>
-  <tr><th>Inherited Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-lyrics">lyrics</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a>, <a href="#term-lyrics">lyrics</a></td></tr>
 </table>
 <h3 id="term-MusicArtist">MusicArtist</h3
 <p>
@@ -377,7 +388,7 @@ pause between them.
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Subclasses:</th> <td><a href="#term-MusicGroup">MusicGroup</a>, <a href="#term-SoloMusicArtist">SoloMusicArtist</a></td></tr>
 <tr><th>Parent Class:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
-<tr><th>Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-activity">activity</a>, <a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-origin">origin</a>, <a href="#term-ipi">ipi</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
 </table>
 <h3 id="term-MusicGroup">MusicGroup</h3
 <p>Group of musicians, or musical ensemble, usually popular or folk, playing parts of or improvising off of a musical arrangement. </p>
@@ -385,9 +396,9 @@ pause between them.
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/MusicGroup">http://purl.org/ontology/mo/MusicGroup</a></td></tr>
 <tr><th>Label:</th> <td>music group</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
-<tr><th>Parent Class:</th> <td><a href="#term-MusicArtist">MusicArtist</a>, <a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a>, <a href="#term-MusicArtist">MusicArtist</a></td></tr>
 <tr><th>Properties:</th> <td><a href="#term-member">member</a></td></tr>
-  <tr><th>Inherited Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-activity">activity</a>, <a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-origin">origin</a>, <a href="#term-ipi">ipi</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
 </table>
 <h3 id="term-MusicalExpression">MusicalExpression</h3
 <p>
@@ -488,7 +499,7 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Subclasses:</th> <td><a href="#term-Movement">Movement</a></td></tr>
 <tr><th>Parent Class:</th> <td><a href="http://purl.org/vocab/frbr/core#Work">http://purl.org/vocab/frbr/core#Work</a></td></tr>
-<tr><th>Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-lyrics">lyrics</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-arranged_in">arranged_in</a>, <a href="#term-composed_in">composed_in</a>, <a href="#term-iswc">iswc</a>, <a href="#term-movement">movement</a>, <a href="#term-opus">opus</a>, <a href="#term-lyrics">lyrics</a></td></tr>
 </table>
 <h3 id="term-Orchestration">Orchestration</h3
 <p>
@@ -673,8 +684,8 @@ work #1 J. S. Bach's The art of the fugue
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/SoloMusicArtist">http://purl.org/ontology/mo/SoloMusicArtist</a></td></tr>
 <tr><th>Label:</th> <td>solo music artist</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
-<tr><th>Parent Class:</th> <td><a href="#term-MusicArtist">MusicArtist</a>, <a href="http://xmlns.com/foaf/0.1/Person">foaf:Person</a></td></tr>
-  <tr><th>Inherited Properties:</th> <td><a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-ipi">ipi</a>, <a href="#term-origin">origin</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
+<tr><th>Parent Class:</th> <td><a href="http://xmlns.com/foaf/0.1/Person">foaf:Person</a>, <a href="#term-MusicArtist">MusicArtist</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-activity">activity</a>, <a href="#term-activity_end">activity_end</a>, <a href="#term-activity_start">activity_start</a>, <a href="#term-biography">biography</a>, <a href="#term-compiled">compiled</a>, <a href="#term-discography">discography</a>, <a href="#term-djmixed">djmixed</a>, <a href="#term-fanpage">fanpage</a>, <a href="#term-origin">origin</a>, <a href="#term-ipi">ipi</a>, <a href="#term-remixed">remixed</a>, <a href="#term-sampled">sampled</a>, <a href="#term-supporting_musician">supporting_musician</a></td></tr>
 </table>
 <h3 id="term-Sound">Sound</h3
 <p>
@@ -710,7 +721,7 @@ work #1 J. S. Bach's The art of the fugue
 <p>A track on a particular record</p>
 <table class="table table-hover">
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/Track">http://purl.org/ontology/mo/Track</a></td></tr>
-<tr><th>Label:</th> <td>rack</td></tr>
+<tr><th>Label:</th> <td>track</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Parent Class:</th> <td><a href="#term-MusicalManifestation">MusicalManifestation</a></td></tr>
 <tr><th>Properties:</th> <td><a href="#term-olga">olga</a>, <a href="#term-record_side">record_side</a>, <a href="#term-track_number">track_number</a></td></tr>
@@ -734,6 +745,15 @@ work #1 J. S. Bach's The art of the fugue
   <tr><th>Inherited Properties:</th> <td><a href="#term-encodes">encodes</a></td></tr>
 </table>
 <h2 id="sec-properties">Properties</h2>
+<h3 id="term-activity">activity</h3
+<p>Relates an artist to an activity period</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/activity">http://purl.org/ontology/mo/activity</a></td></tr>
+<tr><th>Label:</th> <td>activity</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Activity">Activity</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
+</table>
 <h3 id="term-activity_end">activity_end</h3
 <p>Relates an artist to a date at which its activity ended</p>
 <table class="table table-hover">
@@ -782,6 +802,15 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Status:</th> <td>unstable</td></tr>
 <tr><th>Range:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+</table>
+<h3 id="term-artist">artist</h3
+<p>Relates a membership event with the corresponding artist</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/artist">http://purl.org/ontology/mo/artist</a></td></tr>
+<tr><th>Label:</th> <td>artist</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-Membership">Membership</a></td></tr>
 </table>
 <h3 id="term-available_as">available_as</h3
 <p>
@@ -1049,6 +1078,14 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-AudioFile">AudioFile</a></td></tr>
 </table>
+<h3 id="term-duration">duration</h3
+<p>The duration of a track or a signal in ms</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/duration">http://purl.org/ontology/mo/duration</a></td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#float">xsd:float</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid26">genid26</a></td></tr>
+</table>
 <h3 id="term-engineer">engineer</h3
 <p>Relates a performance or a recording to the engineer involved</p>
 <table class="table table-hover">
@@ -1146,6 +1183,15 @@ The artist usually selected the tracks, chose their sequence, and slightly chang
 <tr><th>Status:</th> <td>testing</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Group">foaf:Group</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-Membership">Membership</a></td></tr>
+</table>
+<h3 id="term-origin">origin</h3
+<p>Relates an artist to its geographic origin</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/origin">http://purl.org/ontology/mo/origin</a></td></tr>
+<tr><th>Label:</th> <td>origin</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing">geo:SpatialThing</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
 </table>
 <h3 id="term-gtin">gtin</h3
 <p>GTIN is a grouping term for EANs and UPCs. In common speech those are called barcodes although the barcodes are just a representation of those identifying numbers.</p>
@@ -1321,15 +1367,6 @@ This is usually used to link to a Creative Commons licence.</p>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Agent">foaf:Agent</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-Performance">Performance</a></td></tr>
 </table>
-<h3 id="term-lyrics">lyrics</h3
-<p>Associates lyrics with a musical work</p>
-<table class="table table-hover">
-  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/lyrics">http://purl.org/ontology/mo/lyrics</a></td></tr>
-<tr><th>Label:</th> <td>lyrics</td></tr>
-<tr><th>Status:</th> <td>testing</td></tr>
-<tr><th>Range:</th> <td><a href="#term-Lyrics">Lyrics</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
-</table>
 <h3 id="term-mailorder">mailorder</h3
 <p>Used to link a musical work or the expression of a musical work to a website where people can buy a copy of the musical manifestation.</p>
 <table class="table table-hover">
@@ -1486,15 +1523,6 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2000/01/rdf-schema#Literal">rdfs:Literal</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
-</table>
-<h3 id="term-origin">origin</h3
-<p>Relates an artist to its geographic origin</p>
-<table class="table table-hover">
-  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/origin">http://purl.org/ontology/mo/origin</a></td></tr>
-<tr><th>Label:</th> <td>origin</td></tr>
-<tr><th>Status:</th> <td>testing</td></tr>
-<tr><th>Range:</th> <td><a href="http://www.w3.org/2003/01/geo/wgs84_pos#SpatialThing">geo:SpatialThing</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-MusicArtist">MusicArtist</a></td></tr>
 </table>
 <h3 id="term-other_release_of">other_release_of</h3
 <p>Indicates that two musical manifestations are essentially the same.</p>
@@ -2067,6 +2095,15 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
 <tr><th>Domain:</th> <td><a href="#term-genid145">genid145</a></td></tr>
+</table>
+<h3 id="term-lyrics">lyrics</h3
+<p>Associates lyrics with a musical work</p>
+<table class="table table-hover">
+  <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/lyrics">http://purl.org/ontology/mo/lyrics</a></td></tr>
+<tr><th>Label:</th> <td>lyrics</td></tr>
+<tr><th>Status:</th> <td>testing</td></tr>
+<tr><th>Range:</th> <td><a href="#term-Lyrics">Lyrics</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-MusicalWork">MusicalWork</a></td></tr>
 </table>
 <h3 id="term-text">text</h3
 <p>Associates lyrics with their text.</p>
