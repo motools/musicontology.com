@@ -59,539 +59,59 @@
 <p>This vocabulary defines 53 classes and 150 properties.</p>
 <table class="table table-hover">
 <tr><th>Term Name</th><th>Type</th><th>Definition</th></tr>
-<tr><td><a href="#term-AnalogSignal">AnalogSignal</a></td><td>Class</td><td>
-        An analog signal.
-    </td></tr>
-<tr><td><a href="#term-Arrangement">Arrangement</a></td><td>Class</td><td>
-        An arrangement event.
-        Takes as agent the arranger, and produces a score (informational object, not the actually published score).
-    </td></tr>
-<tr><td><a href="#term-AudioFile">AudioFile</a></td><td>Class</td><td>An audio file, which may be available on a local file system or through http, ftp, etc.</td></tr>
-<tr><td><a href="#term-CD">CD</a></td><td>Class</td><td>Compact Disc used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-Composition">Composition</a></td><td>Class</td><td>
-        A composition event.
-        Takes as agent the composer himself.
-        It produces a MusicalWork, or a MusicalExpression (when the initial "product" is a score, for example), or both...
-    </td></tr>
-<tr><td><a href="#term-CorporateBody">CorporateBody</a></td><td>Class</td><td>Organization or group of individuals and/or other organizations involved in the music market.</td></tr>
-<tr><td><a href="#term-DAT">DAT</a></td><td>Class</td><td>Digital Audio Tape used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-DCC">DCC</a></td><td>Class</td><td>Digital Compact Cassette used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-DVDA">DVDA</a></td><td>Class</td><td>DVD-Audio used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-DigitalSignal">DigitalSignal</a></td><td>Class</td><td>
-        A digital signal
-    </td></tr>
-<tr><td><a href="#term-ED2K">ED2K</a></td><td>Class</td><td>Something available on the E-Donkey peer-2-peer filesharing network</td></tr>
-<tr><td><a href="#term-Festival">Festival</a></td><td>Class</td><td>
-        A festival - musical/artistic event lasting several days, like Glastonbury, Rock Am Ring...
-        We migth decompose this event (which is in fact just a classification of the space/time region related to 
-        a particular festival) using hasSubEvent in several performances at different space/time.
-    </td></tr>
-<tr><td><a href="#term-Genre">Genre</a></td><td>Class</td><td>
-        An expressive style of music.
-        
-        Any taxonomy can be plug-in here. You can either define a genre by yourself, like this:
-
-        :mygenre a mo:Genre; dc:title "electro rock".
-
-        Or you can refer to a DBPedia genre (such as http://dbpedia.org/resource/Baroque_music), allowing semantic web
-        clients to access easily really detailed structured information about the genre you are refering to.
-    </td></tr>
-<tr><td><a href="#term-Instrument">Instrument</a></td><td>Class</td><td>
-        Any of various devices or contrivances that can be used to produce musical tones or sound.
-        
-        Any taxonomy can be used to subsume this concept. The default one is one extracted by Ivan Herman
-        from the Musicbrainz instrument taxonomy, conforming to SKOS. This concept holds a seeAlso link 
-        towards this taxonomy.
-    </td></tr>
-<tr><td><a href="#term-Instrumentation">Instrumentation</a></td><td>Class</td><td>
-        Instrumentation deals with the techniques of writing music for a specific instrument, 
-        including the limitations of the instrument, playing techniques and idiomatic handling of the instrument.
-    </td></tr>
-<tr><td><a href="#term-Label">Label</a></td><td>Class</td><td>Trade name of a company that produces musical works or expression of musical works.</td></tr>
-<tr><td><a href="#term-Libretto">Libretto</a></td><td>Class</td><td>
-                Libretto
-        </td></tr>
-<tr><td><a href="#term-Lyrics">Lyrics</a></td><td>Class</td><td>
-        Lyrics
-    </td></tr>
-<tr><td><a href="#term-MD">MD</a></td><td>Class</td><td>Mini Disc used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-MagneticTape">MagneticTape</a></td><td>Class</td><td>Magnetic analogue tape used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-Medium">Medium</a></td><td>Class</td><td>A means or instrumentality for storing or communicating musical manifestation.</td></tr>
-<tr><td><a href="#term-Membership">Membership</a></td><td>Class</td><td>A membership event, where one or several people belongs to a group during a particular time period.</td></tr>
-<tr><td><a href="#term-Movement">Movement</a></td><td>Class</td><td>A movement is a self-contained part of a musical work. While individual or selected movements from a composition are sometimes performed separately, a performance of the complete work requires all the movements to be performed in succession.
-
-Often a composer attempts to interrelate the movements thematically, or sometimes in more subtle ways, in order that the individual
-movements exert a cumulative effect. In some forms, composers sometimes link the movements, or ask for them to be played without a
-pause between them.
-    </td></tr>
-<tr><td><a href="#term-MusicArtist">MusicArtist</a></td><td>Class</td><td>
-        A person or a group of people (or a computer :-) ), whose musical 
-        creative work shows sensitivity and imagination 
-    </td></tr>
-<tr><td><a href="#term-MusicGroup">MusicGroup</a></td><td>Class</td><td>Group of musicians, or musical ensemble, usually popular or folk, playing parts of or improvising off of a musical arrangement. </td></tr>
-<tr><td><a href="#term-MusicalExpression">MusicalExpression</a></td><td>Class</td><td>
-The intellectual or artistic realization of a work in the form of alpha-numeric, musical, or choreographic notation, sound, etc., or any combination of such forms.    
-
-
-For example:
-
-Work #1 Franz Schubert's Trout quintet
-
-    * Expression #1 the composer's score
-    * Expression #2 sound issued from the performance by the Amadeus Quartet and Hephzibah Menuhin on piano
-    * Expression #3 sound issued from the performance by the Cleveland Quartet and Yo-Yo Ma on the cello
-    * . . . . 
-
-The Music Ontology defines the following sub-concepts of a MusicalExpression, which should be used instead of MusicalExpression itself: Score (the
-result of an arrangement), Sound (produced during a performance), Signal. However, it is possible to stick to FRBR and bypass the worflow
-mechanism this ontology defines by using the core FRBR properties on such objects. But it is often better to use events to interconnect such 
-expressions (allowing to go deeply into the production process - `this performer was playing this particular instrument at that
-particular time').
-    
-    </td></tr>
-<tr><td><a href="#term-MusicalItem">MusicalItem</a></td><td>Class</td><td>A single exemplar of a musical expression.
-    
-For example, it could be a single exemplar of a CD. This is normally an single object (a CD) possessed by somebody.
-
-From the FRBR final report: The entity defined as item is a concrete entity. It is in many instances a single physical object (e.g., a copy of a one-volume monograph, a single audio cassette, etc.). There are instances, however, where the entity defined as item comprises more than one physical object (e.g., a monograph issued as two separately bound volumes, a recording issued on three separate compact discs, etc.).
-
-In terms of intellectual content and physical form, an item exemplifying a manifestation is normally the same as the manifestation itself. However, variations may occur from one item to another, even when the items exemplify the same manifestation, where those variations are the result of actions external to the intent of the producer of the manifestation (e.g., damage occurring after the item was produced, binding performed by a library, etc.). 
-    </td></tr>
-<tr><td><a href="#term-MusicalManifestation">MusicalManifestation</a></td><td>Class</td><td>
-
-This entity is related to the edition/production/publication of a musical expression (musical manifestation are closely related with the music industry (their terms, concepts, definitions, methods (production, publication, etc.), etc.)
-    
-From the FRBR final report: The entity defined as manifestation encompasses a wide range of materials, including manuscripts, books, periodicals, maps, posters, sound recordings, films, video recordings, CD-ROMs, multimedia kits, etc. As an entity, manifestation represents all the physical objects that bear the same characteristics, in respect to both intellectual content and physical form.
-
-
-Work #1 J. S. Bach's Six suites for unaccompanied cello
-
-    * Expression #1 sound issued during the performance by Janos Starker recorded in 1963 and 1965
-          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1965 by Mercury
-          o Manifestation #2 recordings re-released on compact disc in 1991 by Mercury 
-    * Expression #2 sound issued during the performances by Yo-Yo Ma recorded in 1983
-          o Manifestation #1 recordings released on 33 1/3 rpm sound discs in 1983 by CBS Records
-          o Manifestation #2 recordings re-released on compact disc in 1992 by CBS Records 
-
-          
-Changes that occur deliberately or even inadvertently in the production process that affect the copies result, strictly speaking, in a new manifestation. A manifestation resulting from such a change may be identified as a particular "state" or "issue" of the publication.
-
-Changes that occur to an individual copy after the production process is complete (e.g., the loss of a page, rebinding, etc.) are not considered to result in a new manifestation. That copy is simply considered to be an exemplar (or item) of the manifestation that deviates from the copy as produced.
-
-With the entity defined as manifestation we can describe the physical characteristics of a set of items and the characteristics associated with the production and distribution of that set of items that may be important factors in enabling users to choose a manifestation appropriate to their physical needs and constraints, and to identify and acquire a copy of that manifestation.
-
-Defining manifestation as an entity also enables us to draw relationships between specific manifestations of a work. We can use the relationships between manifestations to identify, for example, the specific publication that was used to create a microreproduction.          
-
-</td></tr>
-<tr><td><a href="#term-MusicalWork">MusicalWork</a></td><td>Class</td><td>
-    Distinct intellectual or artistic musical creation.
-    
-From the FRBR final report: A work is an abstract entity; there is no single material object one can point to as the work. We recognize the work through individual realizations or expressions of the work, but the work itself exists only in the commonality of
-content between and among the various expressions of the work. When we speak of Homer's Iliad as a work, our point of reference is not a particular recitation or text of the work, but the intellectual creation that lies behind all the various expressions of the work.     
-
-For example:
-
-work #1 J. S. Bach's The art of the fugue
-
-    
-    </td></tr>
-<tr><td><a href="#term-Orchestration">Orchestration</a></td><td>Class</td><td>
-            Orchestration includes, in addition to instrumentation, the handling of groups of instruments and their balance and interaction.
-    </td></tr>
-<tr><td><a href="#term-Performance">Performance</a></td><td>Class</td><td>
-        A performance event. 
-        It might include as agents performers, engineers, conductors, or even listeners.
-        It might include as factors a score, a MusicalWork, musical instruments. 
-        It might produce a sound:-)
-    </td></tr>
-<tr><td><a href="#term-PublishedLibretto">PublishedLibretto</a></td><td>Class</td><td>A published libretto</td></tr>
-<tr><td><a href="#term-PublishedLyrics">PublishedLyrics</a></td><td>Class</td><td>Published lyrics, as a book or as a text file, for example</td></tr>
-<tr><td><a href="#term-PublishedScore">PublishedScore</a></td><td>Class</td><td>A published score (subclass of MusicalManifestation)</td></tr>
-<tr><td><a href="#term-Record">Record</a></td><td>Class</td><td>A published record (manifestation which first aim is to render the product of a recording)</td></tr>
-<tr><td><a href="#term-Recording">Recording</a></td><td>Class</td><td>
-        A recording event.
-        Takes a sound as a factor to produce a signal (analog or digital).
-        The location of such events (if any) is the actual location of the corresponding
-        microphone or the "recording device".
-    </td></tr>
-<tr><td><a href="#term-RecordingSession">RecordingSession</a></td><td>Class</td><td>A set of performances/recordings/mastering events. This event can be decomposed in its constituent events using event:sub_event</td></tr>
-<tr><td><a href="#term-Release">Release</a></td><td>Class</td><td>A specific release, with barcode, box, liner notes, cover art, and a number of records</td></tr>
-<tr><td><a href="#term-ReleaseEvent">ReleaseEvent</a></td><td>Class</td><td>A release event, in a particular place (e.g. a country) at a particular time. Other factors of this event might include cover art, liner notes, box, etc. or a release grouping all these.</td></tr>
-<tr><td><a href="#term-ReleaseStatus">ReleaseStatus</a></td><td>Class</td><td>Musical manifestation release status.</td></tr>
-<tr><td><a href="#term-ReleaseType">ReleaseType</a></td><td>Class</td><td>
-        Release type of a particular manifestation, such as "album" or "interview"...
-    </td></tr>
-<tr><td><a href="#term-SACD">SACD</a></td><td>Class</td><td>Super Audio Compact Disc used as medium to record a musical manifestation.</td></tr>
-<tr><td><a href="#term-Score">Score</a></td><td>Class</td><td>
-        Here, we are dealing with the informational object (the MusicalExpression), not the actually "published" score.
-        This may be, for example, the product of an arrangement process.
-    </td></tr>
-<tr><td><a href="#term-Show">Show</a></td><td>Class</td><td>
-        A show - a musical event lasting several days, in a particular venue. Examples can be
-        "The Magic Flute" at the Opera Bastille, August 2005, or a musical in the west end...
-    </td></tr>
-<tr><td><a href="#term-Signal">Signal</a></td><td>Class</td><td>
-        A subclass of MusicalExpression, representing a signal, for example a master signal produced by a performance and a recording.
-    </td></tr>
-<tr><td><a href="#term-SignalGroup">SignalGroup</a></td><td>Class</td><td>
-        A musical expression representing a group of signals, for example a set of masters resulting from a whole recording/mastering session.
-    </td></tr>
-<tr><td><a href="#term-SoloMusicArtist">SoloMusicArtist</a></td><td>Class</td><td>Single person whose musical creative work shows sensitivity and imagination.</td></tr>
-<tr><td><a href="#term-Sound">Sound</a></td><td>Class</td><td>
-        A subclass of MusicalExpression, representing a sound. Realisation of a MusicalWork during a musical Performance.
-    </td></tr>
-<tr><td><a href="#term-Stream">Stream</a></td><td>Class</td><td>Transmission over a network  used as medium to broadcast a musical manifestation</td></tr>
-<tr><td><a href="#term-Torrent">Torrent</a></td><td>Class</td><td>Something available on the Bittorrent peer-2-peer filesharing network</td></tr>
-<tr><td><a href="#term-Track">Track</a></td><td>Class</td><td>A track on a particular record</td></tr>
-<tr><td><a href="#term-Transcription">Transcription</a></td><td>Class</td><td>Transcription event</td></tr>
-<tr><td><a href="#term-Vinyl">Vinyl</a></td><td>Class</td><td>Vinyl used as medium to record a musical manifestation</td></tr>
-<tr><td><a href="#term-activity_end">activity_end</a></td><td>Property</td><td>Relates an artist to a date at which its activity ended</td></tr>
-<tr><td><a href="#term-activity_start">activity_start</a></td><td>Property</td><td>Relates an artist to a date at which its activity started</td></tr>
-<tr><td><a href="#term-amazon_asin">amazon_asin</a></td><td>Property</td><td>Used to link a work or the expression of a work to its corresponding Amazon ASINs page.</td></tr>
-<tr><td><a href="#term-arranged_in">arranged_in</a></td><td>Property</td><td>
-        Associates a work to an arrangement event where it was arranged
-    </td></tr>
-<tr><td><a href="#term-arrangement_of">arrangement_of</a></td><td>Property</td><td>
-                Associates an arrangement event to a work
-        </td></tr>
-<tr><td><a href="#term-available_as">available_as</a></td><td>Property</td><td>
-        Relates a musical manifestation to a musical item (this album, and my particular cd). By using
-        this property, there is no assumption on wether the full content is available on the linked item.
-        To be explicit about this, you can use a sub-property, such as mo:item (the full manifestation
-        is available on that item) or mo:preview (only a part of the manifestation is available on
-        that item).
-
-        This is a subproperty of frbr:examplar.
-    </td></tr>
-<tr><td><a href="#term-biography">biography</a></td><td>Property</td><td>Used to link an artist to their online biography.</td></tr>
-<tr><td><a href="#term-bitsPerSample">bitsPerSample</a></td><td>Property</td><td>
-        Associates a digital signal to the number a bits used to encode one sample. Range is xsd:int.
-    </td></tr>
-<tr><td><a href="#term-bpm">bpm</a></td><td>Property</td><td>
-        Indicates the BPM of a MusicalWork or a particular Performance 
-        Beats per minute: the pace of music measured by the number of beats occurring in 60 seconds.
-    </td></tr>
-<tr><td><a href="#term-catalogue_number">catalogue_number</a></td><td>Property</td><td>Links a release with the corresponding catalogue number</td></tr>
-<tr><td><a href="#term-channels">channels</a></td><td>Property</td><td>
-        Associates a signal to the number of channels it holds (mono --> 1, stereo --> 2). Range is xsd:int.
-    </td></tr>
-<tr><td><a href="#term-collaborated_with">collaborated_with</a></td><td>Property</td><td>Used to relate two collaborating people on a work.</td></tr>
-<tr><td><a href="#term-compilation_of">compilation_of</a></td><td>Property</td><td>Indicates that a musical manifestation is a compilation of several Signals.</td></tr>
-<tr><td><a href="#term-compiled">compiled</a></td><td>Property</td><td>Used to relate an person or a group of person who compiled the manifestation of a musical work.</td></tr>
-<tr><td><a href="#term-compiler">compiler</a></td><td>Property</td><td>Used to relate the manifestation of a musical work to a person or a group of person who compiled it.</td></tr>
-<tr><td><a href="#term-composed_in">composed_in</a></td><td>Property</td><td>
-        Associates a MusicalWork to the Composition event pertaining
-        to its creation. For example, I might use this property to associate
-        the Magic Flute to its composition event, occuring during 1782 and having as
-        a mo:composer Mozart.
-    </td></tr>
-<tr><td><a href="#term-composer">composer</a></td><td>Property</td><td>
-        Associates a composition event to the actual composer. For example,
-        this property could link the event corresponding to the composition of the
-        Magic Flute in 1782 to Mozart himself (who obviously has a FOAF profile:-) ).
-    </td></tr>
-<tr><td><a href="#term-conducted">conducted</a></td><td>Property</td><td>Relates agents to the performances they were conducting</td></tr>
-<tr><td><a href="#term-conductor">conductor</a></td><td>Property</td><td>Relates a performance to the conductor involved</td></tr>
-<tr><td><a href="#term-contains_sample_from">contains_sample_from</a></td><td>Property</td><td>
-        Relates a signal to another signal, which has been sampled.
-        </td></tr>
-<tr><td><a href="#term-derived_from">derived_from</a></td><td>Property</td><td>A related signal from which the described signal is derived.</td></tr>
-<tr><td><a href="#term-discography">discography</a></td><td>Property</td><td>Used to links an artist to an online discography of their musical works. The discography should provide a summary of each released musical work of the artist.</td></tr>
-<tr><td><a href="#term-discogs">discogs</a></td><td>Property</td><td>Used to link a musical work or the expression of a musical work, an artist or a corporate body to to its corresponding Discogs page.</td></tr>
-<tr><td><a href="#term-djmix_of">djmix_of</a></td><td>Property</td><td>Indicates that all (or most of) the tracks of a musical work or the expression of a musical work were mixed together from all (or most of) the tracks from another musical work or the expression of a musical work to form a so called DJ-Mix. 
-    
-The tracks might have been altered by pitching (so that the tempo of one track matches the tempo of the following track) and fading (so that one track blends in smoothly with the other). If the tracks have been more substantially altered, the "mo:remix" relationship type is more appropriate. </td></tr>
-<tr><td><a href="#term-djmixed">djmixed</a></td><td>Property</td><td>Used to relate an artist who djmixed a musical work or the expression of a musical work. 
-    
-The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </td></tr>
-<tr><td><a href="#term-djmixed_by">djmixed_by</a></td><td>Property</td><td>Used to relate a work or the expression of a work to an artist who djmixed it. 
-    
-The artist usually selected the tracks, chose their sequence, and slightly changed them by fading (so that one track blends in smoothly with the other) or pitching (so that the tempo of one track matches the tempo of the following track). This applies to a 'Mixtape' in which all tracks were DJ-mixed together into one single long track. </td></tr>
-<tr><td><a href="#term-download">download</a></td><td>Property</td><td>
-                This property can be used to link from a person to the website where they make their works available, or from
-                a manifestation (a track or an album, for example) to a web page where it is available for
-                download.
-        
-        It is better to use one of the three sub-properties instead of this one in order to specify wether the
-        content can be accessed for free (mo:freedownload), if it is just free preview material (mo:previewdownload), or
-        if it can be accessed for some money (mo:paiddownload) (this includes links to the Amazon store, for example).
-
-                This property MUST be used only if the content is just available through a web page (holding, for example
-                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
-                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
-                less to rip streams from Flash applications can still access the audio content.
-        </td></tr>
-<tr><td><a href="#term-ean">ean</a></td><td>Property</td><td>The European Article Number (EAN) is a universal identifier for products, commonly printed in form of barcodes on them. The numbers represented by those codes can either be 8 or 13 digits long, with the 13-digit-version being most common. EANs form a superset of the North American Universal Product Code (UPC) as every UPC can be made an EAN by adding a leading zero to it. Additionally every EAN is also a Japanese Article Number (JAN). The identifiers were formerly assigned by EAN International which merged with Uniform Code Council (UCC, the guys behind the UPCs) and Electronic Commerce Council of Canada (ECCC) to become GS1. </td></tr>
-<tr><td><a href="#term-encodes">encodes</a></td><td>Property</td><td>
-        Relates a MusicalItem (a track on a particular CD, an audio file, a stream somewhere) to the signal it encodes.
-
-        This is usually a lower-resolution version of the master signal (issued from a Recording event).
-    </td></tr>
-<tr><td><a href="#term-encoding">encoding</a></td><td>Property</td><td>Method used to convert analog electronic signals into digital format such as "MP3 CBR @ 128kbps", "OGG @ 160kbps", "FLAC", etc.</td></tr>
-<tr><td><a href="#term-engineer">engineer</a></td><td>Property</td><td>Relates a performance or a recording to the engineer involved</td></tr>
-<tr><td><a href="#term-engineered">engineered</a></td><td>Property</td><td>Relates agents to the performances/recordings they were engineering in</td></tr>
-<tr><td><a href="#term-event_homepage">event_homepage</a></td><td>Property</td><td>Links a particular event to a web page</td></tr>
-<tr><td><a href="#term-exchange_item">exchange_item</a></td><td>Property</td><td>A person, a group of person or an organization exchanging an exemplar of a single manifestation.</td></tr>
-<tr><td><a href="#term-fanpage">fanpage</a></td><td>Property</td><td>Used to link an artist to a fan-created webpage devoted to that artist.</td></tr>
-<tr><td><a href="#term-free_download">free_download</a></td><td>Property</td><td>
-        This property can be used to link from a person to the website where they make their works available, or from
-        a manifestation (a track or an album, for example) to a web page where it is available for free 
-        download.
-
-        This property MUST be used only if the content is just available through a web page (holding, for example
-        a Flash application) - it is better to link to actual content directly through the use of mo:available_as and 
-        mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
-        less to rip streams from Flash applications can still access the audio content.
-    </td></tr>
-<tr><td><a href="#term-freedownload">freedownload</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-genre">genre</a></td><td>Property</td><td>
-        Associates an event (like a performance or a recording) to a particular musical genre.
-        Further version of this property may also include works and scores in the domain.
-    </td></tr>
-<tr><td><a href="#term-grid">grid</a></td><td>Property</td><td>The Global Release Identifier (GRid) is a system for uniquely identifying Releases of music over electronic networks (that is, online stores where you can buy music as digital files). As that it can be seen as the equivalent of the BarCode (or more correctly the GTIN) as found on physical releases of music. Like the ISRC (a code for identifying single recordings as found on releases) it was developed by the IFPI but it does not appear to be a standard of the ISO.</td></tr>
-<tr><td><a href="#term-group">group</a></td><td>Property</td><td>Relates a membership event with the corresponding group</td></tr>
-<tr><td><a href="#term-gtin">gtin</a></td><td>Property</td><td>GTIN is a grouping term for EANs and UPCs. In common speech those are called barcodes although the barcodes are just a representation of those identifying numbers.</td></tr>
-<tr><td><a href="#term-has_track">has_track</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-headliner">headliner</a></td><td>Property</td><td>Relates a performance to the headliner(s) involved</td></tr>
-<tr><td><a href="#term-homepage">homepage</a></td><td>Property</td><td>Links an artist, a record, etc. to a corresponding web page</td></tr>
-<tr><td><a href="#term-image">image</a></td><td>Property</td><td>Indicates a pictorial image (JPEG, GIF, PNG, Etc.) of a musical work, the expression of a musical work, the manifestation of a work or the examplar of a manifestation.</td></tr>
-<tr><td><a href="#term-imdb">imdb</a></td><td>Property</td><td>Used to link an artist, a musical work or the expression of a musical work to their equivalent page on IMDb, the InternetMovieDatabase.</td></tr>
-<tr><td><a href="#term-instrument">instrument</a></td><td>Property</td><td>Relates a performance to a musical instrument involved</td></tr>
-<tr><td><a href="#term-interpreter">interpreter</a></td><td>Property</td><td>Adds an involved music artist, who interpreted, remixed, or otherwise modified an existing signal, which resulted in the signal that is here the subject of this relation.</td></tr>
-<tr><td><a href="#term-ipi">ipi</a></td><td>Property</td><td>The Interested Parties Information Code (IPI) is an ISO standard similar to ISBNs for identifying the people or groups with some involvement with a particular musical work / compositions.</td></tr>
-<tr><td><a href="#term-ismn">ismn</a></td><td>Property</td><td>The International Standard Music Number (ISMN) is an ISO standard similar to ISBNs for identifying printed music publications</td></tr>
-<tr><td><a href="#term-isrc">isrc</a></td><td>Property</td><td>
-    The ISRC (International Standard Recording Code) is the international identification system for sound recordings and music videorecordings. 
-    Each ISRC is a unique and permanent identifier for a specific recording which can be permanently encoded into a product as its digital fingerprint. 
-    Encoded ISRC provide the means to automatically identify recordings for royalty payments.
-    </td></tr>
-<tr><td><a href="#term-iswc">iswc</a></td><td>Property</td><td>Links a musical work to the corresponding ISWC number</td></tr>
-<tr><td><a href="#term-item">item</a></td><td>Property</td><td>
-                Relates a musical manifestation to a musical item (this album, and my particular cd) holding the
-                entire manifestation, and not just a part of it.
-        </td></tr>
-<tr><td><a href="#term-key">key</a></td><td>Property</td><td>
-        Indicated the key used by the musicians during a performance, or the key of a MusicalWork.
-        Any of 24 major or minor diatonic scales that provide the tonal framework for a piece of music.</td></tr>
-<tr><td><a href="#term-label">label</a></td><td>Property</td><td>Associates a release event with the label releasing the record</td></tr>
-<tr><td><a href="#term-lc">lc</a></td><td>Property</td><td>The Label Code (LC) was introduced in 1977 by the IFPI (International Federation of Phonogram and Videogram Industries) in order to unmistakably identify the different record labels (see Introduction, Record labels) for rights purposes. The Label Code consists historically of 4 figures, presently being extended to 5 figures, preceded by LC and a dash (e.g. LC-0193 = Electrola; LC-0233 = His Master's Voice). Note that the number of countries using the LC is limited, and that the code given on the item is not always accurate.</td></tr>
-<tr><td><a href="#term-licence">licence</a></td><td>Property</td><td>Used to link a work or the expression of a work to the license under which they can be manipulated (downloaded, modified, etc). 
-    
-This is usually used to link to a Creative Commons licence.</td></tr>
-<tr><td><a href="#term-listened">listened</a></td><td>Property</td><td>Relates agents to the performances they were listening in</td></tr>
-<tr><td><a href="#term-listener">listener</a></td><td>Property</td><td>Relates a performance to the listener involved</td></tr>
-<tr><td><a href="#term-lyrics">lyrics</a></td><td>Property</td><td>Associates lyrics with a musical work</td></tr>
-<tr><td><a href="#term-mailorder">mailorder</a></td><td>Property</td><td>Used to link a musical work or the expression of a musical work to a website where people can buy a copy of the musical manifestation.</td></tr>
-<tr><td><a href="#term-mashup_of">mashup_of</a></td><td>Property</td><td>Indicates that musical works or the expressions of a musical work were mashed up on this album or track. 
-    
-This means that two musical works or the expressions of a musical work by different artists are mixed together, over each other, or otherwise combined into a single musical work (usually by a third artist, the remixer).</td></tr>
-<tr><td><a href="#term-media_type">media_type</a></td><td>Property</td><td>The mediatype (file format or MIME type, or physical medium) of a musical manifestation, e.g. a MP3, CD or vinyl.</td></tr>
-<tr><td><a href="#term-medley_of">medley_of</a></td><td>Property</td><td>Indicates that a musical expression is a medley of several other musical expressions. 
-    
-This means that the orignial musical expression were rearranged to create a new musical expression in the form of a medley. </td></tr>
-<tr><td><a href="#term-member">member</a></td><td>Property</td><td>
-        Indicates a member of a musical group
-    </td></tr>
-<tr><td><a href="#term-member_of">member_of</a></td><td>Property</td><td>Inverse of the foaf:member property</td></tr>
-<tr><td><a href="#term-membership">membership</a></td><td>Property</td><td>Relates an agent with related membership events</td></tr>
-<tr><td><a href="#term-meter">meter</a></td><td>Property</td><td>Associates a musical work or a score with its meter</td></tr>
-<tr><td><a href="#term-movement">movement</a></td><td>Property</td><td>Indicates that a musical work has movements</td></tr>
-<tr><td><a href="#term-movement_number">movement_number</a></td><td>Property</td><td>Indicates the position of a movement in a musical work.</td></tr>
-<tr><td><a href="#term-musicbrainz">musicbrainz</a></td><td>Property</td><td>
-        Linking an agent, a track or a record to its corresponding Musicbrainz page.
-        </td></tr>
-<tr><td><a href="#term-musicbrainz_guid">musicbrainz_guid</a></td><td>Property</td><td>Links an object to the corresponding Musicbrainz identifier</td></tr>
-<tr><td><a href="#term-musicmoz">musicmoz</a></td><td>Property</td><td>Used to link an artist, a musical work or the expression of a musical work to its corresponding MusicMoz page.</td></tr>
-<tr><td><a href="#term-myspace">myspace</a></td><td>Property</td><td>Used to link a person to its corresponding MySpace page.</td></tr>
-<tr><td><a href="#term-olga">olga</a></td><td>Property</td><td>Used to link a track to a tabulature file for track in the On-Line Guitar Archive.</td></tr>
-<tr><td><a href="#term-onlinecommunity">onlinecommunity</a></td><td>Property</td><td>Used to link a person with an online community web page like a blog, a wiki, a forum, a livejournal page, Etc.</td></tr>
-<tr><td><a href="#term-opus">opus</a></td><td>Property</td><td>
-        Used to define a creative work, especially a musical composition numbered to designate the order of a composer's works.
-    </td></tr>
-<tr><td><a href="#term-origin">origin</a></td><td>Property</td><td>Relates an artist to its geographic origin</td></tr>
-<tr><td><a href="#term-other_release_of">other_release_of</a></td><td>Property</td><td>Indicates that two musical manifestations are essentially the same.</td></tr>
-<tr><td><a href="#term-paid_download">paid_download</a></td><td>Property</td><td>
-                Provide a link from an artist to a web page where all of that artist's musical work is available for some money,
-                or a link from a manifestation (record/track, for example) to a web page providing a paid access to this manifestation.
-        </td></tr>
-<tr><td><a href="#term-paiddownload">paiddownload</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-performance_of">performance_of</a></td><td>Property</td><td>
-        Associates a Performance to a musical work or an arrangement that is being used as a factor in it.
-        For example, I might use this property to attach the Magic Flute musical work to 
-        a particular Performance.
-    </td></tr>
-<tr><td><a href="#term-performed">performed</a></td><td>Property</td><td>Relates agents to the performances they were performing in</td></tr>
-<tr><td><a href="#term-performed_in">performed_in</a></td><td>Property</td><td>
-        Associates a Musical Work or an Score to Performances in which they were
-        a factor. For example, I might use this property in order to 
-        associate the Magic Flute to a particular performance at the Opera
-        Bastille last year.</td></tr>
-<tr><td><a href="#term-performer">performer</a></td><td>Property</td><td>Relates a performance to the performers involved</td></tr>
-<tr><td><a href="#term-possess_item">possess_item</a></td><td>Property</td><td>A person, a group of person or an organization possessing an exemplar of a single manifestation.</td></tr>
-<tr><td><a href="#term-preview">preview</a></td><td>Property</td><td>
-                Relates a musical manifestation to a musical item (this album, and my particular cd), which holds
-                a preview of the manifestation (eg. one track for an album, or a snippet for a track)
-        </td></tr>
-<tr><td><a href="#term-preview_download">preview_download</a></td><td>Property</td><td>
-                This property can be used to link from a person to the website where they make previews of their works available, or from
-                a manifestation (a track or an album, for example) to a web page where a preview download is available.
-
-                This property MUST be used only if the content is just available through a web page (holding, for example
-                a Flash application) - it is better to link to actual content directly through the use of mo:available_as and
-                mo:Stream, mo:Torrent or mo:ED2K, etc. Therefore, Semantic Web user agents that don't know how to read HTML and even
-                less to rip streams from Flash applications can still access the audio content.
-        </td></tr>
-<tr><td><a href="#term-primary_instrument">primary_instrument</a></td><td>Property</td><td>Indicates that an artist primarily plays an instrument, or that a member was primarily playing a particular instrument during his membership</td></tr>
-<tr><td><a href="#term-produced">produced</a></td><td>Property</td><td>Used to relate an person or a group of person who produced the manifestation of a work.</td></tr>
-<tr><td><a href="#term-produced_score">produced_score</a></td><td>Property</td><td>
-        Associates an arrangement event to a score product (score here does not refer to a published score, but more
-        an abstract arrangement of a particular work).
-    </td></tr>
-<tr><td><a href="#term-produced_signal">produced_signal</a></td><td>Property</td><td>
-                Associates a Recording to the outputted signal.
-        </td></tr>
-<tr><td><a href="#term-produced_signal_group">produced_signal_group</a></td><td>Property</td><td>Associates a recording session with a group of master signals produced by it.</td></tr>
-<tr><td><a href="#term-produced_sound">produced_sound</a></td><td>Property</td><td>
-                Associates a Performance to a physical Sound that is being produced by it.
-        </td></tr>
-<tr><td><a href="#term-produced_work">produced_work</a></td><td>Property</td><td>
-                Associates a composition event to the produced MusicalWork. For example,
-                this property could link the event corresponding to the composition of the
-                Magic Flute in 1782 to the Magic Flute musical work itself. This musical work
-                can then be used in particular performances.
-        </td></tr>
-<tr><td><a href="#term-producer">producer</a></td><td>Property</td><td>Used to relate the manifestation of a work to a person or a group of person who produced it.</td></tr>
-<tr><td><a href="#term-producesSignal">producesSignal</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-producesSound">producesSound</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-productOfComposition">productOfComposition</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-publication_of">publication_of</a></td><td>Property</td><td>Link a particular manifestation to the related signal, score, libretto, or lyrics</td></tr>
-<tr><td><a href="#term-published">published</a></td><td>Property</td><td>Used to relate an person or a group of person who published the manifestation of a work.</td></tr>
-<tr><td><a href="#term-published_as">published_as</a></td><td>Property</td><td>
-        Links a musical expression (e.g. a signal or a score) to one of its manifestations (e.g. a track on a particular record or a published score).
-    </td></tr>
-<tr><td><a href="#term-publisher">publisher</a></td><td>Property</td><td>Used to relate a musical manifestation to a person or a group of person who published it.</td></tr>
-<tr><td><a href="#term-publishing_location">publishing_location</a></td><td>Property</td><td>
-        Relates a musical manifestation to its publication location.
-        </td></tr>
-<tr><td><a href="#term-puid">puid</a></td><td>Property</td><td>
-        Link a signal to the PUIDs associated with it, that is, PUID computed from MusicalItems (mo:AudioFile) 
-        derived from this signal.
-        PUIDs (Portable Unique IDentifier) are the IDs used in the 
-        proprietary MusicDNS AudioFingerprinting system which is operated by MusicIP.
-
-        Using PUIDs, one (with some luck) can identify the Signal object associated with a particular audio file, therefore allowing
-        to access further information (on which release this track is featured? etc.). Using some more metadata one can identify
-        the particular Track corresponding to the audio file (a track on a particular release).</td></tr>
-<tr><td><a href="#term-record">record</a></td><td>Property</td><td>Associates a release with the records it contains. A single release can be associated with multiple records, for example for a multi-disc release.</td></tr>
-<tr><td><a href="#term-record_count">record_count</a></td><td>Property</td><td>Associates a release with the number of records it contains, e.g. the number of discs it contains in the case of a multi-disc release.</td></tr>
-<tr><td><a href="#term-record_number">record_number</a></td><td>Property</td><td>Indicates the position of a record in a release (e.g. a 2xLP, etc.).</td></tr>
-<tr><td><a href="#term-record_side">record_side</a></td><td>Property</td><td>Associates the side on a vinyl record, where a track is located, e.g. A, B, C, etc. This property can then also be used 
-in conjunction with mo:track_number, so that one can infer e.g. "A1", that means, track number 1 on side A.</td></tr>
-<tr><td><a href="#term-recorded_as">recorded_as</a></td><td>Property</td><td>
-        This is a shortcut property, allowing to bypass all the Sound/Recording steps. This property
-        allows to directly link a Performance to the recorded Signal. This is recommended for "normal"
-        users. However, advanced users wanting to express things such as the location of the microphone will
-        have to create this shortcut as well as the whole workflow, in order to let the "normal" users access
-        simply the, well, simple information:-) .
-    </td></tr>
-<tr><td><a href="#term-recorded_in">recorded_in</a></td><td>Property</td><td>
-            Associates a physical Sound to a Recording event where it is being used 
-        in order to produce a signal. For example, I might use this property to 
-        associate the sound produced by a particular performance of the magic flute
-        to a given recording, done using my cell-phone.
-    </td></tr>
-<tr><td><a href="#term-recording_of">recording_of</a></td><td>Property</td><td>
-            Associates a Recording event to a physical Sound being recorded.
-                For example, I might use this property to
-                associate a given recording, done using my cell phone, to the 
-        sound produced by a particular performance of the magic flute.
-    </td></tr>
-<tr><td><a href="#term-records">records</a></td><td>Property</td><td>
-        This is the inverse of the shortcut property recordedAs, allowing to relate directly a performance
-        to a signal.
-    </td></tr>
-<tr><td><a href="#term-release">release</a></td><td>Property</td><td>Associates a release with the corresponding release event</td></tr>
-<tr><td><a href="#term-release_status">release_status</a></td><td>Property</td><td>
-                Relates a musical manifestation to its release status (bootleg, ...)
-        </td></tr>
-<tr><td><a href="#term-release_type">release_type</a></td><td>Property</td><td>
-        Relates a musical manifestation to its release type (interview, spoken word, album, ...)
-    </td></tr>
-<tr><td><a href="#term-remaster_of">remaster_of</a></td><td>Property</td><td>This relates two musical work or the expression of a musical work, where one is a remaster of the other. 
-    
-A remaster is a new version made for release from source recordings that were earlier released separately. This is usually done to improve the audio quality or adjust for more modern playback equipment. The process generally doesn't involve changing the music in any artistically important way. It may, however, result in tracks that are a few seconds longer or shorter.</td></tr>
-<tr><td><a href="#term-remix_of">remix_of</a></td><td>Property</td><td>Used to relate the remix of a musical work in a substantially altered version produced by mixing together individual tracks or segments of an original musical source work.</td></tr>
-<tr><td><a href="#term-remixed">remixed</a></td><td>Property</td><td>Used to relate an artist who remixed a musical work or the expression of a musical work. 
-    
-This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</td></tr>
-<tr><td><a href="#term-remixer">remixer</a></td><td>Property</td><td>Used to relate a musical work or the expression of a musical work to an artist who remixed it. 
-    
-This involves taking just one other musical work and using audio editing to make it sound like a significantly different, but usually still recognisable, song. It can be used to link an artist to a single song that they remixed, or, if they remixed an entire musical work.</td></tr>
-<tr><td><a href="#term-review">review</a></td><td>Property</td><td>Used to link a work or the expression of a work to a review. 
-    
-The review does not have to be open content, as long as it is accessible to the general internet population.</td></tr>
-<tr><td><a href="#term-sample_rate">sample_rate</a></td><td>Property</td><td>
-        Associates a digital signal to its sample rate. It might be easier to express it this way instead of
-        defining a timeline map:-) Range is xsd:float.
-    </td></tr>
-<tr><td><a href="#term-sampled">sampled</a></td><td>Property</td><td>Used to relate an artist who sampled a Signal.</td></tr>
-<tr><td><a href="#term-sampledVersionOf">sampledVersionOf</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-sampled_version">sampled_version</a></td><td>Property</td><td>
-        Associates an analog signal with a sampled version of it
-    </td></tr>
-<tr><td><a href="#term-sampled_version_of">sampled_version_of</a></td><td>Property</td><td>
-        Associates a digital signal with the analog version of it
-    </td></tr>
-<tr><td><a href="#term-sampler">sampler</a></td><td>Property</td><td>Used to relate the signal of a musical work to an artist who sampled it.</td></tr>
-<tr><td><a href="#term-sell_item">sell_item</a></td><td>Property</td><td>A person, a group of person or an organization selling an exemplar of a single manifestation.</td></tr>
-<tr><td><a href="#term-signal">signal</a></td><td>Property</td><td>Associates a group of signals with one of the signals it contains</td></tr>
-<tr><td><a href="#term-signalTime">signalTime</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-similar_to">similar_to</a></td><td>Property</td><td>
-            A similarity relationships between two objects (so far, either an agent, a signal or a genre, but
-        this could grow).
-        This relationship is pretty general and doesn't make any assumptions on how the similarity claim
-        was derived.
-        Such similarity statements can come from a range of different sources (Musicbrainz similarities between
-        artists, or coming from some automatic content analysis).
-        However, the origin of such statements should be kept using a named graph approach - and ultimately, the 
-        documents providing such statements should attach some metadata to themselves (confidence of the claim, etc.).
-        </td></tr>
-<tr><td><a href="#term-singer">singer</a></td><td>Property</td><td>Relates a performance to an involved singer</td></tr>
-<tr><td><a href="#term-supporting_musician">supporting_musician</a></td><td>Property</td><td>Used to relate an artist doing long-time instrumental or vocal support for another artist.</td></tr>
-<tr><td><a href="#term-tempo">tempo</a></td><td>Property</td><td>
-        Rate of speed or pace of music. Tempo markings are traditionally given in Italian; 
-        common markings include: grave (solemn; very, very slow); largo (broad; very slow); 
-        adagio (quite slow); andante (a walking pace); moderato (moderate); allegro (fast; cheerful); 
-        vivace (lively); presto (very fast); accelerando (getting faster); ritardando (getting slower); 
-        and a tempo (in time; returning to the original pace).
-    </td></tr>
-<tr><td><a href="#term-text">text</a></td><td>Property</td><td>Associates lyrics with their text.</td></tr>
-<tr><td><a href="#term-time">time</a></td><td>Property</td><td>
-        Associates a Signal to a time object - its actual domain
-    </td></tr>
-<tr><td><a href="#term-track">track</a></td><td>Property</td><td>Indicates a part of a musical manifestation - in this particular case, a track.</td></tr>
-<tr><td><a href="#term-trackNum">trackNum</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-track_count">track_count</a></td><td>Property</td><td>The track count of a record</td></tr>
-<tr><td><a href="#term-track_number">track_number</a></td><td>Property</td><td>Indicates the position of a track on a record medium (a CD, etc.).</td></tr>
-<tr><td><a href="#term-translation_of">translation_of</a></td><td>Property</td><td>Indicates that a work or the expression of a work has translated or transliterated into another expression of a work.</td></tr>
-<tr><td><a href="#term-tribute_to">tribute_to</a></td><td>Property</td><td>Indicates a musical work or the expression of a musical work that is a tribute to an artist - normally consisting of music being composed by the artist but performed by other artists. </td></tr>
-<tr><td><a href="#term-trmid">trmid</a></td><td>Property</td><td>
-        Indicates the TRMID of a track.
-        TRM IDs are MusicBrainz' old AudioFingerprinting system. 
-        TRM (TRM Recognizes Music) IDs are (somewhat) unique ids that represent 
-        the audio signature of a musical piece (see AudioFingerprint).
-    </td></tr>
-<tr><td><a href="#term-upc">upc</a></td><td>Property</td><td>UPC stands for "Universal Product Code", which was the original barcode used in the United States and Canada. The UPC (now officially EAN.UCC-12 is a numerical method of identifying products without redundancy worldwide for all types of products in the retail sector. The EAN is a superset of the original UPC increasing the digits to 13 with the prefix 0 reserved for UPC. As of 2005, manufacturers are only allowed to use the new 13-digit codes on their items, rather than having two separate numbers.</td></tr>
-<tr><td><a href="#term-usedInPerformance">usedInPerformance</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-usedInRecording">usedInRecording</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-usesSound">usesSound</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-usesWork">usesWork</a></td><td>Property</td><td></td></tr>
-<tr><td><a href="#term-want_item">want_item</a></td><td>Property</td><td>A person, a group of person or an organization wanting an exemplar of a single manifestation.</td></tr>
-<tr><td><a href="#term-wikipedia">wikipedia</a></td><td>Property</td><td>
-        Used to link an work, an expression of a work, a manifestation of a work, 
-        a person, an instrument or a musical genre to its corresponding WikiPedia page. 
-        The full URL should be used, not just the WikiName.
-    </td></tr>
+<tr><td><a href="#term-AnalogSignal">AnalogSignal</a></td><td>Class</td><td>analogue signal</td></tr>
+<tr><td><a href="#term-Arrangement">Arrangement</a></td><td>Class</td><td>arrangement</td></tr>
+<tr><td><a href="#term-AudioFile">AudioFile</a></td><td>Class</td><td>audio file</td></tr>
+<tr><td><a href="#term-CD">CD</a></td><td>Class</td><td>CD</td></tr>
+<tr><td><a href="#term-Composition">Composition</a></td><td>Class</td><td>composition</td></tr>
+<tr><td><a href="#term-CorporateBody">CorporateBody</a></td><td>Class</td><td>corporate body</td></tr>
+<tr><td><a href="#term-DAT">DAT</a></td><td>Class</td><td>DAT</td></tr>
+<tr><td><a href="#term-DCC">DCC</a></td><td>Class</td><td>DCC</td></tr>
+<tr><td><a href="#term-DVDA">DVDA</a></td><td>Class</td><td>DVDA</td></tr>
+<tr><td><a href="#term-DigitalSignal">DigitalSignal</a></td><td>Class</td><td>digital signal</td></tr>
+<tr><td><a href="#term-ED2K">ED2K</a></td><td>Class</td><td>ED2K</td></tr>
+<tr><td><a href="#term-Festival">Festival</a></td><td>Class</td><td>Festival</td></tr>
+<tr><td><a href="#term-Genre">Genre</a></td><td>Class</td><td>Genre</td></tr>
+<tr><td><a href="#term-Instrument">Instrument</a></td><td>Class</td><td>Instrument</td></tr>
+<tr><td><a href="#term-Instrumentation">Instrumentation</a></td><td>Class</td><td>instrumentation</td></tr>
+<tr><td><a href="#term-Label">Label</a></td><td>Class</td><td>label</td></tr>
+<tr><td><a href="#term-Libretto">Libretto</a></td><td>Class</td><td>libretto</td></tr>
+<tr><td><a href="#term-Lyrics">Lyrics</a></td><td>Class</td><td>lyrics</td></tr>
+<tr><td><a href="#term-MD">MD</a></td><td>Class</td><td>MD</td></tr>
+<tr><td><a href="#term-MagneticTape">MagneticTape</a></td><td>Class</td><td>MagneticTape</td></tr>
+<tr><td><a href="#term-Medium">Medium</a></td><td>Class</td><td>Medium</td></tr>
+<tr><td><a href="#term-Membership">Membership</a></td><td>Class</td><td>membership</td></tr>
+<tr><td><a href="#term-Movement">Movement</a></td><td>Class</td><td>movement</td></tr>
+<tr><td><a href="#term-MusicArtist">MusicArtist</a></td><td>Class</td><td>music artist</td></tr>
+<tr><td><a href="#term-MusicGroup">MusicGroup</a></td><td>Class</td><td>music group</td></tr>
+<tr><td><a href="#term-MusicalExpression">MusicalExpression</a></td><td>Class</td><td>musical expression</td></tr>
+<tr><td><a href="#term-MusicalItem">MusicalItem</a></td><td>Class</td><td>MusicalItem</td></tr>
+<tr><td><a href="#term-MusicalManifestation">MusicalManifestation</a></td><td>Class</td><td>musical manifestation</td></tr>
+<tr><td><a href="#term-MusicalWork">MusicalWork</a></td><td>Class</td><td>musical work</td></tr>
+<tr><td><a href="#term-Orchestration">Orchestration</a></td><td>Class</td><td>orchestration</td></tr>
+<tr><td><a href="#term-Performance">Performance</a></td><td>Class</td><td>performance</td></tr>
+<tr><td><a href="#term-PublishedLibretto">PublishedLibretto</a></td><td>Class</td><td>published libretto</td></tr>
+<tr><td><a href="#term-PublishedLyrics">PublishedLyrics</a></td><td>Class</td><td>published lyrics</td></tr>
+<tr><td><a href="#term-PublishedScore">PublishedScore</a></td><td>Class</td><td>published score</td></tr>
+<tr><td><a href="#term-Record">Record</a></td><td>Class</td><td>record</td></tr>
+<tr><td><a href="#term-Recording">Recording</a></td><td>Class</td><td>recording</td></tr>
+<tr><td><a href="#term-RecordingSession">RecordingSession</a></td><td>Class</td><td>recording session</td></tr>
+<tr><td><a href="#term-Release">Release</a></td><td>Class</td><td>release</td></tr>
+<tr><td><a href="#term-ReleaseEvent">ReleaseEvent</a></td><td>Class</td><td>release event</td></tr>
+<tr><td><a href="#term-ReleaseStatus">ReleaseStatus</a></td><td>Class</td><td>release status</td></tr>
+<tr><td><a href="#term-ReleaseType">ReleaseType</a></td><td>Class</td><td>Release type</td></tr>
+<tr><td><a href="#term-SACD">SACD</a></td><td>Class</td><td>SACD</td></tr>
+<tr><td><a href="#term-Score">Score</a></td><td>Class</td><td>score</td></tr>
+<tr><td><a href="#term-Show">Show</a></td><td>Class</td><td>Show</td></tr>
+<tr><td><a href="#term-Signal">Signal</a></td><td>Class</td><td>signal</td></tr>
+<tr><td><a href="#term-SignalGroup">SignalGroup</a></td><td>Class</td><td>signal group</td></tr>
+<tr><td><a href="#term-SoloMusicArtist">SoloMusicArtist</a></td><td>Class</td><td>solo music artist</td></tr>
+<tr><td><a href="#term-Sound">Sound</a></td><td>Class</td><td>sound</td></tr>
+<tr><td><a href="#term-Stream">Stream</a></td><td>Class</td><td>Stream</td></tr>
+<tr><td><a href="#term-Torrent">Torrent</a></td><td>Class</td><td>Torrent</td></tr>
+<tr><td><a href="#term-Track">Track</a></td><td>Class</td><td>rack</td></tr>
+<tr><td><a href="#term-Transcription">Transcription</a></td><td>Class</td><td>transcription</td></tr>
+<tr><td><a href="#term-Vinyl">Vinyl</a></td><td>Class</td><td>Vinyl</td></tr>
 </table>
 <h2 id="sec-classes">Classes</h2>
 <h3 id="term-AnalogSignal">AnalogSignal</h3

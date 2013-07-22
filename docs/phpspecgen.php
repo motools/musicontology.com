@@ -141,11 +141,11 @@
             $html .= '<table class="table table-hover">'."\n";
             $html .= "<tr><th>Term Name</th><th>Type</th><th>Definition</th></tr>\n";
             foreach($this->all("^rdfs:isDefinedBy") as $term) {
-                if ($term instanceof Phpspecgen_Term) {
+                if ($term instanceof Phpspecgen_Class) {
                     $html .= "<tr>";
                     $html .= "<td>".$term->termLink()."</td>";
                     $html .= "<td>".$term->termType()."</td>";
-                    $html .= "<td>".$term->getLiteral('rdfs:comment|rdfs:label')."</td>";
+                    $html .= "<td>".$term->getLiteral('rdfs:label')."</td>";
                     $html .= "</tr>\n";
                 }
             }
