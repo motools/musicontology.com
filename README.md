@@ -3,6 +3,10 @@ Music Ontology website
 
 This repository holds the new Music Ontology website.
 
+A test build is available at: 
+
+  http://raimond.me.uk/resources/musicontology.com
+
 
 Generating the specification
 ----------------------------
