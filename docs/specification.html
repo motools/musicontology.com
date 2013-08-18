@@ -47,8 +47,7 @@
 <em>
         The Music Ontology Specification provides main concepts and 
         properties fo describing music (i.e. artists, albums and tracks) 
-        on the Semantic Web. This document contains a RDF description 
-        of the Music Ontology.
+        on the Semantic Web. 
     </em>
 <dl>
 <dt>Latest Version</dt><dd><a href="http://purl.org/ontology/mo/">http://purl.org/ontology/mo/</a></dd>
@@ -150,7 +149,7 @@
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Subclasses:</th> <td><a href="#term-Instrumentation">Instrumentation</a>, <a href="#term-Orchestration">Orchestration</a></td></tr>
 <tr><th>Parent Class:</th> <td><a href="http://purl.org/NET/c4dm/event.owl#Event">http://purl.org/NET/c4dm/event.owl#Event</a></td></tr>
-<tr><th>Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+<tr><th>Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a></td></tr>
 </table>
 <h3 id="term-AudioFile">AudioFile</h3
 <p>An audio file, which may be available on a local file system or through http, ftp, etc.</p>
@@ -293,7 +292,7 @@
 <tr><th>Label:</th> <td>instrumentation</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Parent Class:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
-  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a></td></tr>
 </table>
 <h3 id="term-Label">Label</h3
 <p>Trade name of a company that produces musical works or expression of musical works.</p>
@@ -512,7 +511,7 @@ work #1 J. S. Bach's The art of the fugue
 <tr><th>Label:</th> <td>orchestration</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Parent Class:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
-  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a>, <a href="#term-produced_score">produced_score</a></td></tr>
+  <tr><th>Inherited Properties:</th> <td><a href="#term-arrangement_of">arrangement_of</a></td></tr>
 </table>
 <h3 id="term-Performance">Performance</h3
 <p>
@@ -1653,7 +1652,7 @@ This means that the orignial musical expression were rearranged to create a new 
 </table>
 <h3 id="term-produced_score">produced_score</h3
 <p>
-        Associates an arrangement event to a score product (score here does not refer to a published score, but more
+        Associates an arrangement or a composition event to a score product (score here does not refer to a published score, but more
         an abstract arrangement of a particular work).
     </p>
 <table class="table table-hover">
@@ -1661,7 +1660,7 @@ This means that the orignial musical expression were rearranged to create a new 
 <tr><th>Label:</th> <td>produced score</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
 <tr><th>Range:</th> <td><a href="#term-Score">Score</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-Arrangement">Arrangement</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid130">genid130</a></td></tr>
 </table>
 <h3 id="term-produced_signal">produced_signal</h3
 <p>
@@ -1967,7 +1966,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>review</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid130">genid130</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid133">genid133</a></td></tr>
 </table>
 <h3 id="term-sample_rate">sample_rate</h3
 <p>
@@ -2063,8 +2062,8 @@ The review does not have to be open content, as long as it is accessible to the 
   <tr><th>URI:</th> <td><a href="http://purl.org/ontology/mo/similar_to">http://purl.org/ontology/mo/similar_to</a></td></tr>
 <tr><th>Label:</th> <td>similar_to</td></tr>
 <tr><th>Status:</th> <td>unstable</td></tr>
-<tr><th>Range:</th> <td><a href="#term-genid141">genid141</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid134">genid134</a></td></tr>
+<tr><th>Range:</th> <td><a href="#term-genid144">genid144</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid137">genid137</a></td></tr>
 </table>
 <h3 id="term-singer">singer</h3
 <p>Relates a performance to an involved singer</p>
@@ -2096,7 +2095,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>tempo</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid148">genid148</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid151">genid151</a></td></tr>
 </table>
 <h3 id="term-lyrics">lyrics</h3
 <p>Associates lyrics with a musical work</p>
@@ -2244,7 +2243,7 @@ The review does not have to be open content, as long as it is accessible to the 
 <tr><th>Label:</th> <td>wikipedia</td></tr>
 <tr><th>Status:</th> <td>stable</td></tr>
 <tr><th>Range:</th> <td><a href="http://xmlns.com/foaf/0.1/Document">foaf:Document</a></td></tr>
-<tr><th>Domain:</th> <td><a href="#term-genid152">genid152</a></td></tr>
+<tr><th>Domain:</th> <td><a href="#term-genid155">genid155</a></td></tr>
 </table>
     </div>
 </body>
