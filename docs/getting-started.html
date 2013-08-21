@@ -95,7 +95,8 @@
               xsd: http://www.w3.org/2001/XMLSchema#
               tl: http://purl.org/NET/c4dm/timeline.owl#
               event: http://purl.org/NET/c4dm/event.owl#
-              foaf: http://xmlns.com/foaf/0.1/"&gt;
+              foaf: http://xmlns.com/foaf/0.1/
+              rdfs: http://www.w3.org/2000/01/rdf-schema#"&gt;
   ...
 
 &lt;html&gt;
@@ -111,8 +112,9 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "tl": "http://purl.org/NET/c4dm/timeline.owl#",
     "event": "http://purl.org/NET/c4dm/event.owl#",
-    "foaf": "http://xmlns.com/foaf/0.1/"
-  }
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
   ...
 }
         </pre>
@@ -126,6 +128,7 @@
 @prefix tl: &lt;http://purl.org/NET/c4dm/timeline.owl#&gt; .
 @prefix event: &lt;http://purl.org/NET/c4dm/event.owl#&gt; .
 @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 ...
         </pre>
       </div>
@@ -193,7 +196,7 @@
         <pre class="prettyprint">        
 &lt;span typeof="mo:MusicGroup" about="#band-1"&gt;
   &lt;span property="dc:title"&gt;Fugazi&lt;/span&gt;
-  started in &lt;span property="mo:activity_start" value="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
+  started in &lt;span property="mo:activity_start" content="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
   and has the following members:
   &lt;ul rel="foaf:member"&gt;  
     &lt;li about="#imk" typeof="mo:MusicArtist"&gt;&lt;span property="foaf:name"&gt;Ian MacKaye&lt;/span&gt;&lt;/li&gt;
@@ -238,23 +241,23 @@
         <div class="mo-format"><p>In RDF/Turtle:</p></div>
         <pre class="prettyprint">
 &lt;#band-1&gt;
-   rdf:type mo:MusicGroup;
+   a mo:MusicGroup;
    dc:title "Fugazi";
    foaf:member &lt;#imk&gt;;
    foaf:member &lt;#jl&gt;;
    foaf:member &lt;#gp&gt;;
    foaf:member &lt;#bc&gt; .
 &lt;#imk&gt;
-   rdf:type mo:MusicArtist;
+   a mo:MusicArtist;
    dc:title "Ian MacKaye" .
 &lt;#jl&gt;
-   rdf:type mo:MusicArtist;
+   a mo:MusicArtist;
    dc:title "Joe Lally" .
 &lt;#gp&gt;
-   rdf:type mo:MusicArtist;
+   a mo:MusicArtist;
    dc:title "Guy Picciotto" .
 &lt;#bc&gt;
-   rdf:type mo:MusicArtist;
+   a mo:MusicArtist;
    dc:title "Brendan Canty" .
         </pre>
       </div>
@@ -271,7 +274,7 @@
     &lt;li typeof="mo:Membership"&gt;
       &lt;span rel="mo:artist"&gt;&lt;span about="#bc" typeof="mo:MusicArtist" property="foaf:name"&gt;Brendan Canty&lt;/span&gt;&lt;/span&gt; played
       &lt;a rel="mo:primary_instrument" typeof="mo:Instrument" href="http://dbpedia.org/resource/Drum_kit"&gt;drums&lt;/a&gt;
-      from &lt;span property="ical:dtstart" value="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
+      from &lt;span property="ical:dtstart" content="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/span&gt;
@@ -305,18 +308,18 @@
         <div class="mo-format"><p>In RDF/Turtle:</p></div>
         <pre class="prettyprint">
 &lt;#band-1&gt;
-   rdf:type mo:MusicGroup;
+   a mo:MusicGroup;
    dc:title "Fugazi";
    mo:membership [
-     rdf:type mo:Membership;
+     a mo:Membership;
      mo:artist &lt;#bc&gt;;
     mo:primary_instrument &lt;http://dbpedia.org/resource/Drum_kit&gt;;
    &lt;http://www.w3.org/2002/12/cal/ical#dtstart&gt; "1987-01-01T00:00:00Z"^^xsd:dateTime .
 &lt;#bc&gt;
-   rdf:type mo:MusicArtist;
+   a mo:MusicArtist;
    foaf:name "Brendan Canty" .
 &lt;http://dbpedia.org/resource/Drum_kit&gt;
-   rdf:type mo:Instrument .
+   a mo:Instrument .
         </pre>
       </div>
 
@@ -330,11 +333,108 @@
 
       <p>We describe below Bach's "The Art of Fugue" and one of its performances.</p>
 
+      <div class="mo-html-example">
+        <div class="mo-format"><p>In HTML:</p></div>
+        <pre class="prettyprint">
+&lt;span typeof="mo:MusicArtist" about="http://dbpedia.org/resource/Johann_Sebastian_Bach"&gt;
+  &lt;span property="foaf:name"&gt;Johann Sebastian Bach&lt;/span&gt;
+  was involved in the
+  &lt;span rev="mo:composer"&gt;
+    &lt;span typeof="mo:Composition" about="#composition"&gt;
+      &lt;span property="dc:title"&gt;
+        Composition of 
+        &lt;span rel="mo:produced_work"&gt;
+          &lt;span typeof="mo:MusicalWork" about="#kunst-der-fuge"&gt;
+            &lt;span property="dc:title"&gt;The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima&lt;/span&gt;
+          &lt;/span&gt;
+        &lt;/span&gt;
+      &lt;/span&gt;
+      which happened between
+      &lt;span rel="event:time"&gt;
+        &lt;span property="tl:start" datatype="xsd:gYear"&gt;1742&lt;/span&gt; 
+        and 
+        &lt;span property="tl:end" datatype="xsd:gYear"&gt;1749&lt;/span&gt;
+      &lt;/span&gt;.
+    &lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+
+&lt;span typeof="mo:Performance" about="#performance"&gt;
+  &lt;span rel="mo:performance_of" resource="#kunst-der-fuge"&gt;This work&lt;/span&gt;
+  was performed and 
+  &lt;a rel="mo:recorded_as" href="http://musicbrainz.org/recording/93da082b-99c1-4469-9eb6-91e9fbeaeb2a#_"&gt;
+    recorded
+  &lt;/a&gt;
+  by the
+  &lt;a rel="mo:performer" href="http://musicbrainz.org/artist/fd20e8ed-0736-44db-8d97-530fbf00e813#_"&gt;
+    Emerson String Quartet
+  &lt;/a&gt;
+  in
+  &lt;span rel="event:time"&gt;&lt;span property="tl:at" datatype="xsd:gYear"&gt;2003&lt;/span&gt;&lt;/span&gt;, with
+  a &lt;span rel="mo:instrument" typeof="mo:Instrument"&gt;&lt;span property="rdfs:label"&gt;first violin&lt;/span&gt;&lt;/span&gt;,
+  a &lt;span rel="mo:instrument" typeof="mo:Instrument"&gt;&lt;span property="rdfs:label"&gt;second violin&lt;/span&gt;&lt;/span&gt;,
+  a &lt;span rel="mo:instrument" typeof="mo:Instrument"&gt;&lt;span property="rdfs:label"&gt;viola&lt;/span&gt;&lt;/span&gt;
+  and a &lt;span rel="mo:instrument" typeof="mo:Instrument"&gt;&lt;span property="rdfs:label"&gt;cello&lt;/span&gt;&lt;/span&gt;.
+&lt;/span&gt;
+        </pre>
+      </div>
+
+      <div class="mo-json-example">
+        <div class="mo-format"><p>In JSON-LD:</p></div>
+        <pre class="prettyprint">
+{
+  "@id": "http://example.org/#composition",
+  "@type": "mo:Composition",
+  "dc:title": "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima",
+  "event:time": {
+    "tl:start": {
+      "@value": "1742",
+      "@type": "xsd:gYear"
+    },
+    "tl:end": {
+      "@value": "1749",
+      "@type": "xsd:gYear"
+    }
+  },
+  "mo:composer": {
+    "@id": "http://dbpedia.org/resource/Johann_Sebastian_Bach",
+    "@type": "mo:Composer",
+    "foaf:name": "Johann Sebastian Bach"
+  },
+  "mo:produced_work": {
+    "@id": "http://example.org/#kunst-der-fuge",
+    "@type": "mo:MusicalWork",
+    "dc:title": "The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima",
+    "@reverse": {
+      "mo:performance_of": {
+        "@id": "http://example.org/#performance",
+        "@type": "mo:Performance",
+        "event:time": {
+          "tl:at": {
+            "@value": "2003",
+            "@type": "xsd:gYear"
+          }
+        },
+        "mo:performer": "http://musicbrainz.org/artist/fd20e8ed-0736-44db-8d97-530fbf00e813#_",
+        "mo:recorded_as": "http://musicbrainz.org/recording/93da082b-99c1-4469-9eb6-91e9fbeaeb2a#_",
+        "mo:instrument": [
+          { "@type": "mo:Instrument", "rdfs:label": "first violin" },
+          { "@type": "mo:Instrument", "rdfs:label": "second violin" },
+          { "@type": "mo:Instrument", "rdfs:label": "viola" },
+          { "@type": "mo:Instrument", "rdfs:label": "cello" }
+        ]
+      }
+    }
+  }
+}
+        </pre>
+      </div>
+
       <div class="mo-turtle-example">
         <div class="mo-format"><p>In RDF/Turtle:</p></div>
         <pre class="prettyprint">
 &lt;http://dbpedia.org/resource/Johann_Sebastian_Bach&gt;
-    rdf:type mo:MusicArtist ;
+    a mo:MusicArtist ;
     foaf:name "Johann Sebastian Bach" .
 &lt;#composition&gt;
     a mo:Composition ;
@@ -350,10 +450,10 @@
     mo:performance_of &lt;#kunst-der-fuge&gt; ;
     event:time [ tl:at "2003"^^xsd:gYear ] ;
     mo:performer &lt;http://musicbrainz.org/artist/fd20e8ed-0736-44db-8d97-530fbf00e813#_&gt; ;
-    mo:instrument [ rdfs:label "Violin" ], 
-                  [ rdfs:label "Violin" ], 
-                  [ rdfs:label "Viola" ], 
-                  [ rdfs:label "Cello" ] ;
+    mo:instrument [ a mo:Instrument ; rdfs:label "first violin" ], 
+                  [ a mo:Instrument ; rdfs:label "second violin" ], 
+                  [ a mo:Instrument ; rdfs:label "viola" ], 
+                  [ a mo:Instrument ; rdfs:label "cello" ] ;
     mo:recorded_as &lt;http://musicbrainz.org/recording/93da082b-99c1-4469-9eb6-91e9fbeaeb2a#_&gt; .
         </pre>
       </div>
