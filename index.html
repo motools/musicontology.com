@@ -3,29 +3,31 @@
   <head>
     <title>Music Ontology</title>
     <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-    <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
     <link href="css/style.css" rel="stylesheet" media="screen"/>
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="index.html">Music Ontology</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
+          </button>
+          <a class="navbar-brand" href="index.html">Music Ontology</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
               <li class="active"><a href="index.html">Home</a></li>
               <li><a href="docs/getting-started.html">Getting started</a></li>
               <li><a href="docs/specification.html">Specification</a></li>
@@ -39,25 +41,25 @@
       </div>
     </div>
     <div class="container">
-      <div class="hero-unit">
+      <div class="jumbotron">
         <h1>The Music Ontology</h1>
         <p>The Music Ontology specifies how to publish structured music-related data on the Web, using a variety of syntaxes, e.g. RDFa, JSON-LD, RDF/Turtle.</p>
       </div>
       <div class="row">
-        <div class="span4">
+        <div class="col-lg-4">
           <h2>Getting started</h2>
           <p>Learn how to start publishing music-related data in your web pages or API, using the Music Ontology</p>
-          <p><a class="btn" href="docs/getting-started.html">Examples &raquo;</a></p>
+          <p><a class="btn btn-default" href="docs/getting-started.html">Examples &raquo;</a></p>
         </div>
-        <div class="span4">
+        <div class="col-lg-4">
           <h2>Learn more</h2>
           <p>Read the full Music Ontology specification, describing all the classses and properties that can be used.</p>
-          <p><a class="btn" href="docs/specification.html">Specification &raquo;</a></p>
+          <p><a class="btn btn-default" href="docs/specification.html">Specification &raquo;</a></p>
         </div>
-        <div class="span4">
+        <div class="col-lg-4">
           <h2>About</h2>
           <p>Get more information on the Music Ontology and its use</p>
-          <p><a class="btn" href="docs/faq.html">FAQ &raquo;</a></p>
+          <p><a class="btn btn-default" href="docs/faq.html">FAQ &raquo;</a></p>
         </div>
       </div>
     </div>

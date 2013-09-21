@@ -19,16 +19,17 @@
   </head>
   <body onload="prettyPrint()">
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="../index.html">Music Ontology</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
+          </button>
+          <a class="navbar-brand" href="index.html">Music Ontology</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
               <li><a href="../index.html">Home</a></li>
               <li class="active"><a href="getting-started.html">Getting started</a></li>
               <li><a href="specification.html">Specification</a></li>
@@ -42,29 +43,45 @@
       </div>
     </div>
     <div class="container">
+
+      <div class="row">
+
+      <div class="sidebar col-md-3">
+        <ul class="bs-sidenav nav">
+          <li><a href="#uris">URIs</a></li>
+          <li><a href="#namespaces">Namespaces</a></li>
+          <li><a href="#example-track">Describing a track</a></li>
+          <li><a href="#example-artist">Describing an artist</a></li>
+          <li><a href="#example-workflow">Describing a production workflow</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-9">
+
       <h1>Getting started</h1>
       <p>
         The Music Ontology provides a model for publishing structured music-related data on your web site or through your API. If you're unsure about why you should publish music-related data in this way, please read our <a href="faq.html">FAQ</a>. Below are a few typical examples of using the Music Ontology, in three different syntaxes: <a href="http://rdfa.info/">RDFa</a> in HTML for embedding music-related data on a web page, and <a href="http://json-ld.org/">JSON-LD</a> and <a href="http://www.w3.org/TR/turtle/">Turtle</a> for exposing music-related data as part of an API.
       </p>
+
       <div class="row">
-        <div class="span4">
+        <div class="col-md-4">
           <h2>HTML</h2>
           <p>Learn how to start publishing music-related data in your web pages, using the Music Ontology.</p>
-          <p><a class="btn format-html" href="#">HTML &raquo;</a></p>
+          <p><a class="btn btn-default format-html" href="#">HTML &raquo;</a></p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h2>JSON-LD</h2>
           <p>Learn how to start exposing music-related data as part of your API using JSON-LD.</p>
-          <p><a class="btn format-json" href="#">JSON-LD &raquo;</a></p> 
+          <p><a class="btn btn-default format-json" href="#">JSON-LD &raquo;</a></p> 
         </div>
-        <div class="span4">
+        <div class="col-md-4">
           <h2>RDF/Turtle</h2>
           <p>Learn how to start exposing music-related Linked Data as RDF/Turtle.</p>
-          <p><a class="btn format-turtle" href="#">RDF/Turtle &raquo;</a></p>
+          <p><a class="btn btn-default format-turtle" href="#">RDF/Turtle &raquo;</a></p>
         </div>
       </div>
 
-      <h2>URIs</h2>
+      <h2 id="uris">URIs</h2>
       <p>
         Before publishing Music Ontology data, the first thing to do is to think about the resources 
         (e.g. <a href="#example-track">tracks</a>, <a href="#example-artist">artists</a>, musical works) you want to describe
@@ -85,8 +102,8 @@
         other music-related data, therefore making it richer. 
       </p>
 
-      <h2>Adding prefixes</h2>
-      <p>In order to start using the Music Ontology, you will need to add a few prefixes to your document. This is done by adding the following to your document.</p>
+      <h2 id="namespaces">Adding namespaces</h2>
+      <p>In order to start using the Music Ontology, you will need to add a few namespaces to your document. This is done by adding the following to your document.</p>
       <div class="mo-html-example">
         <div class="mo-format"><p>In HTML:</p></div>
         <pre class="prettyprint">
@@ -329,7 +346,7 @@
          of a given musical work to a recording of one of its performances. This enables the ontology
          to be very descriptive and easily extensible. Below is an illustration of such a workflow.</p>
 
-      <p><img title="An example of a Music Ontology production workflow" src="../img/mo-workflow.jpg"/>
+      <p><img title="An example of a Music Ontology production workflow" width="90%" src="../img/mo-workflow.jpg"/></p>
 
       <p>We describe below Bach's "The Art of Fugue" and one of its performances.</p>
 
@@ -456,6 +473,10 @@
                   [ a mo:Instrument ; rdfs:label "cello" ] ;
     mo:recorded_as &lt;http://musicbrainz.org/recording/93da082b-99c1-4469-9eb6-91e9fbeaeb2a#_&gt; .
         </pre>
+      </div>
+
+      </div>
+
       </div>
 
     </div>
