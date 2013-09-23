@@ -51,7 +51,8 @@
           <li><a href="#uris">URIs</a></li>
           <li><a href="#namespaces">Namespaces</a></li>
           <li><a href="#example-track">Describing a track</a></li>
-          <li><a href="#example-artist">Describing an artist</a></li>
+          <li><a href="#example-artist">Describing a band</a></li>
+          <li><a href="#example-performance">Describing a performance</a></li>
           <li><a href="#example-workflow">Describing a production workflow</a></li>
         </ul>
       </div>
@@ -337,6 +338,78 @@
    foaf:name "Brendan Canty" .
 &lt;http://dbpedia.org/resource/Drum_kit&gt;
    a mo:Instrument .
+        </pre>
+      </div>
+
+      <h2 id="example-performance">Describing a performance</h2>
+
+      <p>The following example shows how to describe a musical performance, including
+      a track that was played during this performance.</p>
+
+      <div class="mo-html-example">
+        <div class="mo-format"><p>In HTML:</p></div>
+        <pre class="prettyprint">
+&lt;span typeof="mo:Performance" about="http://etree.linkedmusic.org/performance/Mogwai1996-05-18"&gt;
+  &lt;span property="rdfs:label"&gt;A performance by
+    &lt;a rel="mo:performer" href="http://musicbrainz.org/artist/d700b3f5-45af-4d02-95ed-57d301bda93e#_"&gt;
+      &lt;span property="rdfs:label"&gt;Mogwai&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/span&gt;
+  at the
+  &lt;a rel="event:place" href="http://etree.linkedmusic.org/venue/Mogwai1996-05-18"&gt;
+    &lt;span property="rdfs:label"&gt;Kings Cross Water Rats, London&lt;/span&gt;
+  &lt;/a&gt;
+  on the
+  &lt;span property="dc:date" datatype="xsd:date" content="1996-05-18"&gt;18th of May, 1996&lt;/span&gt;
+  included their "
+  &lt;a rel="event:sub_event" href="http://etree.linkedmusic.org/track/Mogwai1996-05-18-1"&gt;
+    &lt;span property="rdfs:label"&gt;Summer&lt;/span&gt;
+  &lt;/a&gt;" track.
+&lt;/span&gt;
+        </pre>
+      </div>
+
+      <div class="mo-json-example">
+        <div class="mo-format"><p>In JSON-LD:</p></div>
+        <pre class="prettyprint">
+{
+  "@id": "http://etree.linkedmusic.org/performance/Mogwai1996-05-18",
+  "@type": "mo:Performance",
+  "rdfs:label": "A performance by Mogwai",
+  "mo:performer": {
+    "@id": "http://musicbrainz.org/artist/d700b3f5-45af-4d02-95ed-57d301bda93e#_",
+    "rdfs:label": "Mogwai"
+  },
+  "dc:date": {
+    "@value": "1996-05-18",
+    "@type": "xsd:date"
+  },
+  "event:place": {
+    "@id": "http://etree.linkedmusic.org/venue/Mogwai1996-05-18",
+    "rdfs:label": "Kings Cross Water Rats, London"
+  },
+  "event:sub_event": {
+    "@id": "http://etree.linkedmusic.org/track/Mogwai1996-05-18-1",
+    "rdfs:label": "Summer"
+  }
+}
+        </pre>
+      </div>
+
+      <div class="mo-turtle-example">
+        <div class="mo-format"><p>In RDF/Turtle:</p></div>
+        <pre class="prettyprint">
+&lt;http://etree.linkedmusic.org/performance/Mogwai1996-05-18&gt;
+   a &lt;http://purl.org/ontology/mo/Performance&gt;;
+   rdfs:label "A performance by Mogwai";
+   mo:performer &lt;http://musicbrainz.org/artist/d700b3f5-45af-4d02-95ed-57d301bda93e#_&gt;;
+   event:place &lt;http://etree.linkedmusic.org/venue/Mogwai1996-05-18&gt;;
+   dc:date "1996-05-18"^^xsd:date;
+   event:sub_event &lt;http://etree.linkedmusic.org/track/Mogwai1996-05-18-1&gt; .
+&lt;http://musicbrainz.org/artist/422aecc0-4aac-012f-19e9-00254bd44c28#_&gt;
+   rdfs:label "Mogwai" .
+&lt;http://etree.linkedmusic.org/track/Mogwai1996-05-18-1&gt;
+   rdfs:label "Summer" .
         </pre>
       </div>
 
