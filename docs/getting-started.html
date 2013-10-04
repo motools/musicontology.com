@@ -85,29 +85,29 @@
     <section id="uris">
       <h2>URIs</h2>
       <p>
-        Before publishing Music Ontology data, the first thing to do is to think about the resources 
+        Before publishing Music Ontology data, you need to think about the resources 
         (e.g. <a href="#example-track">tracks</a>, <a href="#example-artist">artists</a>, musical works) you want to describe
-        and what URIs they should have. The main idea behind <a href="http://linkeddata.org">Linked Data</a> revolves
+        and what URIs they should have. <a href="http://linkeddata.org">Linked Data</a> revolves
         around identifying resources with <a href="http://www.w3.org/TR/cooluris/">"cool URIs"</a> 
-        so that other people can link to them and add information about them. Those URIs should be persistent
-        and as unambiguous as possible (i.e. identifying only one thing, so that other people can link to
-        the right one).
+        so that other people can link to them and publish information about them. URIs should be as persistent
+        and unambiguous as possible (i.e. identifying only one thing) so that other people link to
+        the right one.
       </p>
       <p>
         One of the easiest way of managing URIs is to use <a href="http://en.wikipedia.org/wiki/Fragment_identifier">fragment identifiers</a>,
-        or "hash URIs" and we will be using such URIs in the examples below.
+        or "hash URIs". We use hash URIs in the examples below.
       </p>
       <p>
         There are also large sets of URIs available for the music domain, 
-        such as those provided <a href="http://musicbrainz.org">Musicbrainz</a>. It is often easier to
-        reuse those URIs rather than creating new ones. Doing so also means that your data is linked with
-        other music-related data, therefore making it richer. 
+        such as those provided by <a href="http://musicbrainz.org">Musicbrainz</a>. It is often easier to
+        reuse those URIs rather than creating new ones. Reusing URIs means that your data is linked with
+        other music-related data, making it part of a richer and more descriptive web of data. 
       </p>
     </section>
 
     <section id="namespaces">
       <h2>Adding namespaces</h2>
-      <p>In order to start using the Music Ontology, you will need to add a few namespaces to your document. This is done by adding the following to your document.</p>
+      <p>In order to start using the Music Ontology, you will need to add a few namespaces to your document:</p>
       <div class="mo-html-example">
         <div class="mo-format"><p>In HTML:</p></div>
         <pre class="prettyprint">
@@ -155,18 +155,20 @@
       </div>
 
       <p>
-        The main reason for these multiple prefixes is that the Music Ontology doesn't redefine terms that
+        The resulting document should validate against <a href="http://www.w3.org/TR/rdfa-in-html/">HTML+RDFa</a> 
+        or <a href="http://www.w3.org/TR/xhtml-rdfa/">XHTML+RDFa</a>.
+        These multiple prefixes are needed because the Music Ontology doesn't redefine terms that
         are defined in other vocabularies. For example the Music Ontology is very commonly used alongside
         <a href="http://xmlns.com/foaf/spec/">FOAF</a>, a vocabulary for describing people and including terms such
         as 'name', 'homepage', 'member', etc. RDF is designed to mix and match terms from multiple vocabularies,
-        and the Music Ontology makes a heavy use of that.
+        and the Music Ontology makes heavy use of that.
       </p>
     </section>
 
     <section id="example-track">
       <h2>Describing a track</h2>
-      <p>The following example shows how to describe a track, the band who made it, and linking the band 
-         to its <a href="http://musicbrainz.org">MusicBrainz</a> identifier. It uses the Music Ontology
+      <p>The following example shows how to describe a track and the band who made it, linking the band 
+         to its <a href="http://musicbrainz.org">MusicBrainz</a> URI. It uses the Music Ontology
          alongside <a href="http://xmlns.com/foaf/spec/">FOAF</a> and <a href="http://dublincore.org/">Dublin Core</a>.</p>
 
       <div class="mo-html-example">
@@ -220,7 +222,7 @@
         <div class="mo-format"><p>In HTML:</p></div>
         <pre class="prettyprint">        
 &lt;span typeof="mo:MusicGroup" about="#band-1"&gt;
-  &lt;span property="dc:title"&gt;Fugazi&lt;/span&gt;
+  &lt;span property="foaf:name"&gt;Fugazi&lt;/span&gt;
   started in &lt;span property="mo:activity_start" content="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
   and has the following members:
   &lt;ul rel="foaf:member"&gt;  
@@ -239,7 +241,7 @@
 {
   "@id": "http://example.org/#band-1",
   "@type": "mo:MusicGroup",
-  "dc:title": "Fugazi",
+  "foaf:name": "Fugazi",
   "mo:activity_start": "1987-01-01T00:00:00Z",
   "foaf:member": [{
     "@id": "http://example.org/#imk",
@@ -267,23 +269,23 @@
         <pre class="prettyprint">
 &lt;#band-1&gt;
    a mo:MusicGroup;
-   dc:title "Fugazi";
+   foaf:name "Fugazi";
    foaf:member &lt;#imk&gt;;
    foaf:member &lt;#jl&gt;;
    foaf:member &lt;#gp&gt;;
    foaf:member &lt;#bc&gt; .
 &lt;#imk&gt;
    a mo:MusicArtist;
-   dc:title "Ian MacKaye" .
+   foaf:name "Ian MacKaye" .
 &lt;#jl&gt;
    a mo:MusicArtist;
-   dc:title "Joe Lally" .
+   foaf:name "Joe Lally" .
 &lt;#gp&gt;
    a mo:MusicArtist;
-   dc:title "Guy Picciotto" .
+   foaf:name "Guy Picciotto" .
 &lt;#bc&gt;
    a mo:MusicArtist;
-   dc:title "Brendan Canty" .
+   foaf:name "Brendan Canty" .
         </pre>
       </div>
 
@@ -293,13 +295,13 @@
         <div class="mo-format"><p>In HTML:</p></div>
         <pre class="prettyprint">
 &lt;span prefix="ical: http://www.w3.org/2002/12/cal/ical#" typeof="mo:MusicGroup" about="#band-1"&gt;
-  &lt;span property="dc:title"&gt;Fugazi&lt;/span&gt;
+  &lt;span property="foaf:name"&gt;Fugazi&lt;/span&gt;
   has the following members:
   &lt;ul rel="mo:membership"&gt;
     &lt;li typeof="mo:Membership"&gt;
       &lt;span rel="mo:artist"&gt;&lt;span about="#bc" typeof="mo:MusicArtist" property="foaf:name"&gt;Brendan Canty&lt;/span&gt;&lt;/span&gt; played
       &lt;a rel="mo:primary_instrument" typeof="mo:Instrument" href="http://dbpedia.org/resource/Drum_kit"&gt;drums&lt;/a&gt;
-      from &lt;span property="ical:dtstart" content="1987-01-01T00:00:00Z"&gt;1987&lt;/span&gt;
+      from &lt;span property="tl:start" datatype="xsd:gYear"&gt;1987&lt;/span&gt;
     &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/span&gt;
@@ -312,10 +314,13 @@
 {
   "@id": "http://example.org/#band-1",
   "@type": "mo:MusicGroup",
-  "dc:title": "Fugazi",
+  "foaf:name": "Fugazi",
   "mo:membership": [{
     "@type": "mo:MusicMembership",
-    "ical:dtstart": "1987-01-01T00:00:00Z",
+    "tl:start": {
+      "@value": "1987",
+      "@type": "xsd:gYear"
+    },
     "mo:artist": {
       "@type": "mo:MusicArtist",
       "foaf:name": "Brendan Canty"
@@ -334,12 +339,12 @@
         <pre class="prettyprint">
 &lt;#band-1&gt;
    a mo:MusicGroup;
-   dc:title "Fugazi";
+   foaf:name "Fugazi";
    mo:membership [
      a mo:Membership;
      mo:artist &lt;#bc&gt;;
-    mo:primary_instrument &lt;http://dbpedia.org/resource/Drum_kit&gt;;
-   &lt;http://www.w3.org/2002/12/cal/ical#dtstart&gt; "1987-01-01T00:00:00Z"^^xsd:dateTime .
+     mo:primary_instrument &lt;http://dbpedia.org/resource/Drum_kit&gt;;
+     tl:start "1987"^^xsd:gYear .
 &lt;#bc&gt;
    a mo:MusicArtist;
    foaf:name "Brendan Canty" .
@@ -361,7 +366,7 @@
 &lt;span typeof="mo:Performance" about="http://etree.linkedmusic.org/performance/Mogwai1996-05-18"&gt;
   &lt;span property="rdfs:label"&gt;A performance by
     &lt;a rel="mo:performer" href="http://musicbrainz.org/artist/d700b3f5-45af-4d02-95ed-57d301bda93e#_"&gt;
-      &lt;span property="rdfs:label"&gt;Mogwai&lt;/span&gt;
+      &lt;span property="foaf:name"&gt;Mogwai&lt;/span&gt;
     &lt;/a&gt;
   &lt;/span&gt;
   at the
@@ -387,7 +392,7 @@
   "rdfs:label": "A performance by Mogwai",
   "mo:performer": {
     "@id": "http://musicbrainz.org/artist/d700b3f5-45af-4d02-95ed-57d301bda93e#_",
-    "rdfs:label": "Mogwai"
+    "foaf:name": "Mogwai"
   },
   "dc:date": {
     "@value": "1996-05-18",
@@ -416,7 +421,7 @@
    dc:date "1996-05-18"^^xsd:date;
    event:sub_event &lt;http://etree.linkedmusic.org/track/Mogwai1996-05-18-1&gt; .
 &lt;http://musicbrainz.org/artist/422aecc0-4aac-012f-19e9-00254bd44c28#_&gt;
-   rdfs:label "Mogwai" .
+   foaf:name "Mogwai" .
 &lt;http://etree.linkedmusic.org/track/Mogwai1996-05-18-1&gt;
    rdfs:label "Summer" .
         </pre>
@@ -427,12 +432,12 @@
       <h2>The music production workflow</h2>
 
       <p>The Music Ontology model for music production is based on a chain of events, from the composition
-         of a given musical work to a recording of one of its performances. This enables the ontology
-         to be very descriptive and easily extensible. Below is an illustration of such a workflow.</p>
+         of a musical work to a recording of one of its performances. This enables the ontology
+         to be very descriptive and easily extensible. Below is an illustration of a typical workflow.</p>
 
       <p><img title="An example of a Music Ontology production workflow" width="90%" src="../img/mo-workflow.jpg"/></p>
 
-      <p>We describe below Bach's "The Art of Fugue" and one of its performances.</p>
+      <p>The following example describes Bach's "The Art of Fugue" and one of its performances.</p>
 
       <div class="mo-html-example">
         <div class="mo-format"><p>In HTML:</p></div>
@@ -442,7 +447,7 @@
   was involved in the
   &lt;span rev="mo:composer"&gt;
     &lt;span typeof="mo:Composition" about="#composition"&gt;
-      &lt;span property="dc:title"&gt;
+      &lt;span property="rdfs:label"&gt;
         Composition of 
         &lt;span rel="mo:produced_work"&gt;
           &lt;span typeof="mo:MusicalWork" about="#kunst-der-fuge"&gt;
@@ -486,7 +491,7 @@
 {
   "@id": "http://example.org/#composition",
   "@type": "mo:Composition",
-  "dc:title": "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima",
+  "rdfs:label": "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima",
   "event:time": {
     "tl:start": {
       "@value": "1742",
@@ -539,7 +544,7 @@
     foaf:name "Johann Sebastian Bach" .
 &lt;#composition&gt;
     a mo:Composition ;
-    dc:title "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima" ;
+    rdfs:label "Composition of The Art of Fugue, BWV 1080: Contrapunctus IX, a 4, alla Duodecima" ;
     mo:composer &lt;http://dbpedia.org/resource/Johann_Sebastian_Bach&gt; ;
     event:time [ tl:start "1742"^^xsd:gYear ; tl:end "1749"^^xsd:gYear ] ;
     mo:produced_work &lt;#kunst-der-fuge&gt; .
