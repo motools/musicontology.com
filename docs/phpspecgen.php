@@ -71,6 +71,13 @@
         }
     }
 
+    class Phpspecgen_Individual extends Phpspecgen_Term
+    {
+        public function termType() {
+            return 'Individual';
+        }
+    }
+
     class Phpspecgen_Vocab extends EasyRdf_Resource
     {
         protected function propertyDefinition($title, $property) {
@@ -178,6 +185,9 @@
                         $html .= "  <tr><th>Inherited Properties:</th> ".
                                  "<td>".join(', ', $properties)."</td></tr>\n";
                 }
+                if ($term instanceof Phpspecgen_Individual) {
+                    $html .= $term->propertyRow("Type", "rdf:type");
+                }
                 $html .= $term->propertyRow("Range", "rdfs:range");
                 $html .= $term->propertyRow("Domain", "rdfs:domain");
                 $html .= $term->propertyRow("See Also", "rdfs:seeAlso");
@@ -192,6 +202,7 @@
     # Extra namespaces we use
     EasyRdf_Namespace::set('vann', 'http://purl.org/vocab/vann/');
     EasyRdf_Namespace::set('vs', 'http://www.w3.org/2003/06/sw-vocab-status/ns#');
+    EasyRdf_Namespace::set('mo', 'http://purl.org/ontology/mo/');
 
     ## Add mappings
     EasyRdf_TypeMapper::set('owl:Ontology', 'Phpspecgen_Vocab');
@@ -203,6 +214,8 @@
     EasyRdf_TypeMapper::set('owl:InverseFunctionalProperty', 'Phpspecgen_Property');
     EasyRdf_TypeMapper::set('owl:FunctionalProperty', 'Phpspecgen_Property');
     EasyRdf_TypeMapper::set('rdf:Property', 'Phpspecgen_Property');
+    EasyRdf_TypeMapper::set('mo:ReleaseType', 'Phpspecgen_Individual');
+    EasyRdf_TypeMapper::set('mo:ReleaseStatus', 'Phpspecgen_Individual');
 ?>
 <html>
 <head>
@@ -267,6 +280,7 @@
         print $vocab->htmlSummaryOfTerms();
         print $vocab->htmlTerms('Phpspecgen_Class', 'Classes');
         print $vocab->htmlTerms('Phpspecgen_Property', 'Properties');
+        print $vocab->htmlTerms('Phpspecgen_Individual', 'Individuals');
     }
 ?>
 </div>
