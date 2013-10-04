@@ -162,7 +162,8 @@
                     continue;
 
                 $name = htmlspecialchars($term->localName());
-                $html .= "<h3 id=\"term-$name\">$name</h3\n";
+                $html .= "<section id=\"term-$name\">\n";
+                $html .= "<h3>$name</h3>\n";
                 $html .= "<p>".htmlspecialchars($term->get('rdfs:comment'))."</p>\n";
                 $html .= '<table class="table table-hover">'."\n";
                 $html .= "  <tr><th>URI:</th> <td>".$term->htmlLink()."</td></tr>\n";
@@ -181,6 +182,7 @@
                 $html .= $term->propertyRow("Domain", "rdfs:domain");
                 $html .= $term->propertyRow("See Also", "rdfs:seeAlso");
                 $html .= "</table>\n";
+                $html .= "</section>\n";
             }
             return $html;
         }
