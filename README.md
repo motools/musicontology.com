@@ -28,7 +28,6 @@ to /terms/.
 The /terms/ location should have the following rules.
 
     RewriteEngine On
-    RewriteBase /specification/
     RewriteRule ^$ /specification/ [R=303,L]
     RewriteRule ^(.+)$ /specification/#term-$1 [R=303,NE]
 
