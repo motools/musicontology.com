@@ -266,7 +266,6 @@
               <li><a href="https://github.com/motools">Github</a></li>
               <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
             </ul>
-          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
