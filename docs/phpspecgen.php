@@ -249,7 +249,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="../index.html">Home</a></li>
+              <li><a href="..">Home</a></li>
               <li><a href="getting-started.html">Getting started</a></li>
               <li class="active"><a href="specification.html">Specification</a></li>
               <li><a href="faq.html">FAQ</a></li>
