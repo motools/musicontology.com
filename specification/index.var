@@ -1,0 +1,13 @@
+URI: specification
+
+URI: index.html
+Content-type: text/html; qs=0.8
+Content-language: en
+
+URI: index.ttl
+Content-type: text/turtle; qs=0.5
+Content-language: en
+
+URI: index.rdf
+Content-type: application/rdf+xml; qs=0.5
+Content-language: en

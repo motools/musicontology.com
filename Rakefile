@@ -3,7 +3,7 @@ task :submodule do |t|
 end
 
 task :spec => [:submodule] do |t|
-  `cd docs && php phpspecgen.php > specification.html`
+  `cd specification && php phpspecgen.php > index.html`
 end
 
 task :default => [:spec]
