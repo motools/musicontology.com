@@ -1,5 +1,5 @@
 task :submodule do |t|
-  `git submodule init`
+  `git submodule init && git submodule update`
 end
 
 task :spec => [:submodule] do |t|
