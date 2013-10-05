@@ -217,6 +217,7 @@
     EasyRdf_TypeMapper::set('mo:ReleaseType', 'Phpspecgen_Individual');
     EasyRdf_TypeMapper::set('mo:ReleaseStatus', 'Phpspecgen_Individual');
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
