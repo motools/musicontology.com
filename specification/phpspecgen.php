@@ -104,8 +104,8 @@
         }
 
         public function htmlHeader() {
-            $html = "<h1>".htmlspecialchars($this->label())."</h1>\n";
-            $html .= "<em>".htmlspecialchars($this->get('dc:description|dc11:description|rdfs:comment'))."</em>\n";
+            $html = "<h1>Specification</h1>\n";
+            $html .= "<p>".htmlspecialchars($this->get('dc:description|dc11:description|rdfs:comment'))."</p>\n";
 
             $html .= "<dl>\n";
             $html .= "<dt>Latest Version</dt><dd>".$this->htmlLink()."</dd>\n";
@@ -219,59 +219,79 @@
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Music Ontology specification</title>
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
-    <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
-    <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
-    <link href="../css/style.css" rel="stylesheet" media="screen"/>
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/prettify.js"></script>
-    <script src="../js/mo.js"></script>
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        
-  ga('create', 'UA-44632233-1', 'musicontology.com');
-  ga('send', 'pageview');
-    </script>
-</head>
-<body onload="prettyPrint()">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>The Music Ontology – Specification</title>
+      <!-- Bootstrap -->
+      <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
+      <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
+      <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
+      <link href="../css/style.css" rel="stylesheet" media="screen"/>
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,900' rel='stylesheet' type='text/css'>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+      <script src="../js/bootstrap.min.js"></script>
+      <script src="../js/mo.js"></script>
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          
+    ga('create', 'UA-44632233-1', 'musicontology.com');
+    ga('send', 'pageview');
+      </script>
+  </head>
+
+  <body onload="prettyPrint()">
+    <div class="container">
+
+      <!-- NAV START -->
+      <div class="navbar">
+
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="..">Music Ontology</a>
+
+          <a class="navlogo" href="../index.html"><img src="../img/logo_lrg.png" width="81px" height="32px" /></a>
+
+          <button type="button" class="navtoggle"><img src="../img/navtoggle@2x.png" width="44px" height="44px" /></button>
+
+          <div class="navbar-links">
+              <ul class="nav navbar-nav">
+
+                <!-- CHANGE PATHS -->
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../docs/getting-started.html">Getting started</a></li>
+                <li class="active"><a href="index.html">Specification</a></li>
+                <li><a href="../docs/faq.html">FAQ</a></li>
+                <!-- CHANGE END -->
+
+                <li><a href="https://github.com/motools/musicontology/wiki" target="_blank">Wiki<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://github.com/motools" target="_blank">Github<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group" target="_blank">Mailing list<img src="../img/extarrow.png" /></a></li>
+                <span id="magic-line"></span>
+              </ul>
+          </div>
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="..">Home</a></li>
-              <li><a href="../docs/getting-started.html">Getting started</a></li>
-              <li class="active"><a href="../specification">Specification</a></li>
-              <li><a href="../docs/faq.html">FAQ</a></li>
-              <li><a href="http://wiki.musicontology.com/">Wiki</a></li>
-              <li><a href="https://github.com/motools">Github</a></li>
-              <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
-            </ul>
-        </div>
+
       </div>
-    </div>
+      <!-- NAV END -->
 
     <div class="container">
+
+      <div class="row mo_page">
+
+      <div class="sidebar col-md-3">
+        <ul class="bs-sidenav nav">
+          <li><a href="#sec-summary">Summary of Terms</a></li>
+          <li><a href="#sec-classes">Classes</a></li>
+          <li><a href="#sec-properties">Properties</a></li>
+          <li><a href="#sec-individuals">Individuals</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-9 mo_content">
+
 <?php
 
     // Parse the document
@@ -292,6 +312,8 @@
         print $vocab->htmlTerms('Phpspecgen_Individual', 'Individuals');
     }
 ?>
+     </div>
+    </div>
 </div>
 </body>
 </html>

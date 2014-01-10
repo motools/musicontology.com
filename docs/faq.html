@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Music Ontology</title>
+    <title>The Music Ontology – FAQs</title>
     <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
     <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
     <link href="../css/style.css" rel="stylesheet" media="screen"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,900' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/prettify.js"></script>
     <script src="../js/mo.js"></script>
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -28,30 +25,39 @@
     </script>
   </head>
   <body onload="prettyPrint()">
-    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
+        <!-- NAV START -->
+      <div class="navbar">
+      
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="..">Music Ontology</a>
+
+          <a class="navlogo" href="../index.html"><img src="../img/logo_lrg.png" width="81px" height="32px" /></a>
+  
+          <button type="button" class="navtoggle"><img src="../img/navtoggle@2x.png" width="44px" height="44px" /></button>
+
+          <div class="navbar-links">
+              <ul class="nav navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="getting-started.html">Getting started</a></li>
+                <li><a href="../specification/index.html">Specification</a></li>
+                <li class="active"><a href="faq.html">FAQ</a></li>
+                <li><a href="https://github.com/motools/musicontology/wiki" target="_blank">Wiki<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://github.com/motools" target="_blank">Github<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group" target="_blank">Mailing list<img src="../img/extarrow.png" /></a></li>
+                <span id="magic-line"></span>
+              </ul>
+          </div>
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="..">Home</a></li>
-              <li><a href="getting-started.html">Getting started</a></li>
-              <li><a href="../specification">Specification</a></li>
-              <li class="active"><a href="faq.html">FAQ</a></li>
-              <li><a href="http://wiki.musicontology.com/">Wiki</a></li>
-              <li><a href="https://github.com/motools">Github</a></li>
-              <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
-            </ul>
-        </div>
-      </div>
+
     </div>
+    <!-- NAV END -->
+
     <div class="container">
+
+    <div class="row mo_page">
+
+    <div class="col-md-9 mo_content">
       <h1>Frequently asked questions</h1>
       <p>
 This page aims to provide answers to the most frequently asked questions
@@ -148,5 +154,8 @@ the drummer from the support band joined to play with them."</li>
         </ul>
 
     </div>
+    </div>
+    </div>
+    <div class="credits">Site designed and built by <a href="http://www.rorypickering.com" target="_blank">Rory Pickering</a>.<br />Photograph is a derivative of work by <span class="author"></span>, licensed under Creative Commons.</div>
   </body>
 </html>

@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Music Ontology</title>
+    <title>The Music Ontology – Getting started</title>
     <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/>
     <link href="../css/prettify.css" rel="stylesheet" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'/>
     <link href="../css/style.css" rel="stylesheet" media="screen"/>
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,900' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/prettify.js"></script>
     <script src="../js/mo.js"></script>
@@ -27,32 +24,44 @@
     </script>
   </head>
   <body onload="prettyPrint()">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+  
+  <div class="container">
+
+      <!-- NAV START -->
+      <div class="navbar">
+      
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="..">Music Ontology</a>
+
+          <a class="navlogo" href="../index.html"><img src="../img/logo_lrg.png" width="81px" height="32px" /></a>
+  
+          <button type="button" class="navtoggle"><img src="../img/navtoggle@2x.png" width="44px" height="44px" /></button>
+
+          <div class="navbar-links">
+              
+              <ul class="nav navbar-nav">
+
+                <!-- CHANGE PATHS -->
+                <li><a href="../index.html">Home</a></li>
+                <li class="active"><a href="getting-started.html">Getting started</a></li>
+                <li><a href="../specification/index.html">Specification</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <!-- CHANGE END -->
+
+                <li><a href="https://github.com/motools/musicontology/wiki" target="_blank">Wiki<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://github.com/motools" target="_blank">Github<img src="../img/extarrow.png" /></a></li>
+                <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group" target="_blank">Mailing list<img src="../img/extarrow.png" /></a></li>
+                <span id="magic-line"></span>
+              </ul>
+          </div>
+
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="..">Home</a></li>
-              <li class="active"><a href="getting-started.html">Getting started</a></li>
-              <li><a href="../specification">Specification</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="http://wiki.musicontology.com/">Wiki</a></li>
-              <li><a href="https://github.com/motools">Github</a></li>
-              <li><a href="https://groups.google.com/forum/#!forum/music-ontology-specification-group">Mailing list</a></li>
-            </ul>
-        </div>
+
       </div>
-    </div>
+      <!-- NAV END -->
+
     <div class="container">
 
-      <div class="row">
+      <div class="row mo_page">
 
       <div class="sidebar col-md-3">
         <ul class="bs-sidenav nav">
@@ -65,29 +74,27 @@
         </ul>
       </div>
 
-      <div class="col-md-9">
+      <div class="col-md-9 mo_content">
 
       <h1>Getting started</h1>
       <p>
-        The Music Ontology provides a model for publishing structured music-related data on your web site or through your API. If you're unsure about why you should publish music-related data in this way, please read our <a href="faq.html">FAQ</a>. Below are a few typical examples of using the Music Ontology, in three different syntaxes: <a href="http://rdfa.info/">RDFa</a> in HTML for embedding music-related data on a web page, and <a href="http://json-ld.org/">JSON-LD</a> and <a href="http://www.w3.org/TR/turtle/">Turtle</a> for exposing music-related data as part of an API.
+        Below are a few typical examples of using the Music Ontology, in three different syntaxes: <a href="http://rdfa.info/">RDFa</a> in HTML for embedding music-related data on a web page, and <a href="http://json-ld.org/">JSON-LD</a> and <a href="http://www.w3.org/TR/turtle/">Turtle</a> for exposing music-related data as part of an API.
       </p>
 
-      <div class="row">
-        <div class="col-md-4">
-          <h2>HTML</h2>
-          <p>Learn how to start publishing music-related data in your web pages, using the Music Ontology.</p>
-          <p><a class="btn btn-default format-html" href="#">Show only HTML examples &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>JSON-LD</h2>
-          <p>Learn how to start exposing music-related data as part of your API using JSON-LD.</p>
-          <p><a class="btn btn-default format-json" href="#">Show only JSON-LD examples &raquo;</a></p> 
-        </div>
-        <div class="col-md-4">
-          <h2>RDF/Turtle</h2>
-          <p>Learn how to start exposing music-related Linked Data as RDF/Turtle.</p>
-          <p><a class="btn btn-default format-turtle" href="#">Show only RDF/Turtle examples &raquo;</a></p>
-        </div>
+      <div class="third">
+        <h3>HTML</h3>
+        <p>Learn how to start publishing music-related data in your web pages.</p>
+        <p><button class="btn btn-default format-html">Show only HTML</button></p>
+      </div>
+      <div class="third">
+        <h3>JSON-LD</h3>
+        <p>Learn how to start exposing music-related data as part of your API using JSON-LD.</p>
+        <p><button class="btn btn-default format-json">Show only JSON-LD</button></p> 
+      </div>
+      <div class="third">
+        <h3>RDF/Turtle</h3>
+        <p>Learn how to start exposing music-related Linked Data as RDF/Turtle.</p>
+        <p><button class="btn btn-default format-turtle">Show only RDF/Turtle</button></p>
       </div>
 
     <section id="uris">
@@ -443,7 +450,7 @@
          of a musical work to a recording of one of its performances. This enables the ontology
          to be very descriptive and easily extensible. Below is an illustration of a typical workflow.</p>
 
-      <p><img alt="An example of a Music Ontology production workflow" width="800" src="../img/mo-workflow.jpg"/></p>
+      <p class="noline"><a href="../img/workflow@2x.png"><img alt="An example of a Music Ontology production workflow" width="100%" src="../img/workflow@2x.png"/></a></p>
 
       <p>The following example describes Bach's "The Art of Fugue" and one of its performances.</p>
 
@@ -578,5 +585,6 @@
       </div>
 
     </div>
+    <div class="credits">Site designed and built by <a href="http://www.rorypickering.com" target="_blank">Rory Pickering</a>.<br />Photograph is a derivative of work by <span class="author"></span>, licensed under Creative Commons.</div>
   </body>
 </html>
